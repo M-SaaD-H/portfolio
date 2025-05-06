@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import Navigation from "@/components/Navigation";
+import DarkModeToggle from "@/components/DarkModeToggle";
+import { ThemeContextProvider } from "@/contexts/ThemeContextProvider";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -23,11 +27,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-200 relative`}
       >
-        {children}
+        <ThemeContextProvider>
+          <div className='bg-white/70 dark:bg-neutral-950 backdrop-blur-md sticky top-0 transition-colors duration-200'>
+            <div className='flex justify-between max-w-4xl mx-auto'>
+              <DarkModeToggle />
+              <Navigation />
+            </div>
+          </div>
+          <div className='max-w-3xl mx-auto'>
+            {children}
+          </div>
+        </ThemeContextProvider>
       </body>
     </html>
   );
