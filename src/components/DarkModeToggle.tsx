@@ -1,18 +1,15 @@
 'use client'
 
+import React, { useEffect } from 'react'
 import { IconMoon, IconSun } from '@tabler/icons-react';
 import { useTheme } from 'next-themes'
-import React, { useEffect, useState } from 'react'
 
 function DarkModeToggle() {
   const { theme, setTheme } = useTheme();
-  useEffect(() => {
-    console.log(theme);
-  }, [])
   
   return (
     <button
-      className='relative bg-gray-100 dark:bg-neutral-900 h-[2.4rem] w-[2.4rem] rounded-full m-4'
+      className='relative bg-gray-100 dark:bg-zinc-900 h-[2.4rem] w-[2.4rem] rounded-full m-4 cursor-pointer'
       onClick={() => {
         setTheme(theme === 'light' ? 'dark' : 'light');
         console.log('Theme switched')

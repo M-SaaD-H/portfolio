@@ -35,7 +35,7 @@ function Navigation() {
   const handleMobileNavToggle = () => setIsOpen(prev => !prev);
 
   return (
-    <div className='p-4'>
+    <div className='p-8'>
       <div
         onMouseLeave={() => setHoveredIdx(null)}
         className='hidden flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2 h-max'
@@ -59,7 +59,7 @@ function Navigation() {
                     hoveredIdx === idx && (
                       <motion.div
                         layoutId="hovered"
-                        className="absolute inset-0 h-full w-full rounded-lg bg-gray-100 dark:bg-neutral-800"
+                        className="absolute inset-0 h-full w-full rounded-lg bg-gray-100 dark:bg-zinc-900"
                       />
                     )
                   }
