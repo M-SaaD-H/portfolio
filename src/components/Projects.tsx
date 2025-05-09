@@ -6,7 +6,7 @@ import { IconChevronDown } from '@tabler/icons-react'
 export type Project = {
   title: string,
   description: string,
-  link: string,
+  link?: string,
   tags: string[]
 }
 
@@ -57,6 +57,28 @@ const projects: Project[] = [
   }
 ]
 
+const upcomingProjects: Project[] = [
+  {
+    title: 'UI Component Library',
+    description: "A clean, reusable UI component library—because writing the same button for the 47th time shouldn't be a personality trait.",
+    tags: [
+      'Next.js',
+      'Motion',
+      'ShadCN',
+      'TypScript'
+    ]
+  },
+  {
+    title: 'AlgoBud',
+    description: "An AI-powered DSA platform with a personal tutor that spots your mistakes, explains patterns, and helps you level up—smarter than brute force.",
+    tags: [
+      'Next.js',
+      'Express',
+      'TypeScript',
+    ]
+  }
+]
+
 function Projects() {
   return (
     <div className='p-2'>
@@ -73,6 +95,15 @@ function Projects() {
           See More <IconChevronDown size={16} />
         </button>
       </Link>
+
+      <h1 className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>Upcoming Projects</h1>
+      <div className='grid grid-cols-2 gap-4'>
+        {
+          upcomingProjects.map(project => (
+            <Card project={project} key={project.title} />
+          ))
+        }
+      </div>
     </div>
   )
 }

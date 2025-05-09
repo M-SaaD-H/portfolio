@@ -18,7 +18,11 @@ const Card = ({ project }: { project: Project }) => {
           ))
         }
       </div>
-      <Link href={project.link} target={'_blank'} className='absolute inset-0' />
+      {
+        project.link && (
+          <Link href={project.link} target={'_blank'} className='absolute inset-0' />
+        )
+      }
     </div>
   )
 }
