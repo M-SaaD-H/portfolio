@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-200 relative`}
       >
         <ThemeContextProvider>
-          <div className='backdrop-blur-md sticky top-0 transition-colors duration-200'>
+          <div className='backdrop-blur-md sticky top-0 transition-colors duration-200 z-50'>
             <div className='flex justify-between items-center max-w-4xl mx-auto'>
               <DarkModeToggle />
               <Navigation />
