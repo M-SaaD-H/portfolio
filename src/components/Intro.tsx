@@ -21,7 +21,7 @@ const Intro = () => {
         </div>
       </div>
       <p className='text-zinc-700 dark:text-zinc-400 mt-8'>
-        I&apos;m just a guy who likes turning coffee into code. Building cool stuffs that don&apos;t live forever in my GitHub graveyard is kinda my thing—because the world has enough abandoned side projects already. Coding stuff that slaps harder than my GPA ever did.
+      I&apos;m just a dude who turns coffee into code. I build dope stuff that doesn&apos;t end up in my GitHub graveyard—&apos;cause the world&apos;s got enough abandoned side projects. My code slaps harder than my GPA ever did.
       </p>
     </div>
   )
