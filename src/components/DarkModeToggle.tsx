@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { IconMoon, IconSun } from '@tabler/icons-react';
 import { useTheme } from 'next-themes'
 
