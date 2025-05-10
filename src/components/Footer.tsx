@@ -78,7 +78,7 @@ const Footer = () => {
             ))
           }
         </ul>
-        <ul className='flex flex-col space-y-4'>
+        <ul className='flex flex-col space-y-4' id='socials'>
           {
             socialLinks.map(l => (
               <Link key={l.name} href={l.link} className='text-gray-500 hover:text-gray-600'>

@@ -81,7 +81,7 @@ const upcomingProjects: Project[] = [
 
 function Projects() {
   return (
-    <div className='md:p-2 p-8'>
+    <div className='md:p-2 p-8' id='projects'>
       <h1 className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>Projects</h1>
       <div className='grid md:grid-cols-2 max-md:mx-4 gap-4'>
         {

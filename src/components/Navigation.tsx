@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { AnimatePresence, easeInOut, motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 
 const items = [
@@ -11,16 +11,12 @@ const items = [
     link: '/',
   },
   {
-    name: 'About',
-    link: '/#about',
-  },
-  {
     name: 'Projects',
     link: '/#projects',
   },
   {
     name: 'Dashboard',
-    link: '/#dashboard',
+    link: '/dashboard',
   },
   {
     name: 'Socials',
