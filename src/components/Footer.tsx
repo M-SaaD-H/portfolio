@@ -67,7 +67,7 @@ const projectLinks: Link[] = [
 const Footer = () => {
   return (
     <div className='mt-10'>
-      <hr className='text-gray-300 my-8' />
+      <hr className='text-gray-300 dark:text-neutral-700 my-8' />
       <div className='flex flex-col md:flex-row max-md:ml-12 max-md:gap-12 justify-between max-w-lg mx-auto my-12'>
         <ul className='flex flex-col space-y-4'>
           {
