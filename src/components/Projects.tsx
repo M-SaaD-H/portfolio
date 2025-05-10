@@ -81,9 +81,9 @@ const upcomingProjects: Project[] = [
 
 function Projects() {
   return (
-    <div className='p-2'>
+    <div className='md:p-2 p-8'>
       <h1 className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>Projects</h1>
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='grid md:grid-cols-2 max-md:mx-4 gap-4'>
         {
           projects.map(project => (
             <Card project={project} key={project.title} />
@@ -97,7 +97,7 @@ function Projects() {
       </Link>
 
       <h1 className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>Upcoming Projects</h1>
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='grid md:grid-cols-2 max-md:mx-4 gap-4'>
         {
           upcomingProjects.map(project => (
             <Card project={project} key={project.title} />

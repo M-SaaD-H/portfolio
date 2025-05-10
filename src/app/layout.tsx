@@ -5,6 +5,7 @@ import "./globals.css";
 import Navigation from "@/components/Navigation";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { ThemeContextProvider } from "@/contexts/ThemeContextProvider";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,6 +41,9 @@ export default function RootLayout({
           </div>
           <div className='max-w-2xl mx-auto'>
             {children}
+          </div>
+          <div className='max-w-2xl mx-auto'>
+            <Footer />
           </div>
         </ThemeContextProvider>
       </body>
