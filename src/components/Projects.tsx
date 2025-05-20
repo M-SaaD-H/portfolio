@@ -1,7 +1,10 @@
+'use client'
+
 import React from 'react'
 import Card from './Card'
 import Link from 'next/link'
 import { IconChevronDown } from '@tabler/icons-react'
+import { motion } from 'motion/react'
 
 export type Project = {
   title: string,
@@ -80,9 +83,46 @@ const upcomingProjects: Project[] = [
 ]
 
 function Projects() {
+  const childVariant = {
+    hidden: {
+      opacity: 0.5,
+      y: 50,
+      filter: 'blur(10px)',
+      transition: {
+        type: 'tween',
+        duration: 0.3
+      }
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        type: 'tween',
+        duration: 0.3
+      }
+    }
+  }
+
+  const parentVariant = {
+    hidden: {},
+    show: {
+      transition: {
+        duration: 0.3,
+        staggerChildren: 0.1,
+        delayChildren: 0.1
+      }
+    }
+  }
+
   return (
-    <div className='md:p-2 p-8' id='projects'>
-      <h1 className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>Projects</h1>
+    <motion.div
+      initial={'hidden'}
+      animate={'show'}
+      variants={parentVariant}
+      className='md:p-2 p-8' id='projects'
+    >
+      <motion.h1 variants={childVariant} className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>Projects</motion.h1>
       <div className='grid md:grid-cols-2 max-md:mx-4 gap-4'>
         {
           projects.map(project => (
@@ -104,7 +144,7 @@ function Projects() {
           ))
         }
       </div>
-    </div>
+    </motion.div>
   )
 }
 
