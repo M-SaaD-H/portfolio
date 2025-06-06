@@ -53,50 +53,6 @@ const JavaScript = {
 const MongoDB = {
   name: 'MongoDB',
   logo: <IconBrandMongodb />
-  tags: {
-    name: string,
-    logo?: React.ReactNode
-  }[]
-}
-
-const NextJS ={
-  name: 'Next.js',
-  logo: <IconBrandNextjs />
-}
-
-const React = {
-  name: 'React',
-  logo: <IconBrandReact />
-}
-
-const Tailwind = {
-  name: 'Tailwind CSS',
-  logo: <IconBrandTailwind />
-}
-
-const Motion = {
-  name: 'Motion',
-  logo: <IconBrandFramerMotion />
-}
-
-const TypeScript = {
-  name: 'TypeScript',
-  logo: <IconBrandTypescript />
-}
-
-const NodeJS = {
-  name: 'NodeJS',
-  logo: <IconBrandNodejs />
-}
-
-const JavaScript = {
-  name: 'JavaScript',
-  logo: <IconBrandJavascript />
-}
-
-const MongoDB = {
-  name: 'MongoDB',
-  logo: <IconBrandMongodb />
 }
 
 const projects: Project[] = [
@@ -156,7 +112,7 @@ const projects: Project[] = [
       NodeJS,
       MongoDB,
       { name: 'Cloudinary' },
-      JavaScript
+      JavaScript,
       NodeJS,
       MongoDB,
       { name: 'Cloudinary' },
