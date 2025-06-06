@@ -1,28 +1,83 @@
 'use client'
 
-import React from 'react'
 import Card from './Card'
 import Link from 'next/link'
-import { IconChevronDown } from '@tabler/icons-react'
+import { IconBrandFramerMotion, IconBrandJavascript, IconBrandMongodb, IconBrandNextjs , IconBrandNodejs, IconBrandReact, IconBrandTailwind, IconBrandTypescript, IconChevronDown } from '@tabler/icons-react'
 import { motion } from 'motion/react'
 
 export type Project = {
   title: string,
   description: string,
   link?: string,
-  tags: string[]
+  tags: {
+    name: string,
+    logo?: React.ReactNode
+  }[]
+}
+
+const NextJS ={
+  name: 'Next.js',
+  logo: <IconBrandNextjs />
+}
+
+const React = {
+  name: 'React',
+  logo: <IconBrandReact />
+}
+
+const Tailwind = {
+  name: 'Tailwind CSS',
+  logo: <IconBrandTailwind />
+}
+
+const Motion = {
+  name: 'Motion',
+  logo: <IconBrandFramerMotion />
+}
+
+const TypeScript = {
+  name: 'TypeScript',
+  logo: <IconBrandTypescript />
+}
+
+const NodeJS = {
+  name: 'NodeJS',
+  logo: <IconBrandNodejs />
+}
+
+const JavaScript = {
+  name: 'JavaScript',
+  logo: <IconBrandJavascript />
+}
+
+const MongoDB = {
+  name: 'MongoDB',
+  logo: <IconBrandMongodb />
 }
 
 const projects: Project[] = [
+  {
+    title: 'Vynk',
+    description: "Vynk is an open-source library that helps developers streamline their workflow by eliminating repetitive tasks. Focus on building what matters most and ship faster.",
+    link: 'https://vynk.live',
+    tags: [
+      NextJS,
+      Motion,
+      { name: 'ShadCN' },
+      TypeScript,
+      Tailwind
+    ]
+  },
   {
     title: 'VidChat',
     description: 'VidChat is a real-time video chat app. It lets users instantly get straight-up face-to-face conversations in the browser.',
     link: 'https://vid-chat-peach.vercel.app',
     tags: [
-      'Next.js',
-      'TypeScript',
-      'Socket.io',
-      'WebRTC'
+      NextJS,
+      TypeScript,
+      { name: 'Socket.io' },
+      { name: 'WebRTC' },
+      Tailwind
     ]
   },
   {
@@ -30,10 +85,11 @@ const projects: Project[] = [
     description: 'FinTrack is a sleek finance tracking web app, designed to make adulting (aka budgeting) slightly less painful.',
     link: 'https://fintrack-flax-beta.vercel.app',
     tags: [
-      'Next.js',
-      'TypeScript',
-      'ShadCN',
-      'Aceternity UI'
+      NextJS,
+      TypeScript,
+      { name: 'ShadCN' },
+      { name: 'Aceternity UI' },
+      Tailwind
     ]
   },
   {
@@ -41,10 +97,11 @@ const projects: Project[] = [
     description: 'Sputify is my take on Spotify—built from scratch to stream bops. To deliver a vibe-heavy music experience... minus the licensing fees.',
     link: 'https://github.com/M-SaaD-H/Sputify',
     tags: [
-      'React.js',
-      'Node.js',
-      'ShadCN',
-      'JavaScript'
+      React,
+      NodeJS,
+      { name: 'ShadCN' },
+      JavaScript,
+      Tailwind
     ]
   },
   {
@@ -52,32 +109,23 @@ const projects: Project[] = [
     description: 'ZooTube is a YouTube-inspired backend clone. It handles user auth, video uploads, likes, and comments like the real deal (minus the copyright strikes).',
     link: 'https://github.com/M-SaaD-H/Zootube',
     tags: [
-      'Node.js',
-      'MongoDB',
-      'Cloudinary',
-      'JavaScript'
+      NodeJS,
+      MongoDB,
+      { name: 'Cloudinary' },
+      JavaScript
     ]
   }
 ]
 
 const upcomingProjects: Project[] = [
   {
-    title: 'UI Component Library',
-    description: "A clean, reusable UI component library—because writing the same button for the 47th time shouldn't be a personality trait.",
-    tags: [
-      'Next.js',
-      'Motion',
-      'ShadCN',
-      'TypScript'
-    ]
-  },
-  {
     title: 'AlgoBud',
     description: "An AI-powered DSA platform with a personal tutor that spots your mistakes, explains patterns, and helps you level up—smarter than brute force.",
     tags: [
-      'Next.js',
-      'Express',
-      'TypeScript',
+      NextJS,
+      NodeJS,
+      TypeScript,
+      Tailwind
     ]
   }
 ]

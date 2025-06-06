@@ -4,6 +4,7 @@ import React from 'react'
 import { Project } from './Projects'
 import Link from 'next/link'
 import { motion } from 'motion/react'
+import { Tags } from './Tags'
 
 const Card = ({ project }: { project: Project }) => {
   const childVariant = {
@@ -35,16 +36,12 @@ const Card = ({ project }: { project: Project }) => {
       </div>
       <div className='flex gap-2 flex-wrap'>
         {
-          project.tags.map(tag => (
-            <div key={tag} className='text-xs italic text-neutral-700 px-2 py-1 bg-gray-100 dark:text-white dark:bg-transparent dark:border dark:border-gray-800 rounded-md'>
-              {tag}
-            </div>
-          ))
+          <Tags items={project.tags} />
         }
       </div>
       {
         project.link && (
-          <Link href={project.link} target={'_blank'} className='absolute inset-0' />
+          <Link href={project.link} target={'_blank'} className='absolute inset-0 pointer-events-none' />
         )
       }
     </motion.div>
