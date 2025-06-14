@@ -112,10 +112,6 @@ const projects: Project[] = [
       NodeJS,
       MongoDB,
       { name: 'Cloudinary' },
-      JavaScript,
-      NodeJS,
-      MongoDB,
-      { name: 'Cloudinary' },
       JavaScript
     ]
   }
