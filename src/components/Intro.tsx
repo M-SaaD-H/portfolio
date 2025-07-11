@@ -85,7 +85,7 @@ const Intro = () => {
         <motion.div
           variants={childVariant}
         >
-          <h1 className='text-3xl md:text-5xl font-sans font-bold tracking-tight my-2'>
+          <h1 className='text-4xl md:text-5xl font-sans font-bold tracking-tight my-2'>
             Saad
           </h1>
           <p className='text-muted-foreground text-sm'>Someone who loves building cool stuffs and Anime.</p>
