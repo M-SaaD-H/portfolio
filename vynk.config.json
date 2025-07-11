@@ -1,0 +1,11 @@
+{
+  "tsx": true,
+  "ts": true,
+  "paths": {
+    "ui": "src/components/ui",
+    "block": "src/components/blocks",
+    "snippets": "src/snippets"
+  },
+  "alwaysForce": false,
+  "iconLibrary": "@tabler/icons-react"
+}
