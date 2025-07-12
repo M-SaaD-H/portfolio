@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import React from 'react'
+import { childVariant } from './ui/animation-wrapper';
+import * as motion from 'motion/react-client';
 
 type Skill = {
   name: string;
@@ -25,27 +27,63 @@ const frameworks: Skill[] = [
 const Skills = () => {
   return (
     <div className='my-8'>
-      <h1 className='text-3xl md:text-4xl font-sans font-bold tracking-tight'>Skills</h1>
-      <div className='my-4'>
+      <motion.h1 variants={childVariant} className='text-3xl md:text-4xl font-sans font-bold tracking-tight'>Skills</motion.h1>
+      <motion.div variants={childVariant} className='my-4'>
         <h3 className='font-sans tracking-tight my-2'>Languages</h3>
         <div className='flex flex-wrap gap-2'>
           {
-            languages.map(l => (
-              <Tag tag={l} key={l.name} />
+            languages.map((l, idx) => (
+              <motion.div
+                key={idx}
+                initial={{
+                  y: 10,
+                  opacity: 0,
+                  filter: 'blur(8px)'
+                }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
+                  filter: 'blur(0px)'
+                }}
+                transition={{
+                  type: 'tween',
+                  delay: idx * 0.16
+                }}
+              >
+                <Tag tag={l} />
+              </motion.div>
             ))
           }
         </div>
-      </div>
-      <div className='my-4'>
+      </motion.div>
+      <motion.div variants={childVariant} className='my-4'>
         <h3 className='font-sans tracking-tight my-2'>Frameworks/Libraries</h3>
         <div className='flex flex-wrap gap-2'>
           {
-            frameworks.map(f => (
-              <Tag tag={f} key={f.name} />
+            frameworks.map((f, idx) => (
+              <motion.div
+                key={idx}
+                initial={{
+                  y: 10,
+                  opacity: 0,
+                  filter: 'blur(8px)'
+                }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
+                  filter: 'blur(0px)'
+                }}
+                transition={{
+                  type: 'tween',
+                  delay: idx * 0.16
+                }}
+              >
+                <Tag tag={f} />
+              </motion.div>
             ))
           }
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

@@ -4,9 +4,10 @@ import React from 'react'
 import { motion } from 'motion/react'
 import { IconBrandX } from '@tabler/icons-react'
 import { Socials } from './ui/socials'
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa6'
+import { FaGithub } from 'react-icons/fa6'
 import { SiPeerlist } from 'react-icons/si'
 import { Highlight } from './ui/highlight'
+import { childVariant } from './ui/animation-wrapper'
 
 const socials = [
   {
@@ -27,44 +28,8 @@ const socials = [
 ]
 
 const Intro = () => {
-  const childVariant = {
-    hidden: {
-      opacity: 0.5,
-      y: 20,
-      filter: 'blur(10px)',
-      transition: {
-        type: 'tween',
-        duration: 0.3
-      }
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        type: 'tween',
-        duration: 0.3
-      }
-    }
-  }
-
-  const parentVariant = {
-    hidden: {},
-    show: {
-      transition: {
-        duration: 0.3,
-        staggerChildren: 0.05
-      }
-    }
-  }
-
   return (
-    <motion.div
-      initial={'hidden'}
-      animate={'show'}
-      variants={parentVariant}
-      className='my-4'
-    >
+    <div className='my-4'>
       <div className='flex gap-4'>
         <motion.div
           variants={childVariant}
@@ -77,29 +42,27 @@ const Intro = () => {
             alt='Image'
           />
         </motion.div>
-        <motion.div
-          variants={childVariant}
-        >
-          <h1 className='text-4xl md:text-5xl font-sans font-bold tracking-tight'>
+        <div>
+          <motion.h1 variants={childVariant} className='text-4xl md:text-5xl font-sans font-bold tracking-tight'>
             Saad
-          </h1>
-          <p className='text-muted-foreground text-sm'>Someone who loves building cool stuffs and Anime.</p>
-          <Socials socials={socials} />
-        </motion.div>
+          </motion.h1>
+          <motion.p variants={childVariant} className='text-muted-foreground text-sm'>Someone who loves building cool stuffs and Anime.</motion.p>
+          <motion.div variants={childVariant}><Socials socials={socials} /></motion.div>
+        </div>
       </div>
       <AboutMe />
-    </motion.div>
+    </div>
   )
 }
 
 const AboutMe = () => (
   <div className='text-muted-foreground text-sm my-4 flex flex-col gap-2 text-justify'>
-    <p>
+    <motion.p variants={childVariant}>
       Hey! I&apos;m <Highlight>Saad</Highlight>, a developer who loves turning <Highlight>ideas into reality</Highlight> through code. Whether it&apos;s building <Highlight>sleek web apps</Highlight>, automating boring stuff, or just tinkering with new tech, I&apos;m always up for a challenge.
-    </p>
-    <p>
+    </motion.p>
+    <motion.p variants={childVariant}>
       When I&apos;m not <Highlight>coding</Highlight>, you&apos;ll probably find me watching <Highlight>anime</Highlight>, exploring <Highlight>open source projects</Highlight>, or learning <Highlight>something new</Highlight>. I believe in writing clean, <Highlight>maintainable</Highlight> code and enjoy <Highlight>collaborating</Highlight> with others to create <Highlight>awesome things</Highlight>.
-    </p>
+    </motion.p>
   </div>
 )
 
