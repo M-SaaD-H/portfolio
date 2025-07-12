@@ -26,7 +26,7 @@ const Skills = () => {
   return (
     <div className='my-8'>
       <h1 className='text-3xl md:text-4xl font-sans font-bold tracking-tight'>Skills</h1>
-      <div className='my-2'>
+      <div className='my-4'>
         <h3 className='font-sans tracking-tight my-2'>Languages</h3>
         <div className='flex flex-wrap gap-2'>
           {
@@ -36,7 +36,7 @@ const Skills = () => {
           }
         </div>
       </div>
-      <div className='my-2'>
+      <div className='my-4'>
         <h3 className='font-sans tracking-tight my-2'>Frameworks/Libraries</h3>
         <div className='flex flex-wrap gap-2'>
           {

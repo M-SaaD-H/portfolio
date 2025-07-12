@@ -2,7 +2,7 @@
 
 import Card from './Card'
 import Link from 'next/link'
-import { IconBrandFramerMotion, IconBrandJavascript, IconBrandMongodb, IconBrandNextjs , IconBrandNodejs, IconBrandReact, IconBrandTailwind, IconBrandTypescript, IconChevronDown } from '@tabler/icons-react'
+import { IconBrandFramerMotion, IconBrandJavascript, IconBrandMongodb, IconBrandNextjs, IconBrandNodejs, IconBrandReact, IconBrandTailwind, IconBrandTypescript, IconChevronDown } from '@tabler/icons-react'
 import { motion } from 'motion/react'
 import { Button } from './ui/button'
 
@@ -18,7 +18,7 @@ export type Project = {
   }[]
 }
 
-const NextJS ={
+const NextJS = {
   name: 'Next.js',
   logo: <IconBrandNextjs size={18} />
 }
@@ -187,7 +187,7 @@ function Projects() {
       id='projects'
       className='mt-12'
     >
-      <motion.h1 variants={childVariant} className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>
+      <motion.h1 variants={childVariant} className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight max-md:text-center text-balance'>
         Projects I&apos;ve Crafted & Shipped
       </motion.h1>
       <div className='space-y-4'>
@@ -197,14 +197,15 @@ function Projects() {
           ))
         }
       </div>
-      <Link href={'https://github.com/M-SaaD-H'} target='_blank'>
-        <Button variant={'hidden'} className='flex items-center gap-1 text-sm mx-auto my-8'>
+
+      <Button variant={'hidden'} asChild className='flex items-center gap-1 text-sm mx-auto my-8'>
+        <Link href={'https://github.com/M-SaaD-H'} target='_blank'>
           See More <IconChevronDown size={16} />
-        </Button>
-      </Link>
+        </Link>
+      </Button>
 
       <h1 className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>Upcoming Projects</h1>
-      <div className='grid md:grid-cols-2 max-md:mx-4 gap-4'>
+      <div className='grid md:grid-cols-2 gap-4 w-full'>
         {
           upcomingProjects.map(project => (
             <Card project={project} key={project.title} />

@@ -23,11 +23,6 @@ const socials = [
     name: 'Peerlist',
     link: 'https://peerlist.io/m_saad_h',
     icon: SiPeerlist
-  },
-  {
-    name: 'Linkedin',
-    link: 'https://www.linkedin.com/in/muhammad-saad-haider-942167317',
-    icon: FaLinkedinIn
   }
 ]
 
@@ -85,7 +80,7 @@ const Intro = () => {
         <motion.div
           variants={childVariant}
         >
-          <h1 className='text-4xl md:text-5xl font-sans font-bold tracking-tight my-2'>
+          <h1 className='text-4xl md:text-5xl font-sans font-bold tracking-tight'>
             Saad
           </h1>
           <p className='text-muted-foreground text-sm'>Someone who loves building cool stuffs and Anime.</p>
