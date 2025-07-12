@@ -51,7 +51,7 @@ const Skills = () => {
 }
 
 const Tag = ({ tag }: { tag: Skill }) => (
-  <div className='flex items-center gap-2 bg-muted border border-border rounded-lg px-3 py-1 transition-colors duration-200 hover:border-foreground/70'>
+  <div className='flex items-center gap-2 bg-muted border border-border rounded-lg px-3 py-1 transition-colors duration-200 hover:border-foreground/70 select-none'>
     <Image
       src={tag.icon}
       height={18}

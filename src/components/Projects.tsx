@@ -4,11 +4,14 @@ import Card from './Card'
 import Link from 'next/link'
 import { IconBrandFramerMotion, IconBrandJavascript, IconBrandMongodb, IconBrandNextjs , IconBrandNodejs, IconBrandReact, IconBrandTailwind, IconBrandTypescript, IconChevronDown } from '@tabler/icons-react'
 import { motion } from 'motion/react'
+import { Button } from './ui/button'
 
 export type Project = {
   title: string,
   description: string,
-  link?: string,
+  image: string,
+  liveLink: string,
+  sourceLink: string,
   tags: {
     name: string,
     logo?: React.ReactNode
@@ -17,49 +20,51 @@ export type Project = {
 
 const NextJS ={
   name: 'Next.js',
-  logo: <IconBrandNextjs />
+  logo: <IconBrandNextjs size={18} />
 }
 
 const React = {
   name: 'React',
-  logo: <IconBrandReact />
+  logo: <IconBrandReact size={18} />
 }
 
 const Tailwind = {
   name: 'Tailwind CSS',
-  logo: <IconBrandTailwind />
+  logo: <IconBrandTailwind size={18} />
 }
 
 const Motion = {
   name: 'Motion',
-  logo: <IconBrandFramerMotion />
+  logo: <IconBrandFramerMotion size={18} />
 }
 
 const TypeScript = {
   name: 'TypeScript',
-  logo: <IconBrandTypescript />
+  logo: <IconBrandTypescript size={18} />
 }
 
 const NodeJS = {
   name: 'NodeJS',
-  logo: <IconBrandNodejs />
+  logo: <IconBrandNodejs size={18} />
 }
 
 const JavaScript = {
   name: 'JavaScript',
-  logo: <IconBrandJavascript />
+  logo: <IconBrandJavascript size={18} />
 }
 
 const MongoDB = {
   name: 'MongoDB',
-  logo: <IconBrandMongodb />
+  logo: <IconBrandMongodb size={18} />
 }
 
 const projects: Project[] = [
   {
     title: 'Vynk',
-    description: "Vynk is an open-source library that helps developers streamline their workflow by eliminating repetitive tasks. Focus on building what matters most and ship faster.",
-    link: 'https://vynk.live',
+    description: "Open-source library for UI components, blocks and spinnets available with a single CLI command to accelerate the developement.",
+    image: '/projects/vynk.png',
+    liveLink: 'https://vynk.live',
+    sourceLink: 'https://github.com/M-SaaD-H/vynk',
     tags: [
       NextJS,
       Motion,
@@ -70,8 +75,10 @@ const projects: Project[] = [
   },
   {
     title: 'VidChat',
-    description: 'VidChat is a real-time video chat app. It lets users instantly get straight-up face-to-face conversations in the browser.',
-    link: 'https://vid-chat-peach.vercel.app',
+    description: 'A real-time browser video chat app built to learn and demonstrate WebRTC, featuring peer-to-peer video calls and simple signaling.',
+    image: '/projects/vidchat.png',
+    liveLink: 'https://vid-chat-peach.vercel.app',
+    sourceLink: 'https://github.com/M-SaaD-H/VidChat',
     tags: [
       NextJS,
       TypeScript,
@@ -82,8 +89,10 @@ const projects: Project[] = [
   },
   {
     title: 'FinTrack',
-    description: 'FinTrack is a sleek finance tracking web app, designed to make adulting (aka budgeting) slightly less painful.',
-    link: 'https://fintrack-flax-beta.vercel.app',
+    description: 'A simple web app for tracking finances, designed specifically for students.',
+    image: '/projects/fintrack.png',
+    liveLink: 'https://fintrack-flax-beta.vercel.app',
+    sourceLink: 'https://github.com/M-SaaD-H/fintrack',
     tags: [
       NextJS,
       TypeScript,
@@ -94,8 +103,10 @@ const projects: Project[] = [
   },
   {
     title: 'Sputify',
-    description: 'Sputify is my take on Spotify—built from scratch to stream bops. To deliver a vibe-heavy music experience... minus the licensing fees.',
-    link: 'https://github.com/M-SaaD-H/Sputify',
+    description: 'A Spotify-inspired music streaming clone with additional functionalities like chat and jamming rooms.',
+    image: '/projects/sputify.png',
+    liveLink: 'https://github.com/M-SaaD-H/Sputify',
+    sourceLink: 'https://github.com/M-SaaD-H/Sputify',
     tags: [
       React,
       NodeJS,
@@ -106,8 +117,10 @@ const projects: Project[] = [
   },
   {
     title: 'Zootube',
-    description: 'ZooTube is a YouTube-inspired backend clone. It handles user auth, video uploads, likes, and comments like the real deal (minus the copyright strikes).',
-    link: 'https://github.com/M-SaaD-H/Zootube',
+    description: 'A YouTube-style backend clone with uploads and authentication, built to learn Express and backend development.',
+    image: '/projects/zootube.png',
+    liveLink: 'https://github.com/M-SaaD-H/Zootube',
+    sourceLink: 'https://github.com/M-SaaD-H/Zootube',
     tags: [
       NodeJS,
       MongoDB,
@@ -121,6 +134,9 @@ const upcomingProjects: Project[] = [
   {
     title: 'AlgoBud',
     description: "An AI-powered DSA platform with a personal tutor that spots your mistakes, explains patterns, and helps you level up—smarter than brute force.",
+    image: '',
+    liveLink: '/',
+    sourceLink: '/',
     tags: [
       NextJS,
       NodeJS,
@@ -168,10 +184,13 @@ function Projects() {
       initial={'hidden'}
       animate={'show'}
       variants={parentVariant}
-      className='md:p-2 p-8' id='projects'
+      id='projects'
+      className='mt-12'
     >
-      <motion.h1 variants={childVariant} className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>Projects</motion.h1>
-      <div className='grid md:grid-cols-2 max-md:mx-4 gap-4'>
+      <motion.h1 variants={childVariant} className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>
+        Projects I&apos;ve Crafted & Shipped
+      </motion.h1>
+      <div className='space-y-4'>
         {
           projects.map(project => (
             <Card project={project} key={project.title} />
@@ -179,9 +198,9 @@ function Projects() {
         }
       </div>
       <Link href={'https://github.com/M-SaaD-H'} target='_blank'>
-        <button className='flex items-center gap-1 text-sm mx-auto my-8 px-3 py-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200 cursor-pointer'>
+        <Button variant={'hidden'} className='flex items-center gap-1 text-sm mx-auto my-8'>
           See More <IconChevronDown size={16} />
-        </button>
+        </Button>
       </Link>
 
       <h1 className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>Upcoming Projects</h1>

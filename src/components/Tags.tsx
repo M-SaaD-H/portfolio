@@ -38,7 +38,7 @@ const TagItem = ({ item }: { item: ItemType }) => {
         }}
         className='flex items-center'
       >
-        {item.logo ?? <div className='h-6 w-6 rounded-full dark:bg-neutral-200 bg-zinc-800' />}
+        {item.logo ?? <div className='h-4 w-4 rounded-full dark:bg-neutral-300 bg-zinc-800' />}
       </motion.div>
       <motion.div
         variants={{
@@ -52,7 +52,7 @@ const TagItem = ({ item }: { item: ItemType }) => {
           damping: 20,
           mass: 0.5
         }}
-        className='overflow-hidden whitespace-nowrap font-sans'
+        className='overflow-hidden whitespace-nowrap font-sans text-sm my-auto'
       >
         {item.name}
       </motion.div>
