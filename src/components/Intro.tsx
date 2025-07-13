@@ -58,10 +58,10 @@ const Intro = () => {
 const AboutMe = () => (
   <div className='text-muted-foreground text-sm my-4 flex flex-col gap-2 text-justify'>
     <motion.p variants={childVariant}>
-      Hey! I&apos;m <Highlight>Saad</Highlight>, a developer who loves turning <Highlight>ideas into reality</Highlight> through code. Whether it&apos;s building <Highlight>sleek web apps</Highlight>, automating boring stuff, or just tinkering with new tech, I&apos;m always up for a challenge.
+      Hey! I&apos;m <Highlight>Saad</Highlight>, a developer who loves turning <Highlight>ideas into reality</Highlight> through code. Whether it&apos;s building <Highlight>sleek web apps</Highlight>, automating boring stuff, or just tinkering with new tech, I&apos;m always up for it.
     </motion.p>
     <motion.p variants={childVariant}>
-      When I&apos;m not <Highlight>coding</Highlight>, you&apos;ll probably find me watching <Highlight>anime</Highlight>, exploring <Highlight>open source projects</Highlight>, or learning <Highlight>something new</Highlight>. I believe in writing clean, <Highlight>maintainable</Highlight> code and enjoy <Highlight>collaborating</Highlight> with others to create <Highlight>awesome things</Highlight>.
+      When I&apos;m not <Highlight>coding</Highlight>, you&apos;ll probably find me watching <Highlight>anime</Highlight>, exploring <Highlight>open source projects</Highlight>, or learning <Highlight>something new</Highlight>. I&apos;m always curious and <Highlight>love connecting</Highlight> with people who share the same passion for tech and creativity.
     </motion.p>
   </div>
 )
