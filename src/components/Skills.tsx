@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react'
-import { childVariant } from './ui/animation-wrapper';
+import { AnimationWrapper, childVariant } from './ui/animation-wrapper';
 import * as motion from 'motion/react-client';
 
 type Skill = {
@@ -20,7 +20,8 @@ const frameworks: Skill[] = [
   { name: "Express.js", icon: "/skills/expressjs.svg" },
   { name: "Tailwind CSS", icon: "/skills/tailwind.svg" },
   { name: "Framer Motion", icon: "/skills/framermotion.svg" },
-  { name: "TanStack Query", icon: "/skills/tanstackquery.svg" }
+  { name: "TanStack Query", icon: "/skills/tanstackquery.svg" },
+  { name: "Zustand", icon: "/skills/zustand.svg" }
 ];
 
 
@@ -30,59 +31,27 @@ const Skills = () => {
       <motion.h1 variants={childVariant} className='text-3xl md:text-4xl font-sans font-bold tracking-tight'>Skills</motion.h1>
       <motion.div variants={childVariant} className='my-4'>
         <h3 className='font-sans tracking-tight my-2'>Languages</h3>
-        <div className='flex flex-wrap gap-2'>
+        <AnimationWrapper className='flex flex-wrap gap-2'>
           {
-            languages.map((l, idx) => (
-              <motion.div
-                key={idx}
-                initial={{
-                  y: 10,
-                  opacity: 0,
-                  filter: 'blur(8px)'
-                }}
-                animate={{
-                  y: 0,
-                  opacity: 1,
-                  filter: 'blur(0px)'
-                }}
-                transition={{
-                  type: 'tween',
-                  delay: idx * 0.16
-                }}
-              >
+            languages.map(l => (
+              <motion.div variants={childVariant} key={l.name}>
                 <Tag tag={l} />
               </motion.div>
             ))
           }
-        </div>
+        </AnimationWrapper>
       </motion.div>
       <motion.div variants={childVariant} className='my-4'>
         <h3 className='font-sans tracking-tight my-2'>Frameworks/Libraries</h3>
-        <div className='flex flex-wrap gap-2'>
+        <AnimationWrapper className='flex flex-wrap gap-2'>
           {
-            frameworks.map((f, idx) => (
-              <motion.div
-                key={idx}
-                initial={{
-                  y: 10,
-                  opacity: 0,
-                  filter: 'blur(8px)'
-                }}
-                animate={{
-                  y: 0,
-                  opacity: 1,
-                  filter: 'blur(0px)'
-                }}
-                transition={{
-                  type: 'tween',
-                  delay: idx * 0.16
-                }}
-              >
+            frameworks.map(f => (
+              <motion.div variants={childVariant} key={f.name}>
                 <Tag tag={f} />
               </motion.div>
             ))
           }
-        </div>
+        </AnimationWrapper>
       </motion.div>
     </div>
   )

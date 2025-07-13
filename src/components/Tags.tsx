@@ -1,61 +1,76 @@
-'use client'
+"use client"
 
-import React from 'react'
-import { motion } from 'motion/react'
+import React from "react"
+import { motion } from "motion/react"
+import { cn } from "@/lib/utils"
 
 type ItemType = {
   name: string,
   logo?: React.ReactNode
 }
 
-export const Tags = ({ items }: { items: ItemType[] }) => {
+const Tags = ({ overlap = false, children, className }: { overlap?: boolean, children: React.ReactNode, className?: string }) => {
   return (
-    <div className='flex'>
-      {
-        items.map(i => (
-          <TagItem item={i} key={i.name} />
-        ))
-      }
+    <div 
+      className={cn(
+        "flex justify-center items-center",
+        className
+      )}
+      style={{ 
+        "--tag-overlap": overlap ? "-0.2rem" : "0",
+      } as React.CSSProperties}
+    >
+      {children}
     </div>
   )
 }
+
+Tags.displayName = "Tags"
 
 const TagItem = ({ item }: { item: ItemType }) => {
   return (
     <motion.div
       layout
-      whileHover={'animate'}
-      whileTap={'animate'}
-      initial={'initial'}
-      className='flex cursor-pointer'
+      whileHover={"animate"}
+      whileTap={"animate"}
+      initial={"initial"}
+      animate={"initial"}
+      className={cn(
+        "flex cursor-pointer",
+        "mx-[var(--tag-overlap)]"
+      )}
     >
       <motion.div
         variants={{
+          initial: { paddingRight: 0 },
           animate: { paddingRight: 2 }
         }}
         transition={{
-          type: 'spring'
+          type: "spring"
         }}
-        className='flex items-center'
+        className="flex items-center"
       >
-        {item.logo ?? <div className='h-4 w-4 rounded-full dark:bg-neutral-300 bg-zinc-800' />}
+        {item.logo ?? <div className="size-4 rounded-full bg-foreground/90" />}
       </motion.div>
       <motion.div
         variants={{
           initial: { width: 0 },
-          animate: { width: 'auto' },
-          exit: { width: 0 }
+          animate: { width: "auto", marginRight: "calc(var(--tag-overlap) * -3)" }
         }}
         transition={{
-          type: 'spring',
+          type: "spring",
           stiffness: 200,
           damping: 20,
           mass: 0.5
         }}
-        className='overflow-hidden whitespace-nowrap font-sans text-sm my-auto'
+        className="overflow-hidden whitespace-nowrap font-sans text-sm"
       >
         {item.name}
       </motion.div>
     </motion.div>
   )
 }
+
+TagItem.displayName = "TagItem"
+
+export { Tags, TagItem }

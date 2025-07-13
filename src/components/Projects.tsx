@@ -136,8 +136,21 @@ const upcomingProjects: Project[] = [
     title: 'AlgoBud',
     description: "An AI-powered DSA platform with a personal tutor that spots your mistakes, explains patterns, and helps you level up—smarter than brute force.",
     image: '',
-    liveLink: '/',
-    sourceLink: '/',
+    liveLink: '',
+    sourceLink: '',
+    tags: [
+      NextJS,
+      NodeJS,
+      TypeScript,
+      Tailwind
+    ]
+  },
+  {
+    title: 'Zuno',
+    description: "An AI agent that keeps track of your personal life, so you can focus on getting work done without missing anything important.",
+    image: '',
+    liveLink: '',
+    sourceLink: '',
     tags: [
       NextJS,
       NodeJS,
@@ -153,10 +166,10 @@ function Projects() {
       <motion.h1 variants={childVariant} className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight max-md:text-center text-balance'>
         Projects I&apos;ve Crafted & Shipped
       </motion.h1>
-      <div className='space-y-4'>
+      <div className='grid gap-4 md:auto-rows-[10rem]'>
         {
           projects.map(project => (
-            <motion.div variants={childVariant} key={project.title}>
+            <motion.div variants={childVariant} key={project.title} className='h-full w-full flex'>
               <Card project={project} />
             </motion.div>
           ))
@@ -164,14 +177,14 @@ function Projects() {
       </div>
 
       <motion.div variants={childVariant}>
-        <Button variant={'hidden'} asChild className='flex items-center gap-1 text-sm mx-auto my-8'>
+        <Button variant={'hidden'} asChild className='flex items-center gap-1 w-max text-sm mx-auto my-8'>
           <Link href={'https://github.com/M-SaaD-H'} target='_blank'>
             See More <IconChevronDown size={16} />
           </Link>
         </Button>
       </motion.div>
 
-      <motion.h1 variants={childVariant} className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight'>Upcoming Projects</motion.h1>
+      <motion.h1 variants={childVariant} className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight max-md:text-center text-balance'>Upcoming Projects</motion.h1>
       <div className='grid md:grid-cols-2 gap-4 w-full'>
         {
           upcomingProjects.map(project => (
