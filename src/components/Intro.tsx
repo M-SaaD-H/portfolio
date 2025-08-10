@@ -40,6 +40,7 @@ const Intro = () => {
             height={120}
             width={120}
             alt='Image'
+            className='max-md:size-[6rem]'
           />
         </motion.div>
         <div>

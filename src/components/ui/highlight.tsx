@@ -1,8 +1,14 @@
+import { cn } from '@/lib/utils'
 import React from 'react'
 
-export const Highlight = ({ children }: { children: React.ReactNode }) => {
+export const Highlight = ({ children, className }: { children: React.ReactNode, className?: string }) => {
   return (
-    <span className='text-foreground'>
+    <span
+      className={cn(
+        'text-foreground',
+        className
+      )}
+    >
       {children}
     </span>
   )

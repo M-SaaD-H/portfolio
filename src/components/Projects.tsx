@@ -59,6 +59,11 @@ const MongoDB = {
   logo: <IconBrandMongodb size={18} />
 }
 
+const Java = {
+  name: 'Java',
+  logo: <img src={"/skills/java.svg"} className='size-5' style={{ filter: 'brightness(1000%) saturate(0)', WebkitFilter: 'brightness(1000%) saturate(0)' }} />
+}
+
 const projects: Project[] = [
   {
     title: 'Vynk',
@@ -72,6 +77,26 @@ const projects: Project[] = [
       { name: 'ShadCN' },
       TypeScript,
       Tailwind
+    ]
+  },
+  {
+    title: 'Autotone',
+    description: "A smart, minimal browser extension that automatically keeps your audio volume steady and comfortable across tabs.",
+    image: '/projects/autotone.png',
+    liveLink: 'https://github.com/M-SaaD-H/autotone',
+    sourceLink: 'https://github.com/M-SaaD-H/autotone',
+    tags: [
+      JavaScript
+    ]
+  },
+  {
+    title: '2D Game',
+    description: "A Simple 2D Adventure game, built just for having some fun with Java.",
+    image: '/projects/game.png',
+    liveLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
+    sourceLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
+    tags: [
+      Java
     ]
   },
   {
