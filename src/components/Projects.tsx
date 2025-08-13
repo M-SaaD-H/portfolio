@@ -6,6 +6,7 @@ import { IconBrandFramerMotion, IconBrandJavascript, IconBrandMongodb, IconBrand
 import { motion } from 'motion/react'
 import { Button } from './ui/button'
 import { childVariant } from './ui/animation-wrapper'
+import Image from 'next/image'
 
 export type Project = {
   title: string,
@@ -61,7 +62,7 @@ const MongoDB = {
 
 const Java = {
   name: 'Java',
-  logo: <img src={"/skills/java.svg"} className='size-5' style={{ filter: 'brightness(1000%) saturate(0)', WebkitFilter: 'brightness(1000%) saturate(0)' }} />
+  logo: <Image src={"/skills/java.svg"} height={20} width={20} alt='Java Icon' style={{ filter: 'brightness(1000%) saturate(0)', WebkitFilter: 'brightness(1000%) saturate(0)' }} />
 }
 
 const projects: Project[] = [
