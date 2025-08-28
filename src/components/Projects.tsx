@@ -2,11 +2,12 @@
 
 import Card from './Card'
 import Link from 'next/link'
-import { IconBrandFramerMotion, IconBrandJavascript, IconBrandMongodb, IconBrandNextjs, IconBrandNodejs, IconBrandReact, IconBrandTailwind, IconBrandTypescript, IconChevronDown } from '@tabler/icons-react'
+import { IconBrandFramerMotion, IconBrandJavascript, IconBrandMongodb, IconBrandNextjs, IconBrandNodejs, IconBrandReact, IconBrandTailwind, IconBrandTypescript, IconChevronDown, IconChevronRight } from '@tabler/icons-react'
 import { motion } from 'motion/react'
 import { Button } from './ui/button'
 import { childVariant } from './ui/animation-wrapper'
 import Image from 'next/image'
+import React, { useState } from 'react'
 
 export type Project = {
   title: string,
@@ -20,12 +21,24 @@ export type Project = {
   }[]
 }
 
+export type UpcomingProject = {
+  title: string,
+  description: string,
+  image?: string,
+  liveLink?: string,
+  sourceLink?: string,
+  tags: {
+    name: string,
+    logo?: React.ReactNode
+  }[]
+}
+
 const NextJS = {
   name: 'Next.js',
   logo: <IconBrandNextjs size={18} />
 }
 
-const React = {
+const ReactTech = {
   name: 'React',
   logo: <IconBrandReact size={18} />
 }
@@ -145,7 +158,7 @@ const projects: Project[] = [
     liveLink: 'https://github.com/M-SaaD-H/Sputify',
     sourceLink: 'https://github.com/M-SaaD-H/Sputify',
     tags: [
-      React,
+      ReactTech,
       NodeJS,
       { name: 'ShadCN' },
       JavaScript,
@@ -167,13 +180,10 @@ const projects: Project[] = [
   }
 ]
 
-const upcomingProjects: Project[] = [
+const upcomingProjects: UpcomingProject[] = [
   {
     title: 'AlgoBud',
     description: "An AI-powered DSA platform with a personal tutor that spots your mistakes, explains patterns, and helps you level up—smarter than brute force.",
-    image: '',
-    liveLink: '',
-    sourceLink: '',
     tags: [
       NextJS,
       NodeJS,
@@ -184,9 +194,6 @@ const upcomingProjects: Project[] = [
   {
     title: 'Zuno',
     description: "An AI agent that keeps track of your personal life, so you can focus on getting work done without missing anything important.",
-    image: '',
-    liveLink: '',
-    sourceLink: '',
     tags: [
       NextJS,
       NodeJS,
@@ -197,6 +204,9 @@ const upcomingProjects: Project[] = [
 ]
 
 function Projects() {
+  const [showAll, setShowAll] = useState(false)
+  const visibleProjects = showAll ? projects : projects.slice(0, 4)
+
   return (
     <div id='projects' className='mt-12'>
       <motion.h1 variants={childVariant} className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight max-md:text-center text-balance'>
@@ -204,7 +214,7 @@ function Projects() {
       </motion.h1>
       <div className='grid gap-4 md:auto-rows-[10rem]'>
         {
-          projects.map(project => (
+          visibleProjects.map(project => (
             <motion.div variants={childVariant} key={project.title} className='h-full w-full flex'>
               <Card project={project} />
             </motion.div>
@@ -212,20 +222,41 @@ function Projects() {
         }
       </div>
 
-      <motion.div variants={childVariant}>
-        <Button variant={'hidden'} asChild className='flex items-center gap-1 w-max text-sm mx-auto my-8'>
-          <Link href={'https://github.com/M-SaaD-H'} target='_blank'>
-            See More <IconChevronDown size={16} />
-          </Link>
-        </Button>
-      </motion.div>
+      {!showAll && (
+        <motion.div variants={childVariant}>
+          <Button
+            variant={'hidden'}
+            asChild
+            className='flex items-center gap-1 w-max text-sm mx-auto my-8'
+            onClick={() => setShowAll(true)}
+          >
+            <span>
+              See More <IconChevronDown size={16} />
+            </span>
+          </Button>
+        </motion.div>
+      )}
+
+      {showAll && (
+        <motion.div variants={childVariant}>
+          <Button
+            variant={'hidden'}
+            asChild
+            className='flex items-center gap-1 hover:gap-2 transition-all duration-200 w-max text-sm mx-auto my-8'
+          >
+            <Link href={'https://github.com/M-SaaD-H'} target='_blank'>
+              View on GitHub <IconChevronRight size={16} />
+            </Link>
+          </Button>
+        </motion.div>
+      )}
 
       <motion.h1 variants={childVariant} className='text-4xl ml-2 my-8 font-bold font-sans tracking-tight max-md:text-center text-balance'>Upcoming Projects</motion.h1>
       <div className='grid md:grid-cols-2 gap-4 w-full'>
         {
           upcomingProjects.map(project => (
             <motion.div variants={childVariant} key={project.title}>
-              <Card project={project} key={project.title} />
+              <Card project={project} />
             </motion.div>
           ))
         }

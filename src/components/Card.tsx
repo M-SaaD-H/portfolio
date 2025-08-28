@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Project } from './Projects'
+import { Project, UpcomingProject } from './Projects'
 import Link from 'next/link'
 import { TagItem, Tags } from './Tags'
 import { Button } from './ui/button'
@@ -9,7 +9,7 @@ import Image from 'next/image'
 import { IconExternalLink } from '@tabler/icons-react'
 import { FaGithub } from 'react-icons/fa6'
 
-const Card = ({ project }: { project: Project }) => {
+const Card = ({ project }: { project: Project | UpcomingProject }) => {
   return (
     <div className='flex max-md:flex-col overflow-hidden rounded-lg w-full h-full border transition-colors duration-200 hover:bg-muted/30 border-border shadow-[0_1px_1px_rgba(0,0,0,0.05),0_4px_6px_rgba(34,42,53,0.04),0_24px_68px_rgba(47,48,55,0.05),0_2px_3px_rgba(0,0,0,0.04)] relative group'>
       {
