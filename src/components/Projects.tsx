@@ -81,6 +81,16 @@ const projects: Project[] = [
     ]
   },
   {
+    title: 'Anton',
+    description: "A SQL-like database built from scratch in Java for learning database internals.",
+    image: '/projects/anton.png',
+    liveLink: 'https://github.com/M-SaaD-H/Anton',
+    sourceLink: 'https://github.com/M-SaaD-H/Anton',
+    tags: [
+      Java
+    ]
+  },
+  {
     title: 'Autotone',
     description: "A smart, minimal browser extension that automatically keeps your audio volume steady and comfortable across tabs.",
     image: '/projects/autotone.png',
