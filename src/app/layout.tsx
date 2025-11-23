@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import Footer from "@/components/Footer";
+import LocomotiveScrollWrapper from "@/components/LocomotiveScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,12 +30,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className='max-w-2xl mx-auto md:mt-12 mt-4 p-8'>
-          {children}
-        </div>
-        <div className='max-w-2xl mx-auto'>
-          <Footer />
-        </div>
+        <LocomotiveScrollWrapper>
+          <div className='max-w-2xl mx-auto md:mt-12 mt-4 p-8'>
+            {children}
+          </div>
+          <div className='max-w-2xl mx-auto'>
+            <Footer />
+          </div>
+        </LocomotiveScrollWrapper>
       </body>
     </html>
   );
