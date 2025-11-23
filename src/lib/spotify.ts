@@ -80,6 +80,8 @@ async function getCachedAccessToken() {
     accessToken = access_token;
     // expires_in is in seconds, Date.now() is milliseconds
     accessTokenExpiresAt = now + expires_in;
+
+    console.log("Access Token Refreshed")
   }
 
   return accessToken;
@@ -100,8 +102,6 @@ export const getSpotifyStatus = async () => {
       song
     };
   }
-
-  console.log("getting recently played song");
 
   song = await getRecentlyPlayed(token)
 
@@ -127,7 +127,12 @@ const getNowPlaying = async (token: string) => {
     throw new Error(`Spotify API Error: ${response.status} : ${response.statusText}`);
   }
 
-  const data = await response.json()
+  const data = await response.json();
+
+  // spotify api specific edge case
+  if (!data.item) {
+    return await getRecentlyPlayed(token);
+  }
   
   return formatSong(data.item);
 };
