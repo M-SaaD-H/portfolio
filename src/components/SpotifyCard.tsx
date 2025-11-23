@@ -49,7 +49,7 @@ const SpotifyCard = React.memo(() => {
     return (
       <motion.div 
         variants={childVariant} 
-        className="w-full bg-card text-card-foreground border border-border rounded-xl p-2 flex items-center justify-between"
+        className="w-full bg-card text-card-foreground border border-border rounded-xl p-2 flex items-center justify-between gap-2"
       >
         <div className="flex justify-center items-center gap-4">
           <Image
@@ -74,7 +74,7 @@ const SpotifyCard = React.memo(() => {
             <Link
               href={song.externalLink}
               target="_blank"
-              className="font-sans tracking-tight font-medium truncate text-sm hover:text-green-500 hover:underline transition-colors duration-100"
+              className="font-sans tracking-tight font-medium truncate text-sm text-wrap hover:text-green-500 hover:underline transition-colors duration-100"
             >
               {song.title}
             </Link>
