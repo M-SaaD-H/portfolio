@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
@@ -15,23 +15,26 @@
     "class-variance-authority": "^0.7.1",
     "locomotive-scroll": "^5.0.0-beta.21",
     "motion": "^12.9.7",
-    "next": "15.3.1",
-    "react": "^19.0.0",
+    "next": "16.0.7",
+    "react": "19.2.1",
     "react-activity-calendar": "^2.7.13",
-    "react-dom": "^19.0.0",
+    "react-dom": "19.2.1",
     "react-icons": "^5.5.0",
     "tailwind-merge": "^3.3.1",
     "vynk": "^3.0.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
     "eslint": "^9",
-    "eslint-config-next": "15.3.1",
+    "eslint-config-next": "16.0.7",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3"
   }
 }
