@@ -19,7 +19,50 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Saad",
-  description: "Welcome to my corner of the internet where I turn coffee into code and bugs into features. Warning: May contain traces of actual competence.",
+  description: "Engineer delivering fast, scalable, and meticulously crafted digital experiences.",
+  keywords: [
+    "Saad",
+    "Muhammad Saad Haider",
+    "Engineer",
+    "Programmer",
+    "Coder",
+    "India",
+    "Vynk",
+    "Anton",
+    "Autotone",
+    "Open Source Contributor"
+  ],
+  authors: [{ name: "Saad", url: "https://saad.works" }],
+  creator: "Saad",
+  publisher: "Saad",
+  openGraph: {
+    title: "Saad",
+    description: "Engineer delivering fast, scalable, and meticulously crafted digital experiences.",
+    url: "https://saad.works",
+    siteName: "Saad",
+    images: [
+      {
+        url: "https://saad.works/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Saad - Engineer",
+      }
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Saad",
+    description: "Engineer delivering fast, scalable, and meticulously crafted digital experiences.",
+    images: ["/og-image.png"],
+    site: "@_MSaaDH",
+    creator: "@_MSaaDH",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+  category: "developer",
 };
 
 export default function RootLayout({
