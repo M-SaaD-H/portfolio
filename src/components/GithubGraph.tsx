@@ -73,7 +73,7 @@ const GithubGraph = () => {
                 }
               `}
             </style>
-            <ActivityCalendar data={data} />
+            <ActivityCalendar data={data} blockSize={9.5} blockMargin={2} />
           </div>
         )
       }
