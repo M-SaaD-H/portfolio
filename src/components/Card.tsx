@@ -20,7 +20,7 @@ const Card = ({ project }: { project: Project | UpcomingProject }) => {
               height={300}
               width={400}
               alt={project.title + ' Landing Image'}
-              className='shrink-0 object-cover h-full w-full transition-transform duration-300 group-hover:scale-105'
+              className='shrink-0 object-cover h-full w-full transition-all duration-300 group-hover:scale-105 grayscale-100 opacity-50 hover:grayscale-0 hover:opacity-100'
               quality={90}
               priority={false}
             />
