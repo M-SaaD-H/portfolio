@@ -50,7 +50,10 @@ const GithubGraph = () => {
 
   return (
     <motion.div variants={childVariant} className='flex flex-col font-sans'>
-      <h3 className='text-3xl md:text-4xl font-bold tracking-tight my-4 mx-2'>Github</h3>
+      <div className='flex items-end mb-4 mx-2 gap-1'>
+        <h3 className='text-2xl font-bold tracking-tight'>Github</h3>
+        <p className='italic text-muted-foreground text-sm tracking-tight mb-[0.2rem]'>where code meets craft</p>
+      </div>
       {
         loading ? (
           <div className='w-full min-h-20 flex justify-center items-center'>
@@ -73,7 +76,7 @@ const GithubGraph = () => {
                 }
               `}
             </style>
-            <ActivityCalendar data={data} blockSize={9.5} blockMargin={2} />
+            <ActivityCalendar data={data} blockSize={9.5} blockMargin={2} fontSize={12} />
           </div>
         )
       }

@@ -28,8 +28,8 @@ const frameworks: Skill[] = [
 const Skills = () => {
   return (
     <div className='my-8'>
-      <motion.h1 variants={childVariant} className='text-3xl md:text-4xl font-sans font-bold tracking-tight'>Skills</motion.h1>
-      <motion.div variants={childVariant} className='my-4'>
+      <h3 className='text-2xl font-bold tracking-tight'>Skills</h3>
+      <motion.div variants={childVariant} className='my-2'>
         <h3 className='font-sans tracking-tight my-2'>Languages</h3>
         <AnimationWrapper className='flex flex-wrap gap-2'>
           {
@@ -41,7 +41,7 @@ const Skills = () => {
           }
         </AnimationWrapper>
       </motion.div>
-      <motion.div variants={childVariant} className='my-4'>
+      <motion.div variants={childVariant} className='my-2'>
         <h3 className='font-sans tracking-tight my-2'>Frameworks/Libraries</h3>
         <AnimationWrapper className='flex flex-wrap gap-2'>
           {
@@ -65,7 +65,7 @@ const Tag = ({ tag }: { tag: Skill }) => (
       width={18}
       alt={tag.name}
     />
-    <span className='text-sm'>{tag.name}</span>
+    <span className='text-xs'>{tag.name}</span>
   </div>
 )
 
