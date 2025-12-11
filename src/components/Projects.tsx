@@ -81,7 +81,7 @@ const Java = {
 const projects: Project[] = [
   {
     title: 'Vynk',
-    description: "Open-source library for UI components, blocks and spinnets available with a single CLI command to accelerate the developement.",
+    description: "CLI tool for ready-to-use UI components and blocks to speed up your web development.",
     image: '/projects/vynk.png',
     liveLink: 'https://vynk.live',
     sourceLink: 'https://github.com/M-SaaD-H/vynk',
@@ -95,7 +95,7 @@ const projects: Project[] = [
   },
   {
     title: 'Anton',
-    description: "A SQL-like database built from scratch in Java for learning database internals.",
+    description: "A SQL-like Java database, built from scratch, for learning database internals.",
     image: '/projects/anton.png',
     liveLink: 'https://github.com/M-SaaD-H/Anton',
     sourceLink: 'https://github.com/M-SaaD-H/Anton',
@@ -105,7 +105,7 @@ const projects: Project[] = [
   },
   {
     title: 'Autotone',
-    description: "A smart, minimal browser extension that automatically keeps your audio volume steady and comfortable across tabs.",
+    description: "Browser extension to automatically balance and keep tab audio volume steady.",
     image: '/projects/autotone.png',
     liveLink: 'https://github.com/M-SaaD-H/autotone',
     sourceLink: 'https://github.com/M-SaaD-H/autotone',
@@ -115,7 +115,7 @@ const projects: Project[] = [
   },
   {
     title: '2D Game',
-    description: "A Simple 2D Adventure game, built just for having some fun with Java.",
+    description: "Simple 2D adventure game built in Java, featuring exploration and basic enemy AI.",
     image: '/projects/game.png',
     liveLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
     sourceLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
@@ -125,7 +125,7 @@ const projects: Project[] = [
   },
   {
     title: 'VidChat',
-    description: 'A real-time browser video chat app built to learn and demonstrate WebRTC, featuring peer-to-peer video calls and simple signaling.',
+    description: "Peer-to-peer browser video chat app using WebRTC and Socket.io for real-time calls.",
     image: '/projects/vidchat.png',
     liveLink: 'https://vid-chat-peach.vercel.app',
     sourceLink: 'https://github.com/M-SaaD-H/VidChat',
@@ -139,7 +139,7 @@ const projects: Project[] = [
   },
   {
     title: 'FinTrack',
-    description: 'A simple web app for tracking finances, designed specifically for students.',
+    description: "A student-focused finance tracker app to manage and monitor expenses with ease.",
     image: '/projects/fintrack.png',
     liveLink: 'https://fintrack-flax-beta.vercel.app',
     sourceLink: 'https://github.com/M-SaaD-H/fintrack',
@@ -153,7 +153,7 @@ const projects: Project[] = [
   },
   {
     title: 'Sputify',
-    description: 'A Spotify-inspired music streaming clone with additional functionalities like chat and jamming rooms.',
+    description: "Spotify-like web music streaming clone. Features playlists, playback, and more.",
     image: '/projects/sputify.png',
     liveLink: 'https://github.com/M-SaaD-H/Sputify',
     sourceLink: 'https://github.com/M-SaaD-H/Sputify',
@@ -167,7 +167,7 @@ const projects: Project[] = [
   },
   {
     title: 'Zootube',
-    description: 'A YouTube-style backend clone with uploads and authentication, built to learn Express and backend development.',
+    description: "YouTube-style backend with secure uploads, authentication, and cloud media management.",
     image: '/projects/zootube.png',
     liveLink: 'https://github.com/M-SaaD-H/Zootube',
     sourceLink: 'https://github.com/M-SaaD-H/Zootube',
@@ -210,7 +210,7 @@ function Projects() {
   return (
     <div id='projects' className='mt-12'>
       <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4'>Projects</motion.h3>
-      <div className='grid gap-4 md:auto-rows-[10rem]'>
+      <div className='grid gap-3 md:grid-cols-2 md:auto-rows-[16rem]'>
         {
           visibleProjects.map(project => (
             <motion.div variants={childVariant} key={project.title} className='h-full w-full flex'>
@@ -224,27 +224,10 @@ function Projects() {
         <motion.div variants={childVariant}>
           <Button
             variant={'hidden'}
-            asChild
-            className='flex items-center gap-1 w-max text-sm mx-auto my-8'
+            className='flex items-center gap-1 w-max text-sm mx-auto my-8 rounded-xl'
             onClick={() => setShowAll(true)}
           >
-            <span>
-              See More <IconChevronDown size={16} />
-            </span>
-          </Button>
-        </motion.div>
-      )}
-
-      {showAll && (
-        <motion.div variants={childVariant}>
-          <Button
-            variant={'hidden'}
-            asChild
-            className='flex items-center gap-1 hover:gap-2 transition-all duration-200 w-max text-sm mx-auto my-8'
-          >
-            <Link href={'https://github.com/M-SaaD-H'} target='_blank'>
-              View on GitHub <IconChevronRight size={16} />
-            </Link>
+            See More <IconChevronDown size={16} />
           </Button>
         </motion.div>
       )}
