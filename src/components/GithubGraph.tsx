@@ -49,38 +49,37 @@ const GithubGraph = () => {
   }, []);
 
   return (
-    <motion.div variants={childVariant} className='flex flex-col font-sans'>
-      <div className='flex items-end mb-4 mx-2 gap-1'>
-        <h3 className='text-2xl font-bold tracking-tight'>Github</h3>
-        <p className='italic text-muted-foreground text-sm tracking-tight mb-[0.2rem]'>where code meets craft</p>
-      </div>
-      {
-        loading ? (
-          <div className='w-full min-h-20 flex justify-center items-center'>
-            <IconLoader2 className='animate-spin' />
-          </div>
-        ) : !data || data.length === 0 ? (
-          <p className='my-8 text-muted-foreground'>No GitHub contribution data available.</p>
-        ) : (
-          <div
-            className="overflow-x-auto"
-            style={{
-              scrollbarWidth: 'none', // Firefox
-              msOverflowStyle: 'none', // IE 10+
-            }}
-          >
-            <style>
-              {`
+    <div className='flex flex-col font-sans'>
+      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4'>Github</motion.h3>
+      <motion.div variants={childVariant}>
+        {
+          loading ? (
+            <div className='w-full min-h-20 flex justify-center items-center'>
+              <IconLoader2 className='animate-spin' />
+            </div>
+          ) : !data || data.length === 0 ? (
+            <p className='my-8 text-muted-foreground'>No GitHub contribution data available.</p>
+          ) : (
+            <div
+              className="overflow-x-auto"
+              style={{
+                scrollbarWidth: 'none', // Firefox
+                msOverflowStyle: 'none', // IE 10+
+              }}
+            >
+              <style>
+                {`
                 div::-webkit-scrollbar {
                   display: none;
                 }
               `}
-            </style>
-            <ActivityCalendar data={data} blockSize={9.5} blockMargin={2} fontSize={12} />
-          </div>
-        )
-      }
-    </motion.div>
+              </style>
+              <ActivityCalendar data={data} blockSize={9.5} blockMargin={2} fontSize={12} />
+            </div>
+          )
+        }
+      </motion.div>
+    </div>
   );
 };
 

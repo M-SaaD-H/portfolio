@@ -81,10 +81,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
       >
         <LocomotiveScrollWrapper>
-          <div className='max-w-2xl mx-auto md:mt-12 mt-4 p-8'>
+          <div className="max-w-xl mx-auto md:mt-12 mt-4 p-4">
             {children}
-          </div>
-          <div className='max-w-2xl mx-auto'>
             <Footer />
           </div>
         </LocomotiveScrollWrapper>

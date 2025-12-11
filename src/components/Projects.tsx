@@ -209,10 +209,7 @@ function Projects() {
 
   return (
     <div id='projects' className='mt-12'>
-      <motion.div variants={childVariant} className='flex items-end mb-4 mx-2 gap-1'>
-        <h3 className='text-2xl font-bold tracking-tight'>Projects</h3>
-        <p className='italic text-muted-foreground text-sm tracking-tight mb-[0.2rem]'>I&apos;ve crafted & shipped</p>
-      </motion.div>
+      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4'>Projects</motion.h3>
       <div className='grid gap-4 md:auto-rows-[10rem]'>
         {
           visibleProjects.map(project => (

@@ -1,53 +1,41 @@
+"use client"
+
 import Image from 'next/image';
 import React from 'react'
 import { AnimationWrapper, childVariant } from './ui/animation-wrapper';
-import * as motion from 'motion/react-client';
+import { motion } from 'motion/react';
 
 type Skill = {
   name: string;
   icon: string
 }
 
-const languages: Skill[] = [
-  { name: "JavaScript", icon: "/skills/javascript.svg" },
-  { name: "TypeScript", icon: "/skills/typescript.svg" },
-  { name: "Java", icon: "/skills/java.svg" }
-];
-
-const frameworks: Skill[] = [
+const skills: Skill[] = [
+  { name: "Java", icon: "/skills/java.svg" },
   { name: "React", icon: "/skills/react.svg" },
   { name: "Next.js", icon: "/skills/nextjs.svg" },
+  { name: "TypeScript", icon: "/skills/typescript.svg" },
+  { name: "React Native", icon: "/skills/react.svg" },
+  { name: "Expo", icon: "/skills/expo.svg" },
+  { name: "JavaScript", icon: "/skills/javascript.svg" },
   { name: "Express.js", icon: "/skills/expressjs.svg" },
   { name: "Tailwind CSS", icon: "/skills/tailwind.svg" },
-  { name: "Framer Motion", icon: "/skills/framermotion.svg" },
+  { name: "Zustand", icon: "/skills/zustand.svg" },
   { name: "TanStack Query", icon: "/skills/tanstackquery.svg" },
-  { name: "Zustand", icon: "/skills/zustand.svg" }
+  { name: "Framer Motion", icon: "/skills/framermotion.svg" },
 ];
 
 
 const Skills = () => {
   return (
     <div className='my-8'>
-      <h3 className='text-2xl font-bold tracking-tight'>Skills</h3>
+      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight'>Skills</motion.h3>
       <motion.div variants={childVariant} className='my-2'>
-        <h3 className='font-sans tracking-tight my-2'>Languages</h3>
         <AnimationWrapper className='flex flex-wrap gap-2'>
           {
-            languages.map(l => (
-              <motion.div variants={childVariant} key={l.name}>
-                <Tag tag={l} />
-              </motion.div>
-            ))
-          }
-        </AnimationWrapper>
-      </motion.div>
-      <motion.div variants={childVariant} className='my-2'>
-        <h3 className='font-sans tracking-tight my-2'>Frameworks/Libraries</h3>
-        <AnimationWrapper className='flex flex-wrap gap-2'>
-          {
-            frameworks.map(f => (
-              <motion.div variants={childVariant} key={f.name}>
-                <Tag tag={f} />
+            skills.map(s => (
+              <motion.div variants={childVariant} key={s.name}>
+                <Tag tag={s} />
               </motion.div>
             ))
           }
@@ -58,7 +46,7 @@ const Skills = () => {
 }
 
 const Tag = ({ tag }: { tag: Skill }) => (
-  <div className='flex items-center gap-2 bg-muted border border-border rounded-lg px-3 py-1 transition-colors duration-200 hover:border-foreground/70 select-none'>
+  <div className='flex items-center gap-2 bg-muted border border-border rounded-lg px-2 py-1 transition-colors duration-200 hover:border-foreground/70 select-none'>
     <Image
       src={tag.icon}
       height={18}
