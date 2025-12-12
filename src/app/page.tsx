@@ -6,6 +6,7 @@ import Projects from '@/components/Projects'
 import GithubGraph from '@/components/GithubGraph'
 import SpotifyCard from '@/components/SpotifyCard'
 import { AnimationWrapper } from '@/components/ui/animation-wrapper'
+import Footer from '@/components/Footer'
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <Skills />
       <GithubGraph />
       <Projects />
+      <Footer />
     </AnimationWrapper>
   )
 }

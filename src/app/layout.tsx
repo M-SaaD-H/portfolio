@@ -4,7 +4,6 @@ import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/next"
 
-import Footer from "@/components/Footer";
 import LocomotiveScrollWrapper from "@/components/LocomotiveScroll";
 
 const geistSans = Geist({
@@ -83,7 +82,6 @@ export default function RootLayout({
         <LocomotiveScrollWrapper>
           <div className="max-w-xl mx-auto md:mt-8 p-6">
             {children}
-            <Footer />
           </div>
         </LocomotiveScrollWrapper>
         <Analytics />

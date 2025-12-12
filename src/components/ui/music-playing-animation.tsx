@@ -25,11 +25,11 @@ export const MusicPlayingAnimation = () => {
   }, []);
 
   return (
-    <div className="flex items-center gap-1 h-14">
+    <div className="flex items-center gap-[0.18rem] h-14">
       {heights.map((height, index) => (
         <div
           key={index}
-          className="w-1 bg-green-500 rounded-full"
+          className="w-[0.2rem] bg-green-500 rounded-full"
           style={{
             height: `${height}px`,
             transition: 'height 0.2s cubic-bezier(0.4, 0, 0.2, 1)'

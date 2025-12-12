@@ -49,7 +49,7 @@ const SpotifyCard = React.memo(() => {
     return (
       <motion.div 
         variants={childVariant} 
-        className="w-full bg-card text-card-foreground border border-border rounded-xl p-2 flex items-center justify-between gap-2"
+        className="w-full bg-card text-card-foreground border border-border rounded-2xl p-2 flex items-center justify-between gap-2zzzzz"
       >
         <div className="flex justify-center items-center gap-4">
           <Image
@@ -59,7 +59,7 @@ const SpotifyCard = React.memo(() => {
             alt={song.title}
             className="rounded-lg"
           />
-          <div>
+          <div className='mr-2'>
             <div className="flex gap-1 items-center">
               <Image
                 src="/assets/spotify.svg"
@@ -74,16 +74,16 @@ const SpotifyCard = React.memo(() => {
             <Link
               href={song.externalLink}
               target="_blank"
-              className="font-sans tracking-tight font-medium truncate text-sm text-wrap hover:text-green-500 hover:underline transition-colors duration-100"
+              className="font-sans tracking-tight font-medium line-clamp-1 truncate text-sm text-wrap hover:text-green-500 hover:underline transition-colors duration-100"
             >
               {song.title}
             </Link>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground line-clamp-1">
               by {song.artists.join(", ")}
             </p>
           </div>
         </div>
-        <div>
+        <div className='shrink-0'>
           {isPlaying ? (
             <div className="mr-4">
               <MusicPlayingAnimation />

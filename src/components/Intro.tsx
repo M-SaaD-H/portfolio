@@ -1,14 +1,13 @@
 'use client'
-import Image from 'next/image'
+
 import React from 'react'
+import Image from 'next/image'
 import { motion } from 'motion/react'
 import { IconBrandX } from '@tabler/icons-react'
-import { Socials } from './ui/socials'
 import { FaGithub } from 'react-icons/fa6'
 import { SiPeerlist } from 'react-icons/si'
 import { Highlight } from './ui/highlight'
 import { childVariant } from './ui/animation-wrapper'
-import { TextAnimation } from './ui/text-animation'
 
 const socials = [
   {
