@@ -22,6 +22,7 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://saad.works"),
   title: "Saad",
   description: "Engineer delivering fast, scalable, and meticulously crafted digital experiences.",
   keywords: [

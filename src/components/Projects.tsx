@@ -1,6 +1,6 @@
 'use client'
 
-import Card from './Card'
+import { ProjectCard, UpcomingProjectCard } from './ProjectCards'
 import Link from 'next/link'
 import { IconBrandFramerMotion, IconBrandJavascript, IconBrandMongodb, IconBrandNextjs, IconBrandNodejs, IconBrandReact, IconBrandTailwind, IconBrandTypescript, IconChevronDown, IconChevronRight } from '@tabler/icons-react'
 import { motion } from 'motion/react'
@@ -115,7 +115,7 @@ const projects: Project[] = [
   },
   {
     title: '2D Game',
-    description: "Simple 2D adventure game built in Java, featuring exploration and basic enemy AI.",
+    description: "Simple 2D adventure game built in Java, featuring exploration and basic obstacles and power-ups.",
     image: '/projects/game.png',
     liveLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
     sourceLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
@@ -183,7 +183,7 @@ const projects: Project[] = [
 const upcomingProjects: UpcomingProject[] = [
   {
     title: 'AlgoBud',
-    description: "An AI-powered DSA platform with a personal tutor that spots your mistakes, explains patterns, and helps you level up—smarter than brute force.",
+    description: "An AI-powered DSA platform with a personal tutor that spots your mistakes, explains patterns, and helps you level up smarter than brute force.",
     tags: [
       NextJS,
       NodeJS,
@@ -210,11 +210,11 @@ function Projects() {
   return (
     <div id='projects' className='mt-12'>
       <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4'>Projects</motion.h3>
-      <div className='grid gap-3 md:grid-cols-2 md:auto-rows-[16rem]'>
+      <div className='grid gap-3 md:grid-cols-2 md:auto-rows-[19rem]'>
         {
           visibleProjects.map(project => (
             <motion.div variants={childVariant} key={project.title} className='h-full w-full flex'>
-              <Card project={project} />
+              <ProjectCard project={project} />
             </motion.div>
           ))
         }
@@ -237,7 +237,7 @@ function Projects() {
         {
           upcomingProjects.map(project => (
             <motion.div variants={childVariant} key={project.title}>
-              <Card project={project} />
+              <UpcomingProjectCard project={project} />
             </motion.div>
           ))
         }

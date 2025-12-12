@@ -38,7 +38,7 @@ const SpotifyCard = React.memo(() => {
       return (
         <motion.div 
           variants={childVariant} 
-          className="w-full h-18 bg-card text-card-foreground border border-border rounded-lg p-4 flex items-center gap-2"
+          className="w-full h-18 bg-card text-card-foreground border border-border rounded-2xl p-4 flex items-center gap-2"
         >
           <p className="text-sm font-sans tracking-tight">Fetching spotify status</p>
           <IconLoader2 className="animate-spin" size={18} />
