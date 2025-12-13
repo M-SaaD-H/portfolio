@@ -28,7 +28,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
           <h1 className='font-sans tracking-tight font-semibold'>{project.title}</h1>
           <p className='text-muted-foreground text-xs line-clamp-2'>{project.description}</p>
         </div>
-        <div className='grid grid-cols-2 gap-2 h-max'>
+        <div className='grid grid-cols-2 gap-2 h-max mt-4'>
           <Button size={'small'} variant={"secondary"} asChild className='text-xs group/button rounded-lg'>
             <Link href={project.sourceLink} target='_blank'>
               <FaGithub size={14} className='group-hover/button:-rotate-12 rotate-0 group-hover/button:-translate-[2px] transition-transform duration-300' />

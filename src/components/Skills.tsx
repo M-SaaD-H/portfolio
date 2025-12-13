@@ -29,7 +29,7 @@ const skills: Skill[] = [
 const Skills = () => {
   return (
     <div className='my-8'>
-      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight'>Skills</motion.h3>
+      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight ml-2'>Skills</motion.h3>
       <motion.div variants={childVariant} className='my-2'>
         <AnimationWrapper className='flex flex-wrap gap-2'>
           {

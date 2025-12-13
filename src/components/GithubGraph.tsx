@@ -50,7 +50,7 @@ const GithubGraph = () => {
 
   return (
     <div className='flex flex-col font-sans'>
-      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4'>Github</motion.h3>
+      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4 ml-2'>Github</motion.h3>
       <motion.div variants={childVariant}>
         {
           loading ? (
