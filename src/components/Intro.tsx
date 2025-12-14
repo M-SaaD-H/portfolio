@@ -56,10 +56,9 @@ const Intro = () => {
         <div className='flex flex-col gap-1 mt-1'>
           {
             heroButtons.map(h => (
-              <motion.div variants={childVariant}>
+              <motion.div variants={childVariant} key={h.text}>
                 <HeroButton
                   button={h}
-                  key={h.text}
                 />
               </motion.div>
             ))
