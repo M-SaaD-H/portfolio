@@ -14,7 +14,7 @@
     "@vercel/analytics": "^1.5.0",
     "class-variance-authority": "^0.7.1",
     "motion": "^12.9.7",
-    "next": "16.0.7",
+    "next": "16.0.10",
     "react": "19.2.1",
     "react-activity-calendar": "^2.7.13",
     "react-dom": "19.2.1",
