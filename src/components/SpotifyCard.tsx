@@ -19,11 +19,14 @@ async function getSpotifyStatus() {
   }
 }
 
-export default async function SpotifyContent() {
+async function SpotifyContent() {
   const data = await getSpotifyStatus()
   
   return <SpotifyCardClient data={data} />
 }
+
+// Not using fallback, because it is staggering the animation
+// will to solve it later
 
 // function SpotifyCardSkeleton() {
 //   return (
@@ -34,10 +37,10 @@ export default async function SpotifyContent() {
 //   )
 // }
 
-// export default function SpotifyCard() {
-//   return (
-//     <Suspense fallback={<SpotifyCardSkeleton />}>
-//       <SpotifyContent />
-//     </Suspense>
-//   )
-// }
+export default function SpotifyCard() {
+  return (
+    <Suspense fallback={<div />}>
+      <SpotifyContent />
+    </Suspense>
+  )
+}

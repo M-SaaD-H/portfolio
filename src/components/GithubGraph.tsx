@@ -39,16 +39,18 @@ async function getGithubContributions() {
   }
 }
 
-export default async function GithubGraphContent() {
+async function GithubGraphContent() {
   const data = await getGithubContributions()
 
   return <GithubGraphClient data={data} />
 }
 
+// Not using fallback, because it is staggering the animation
+// will to solve it later
+
 // function GithubGraphSkeleton() {
 //   return (
 //     <div className='flex flex-col font-sans'>
-//       <h3 className='text-2xl font-bold tracking-tight mb-4 ml-2'>Github</h3>
 //       <div className='w-full min-h-20 flex justify-center items-center'>
 //         <IconLoader2 className='animate-spin' />
 //       </div>
@@ -56,10 +58,10 @@ export default async function GithubGraphContent() {
 //   )
 // }
 
-// export default function GithubGraph() {
-//   return (
-//     <Suspense fallback={<GithubGraphSkeleton />}>
-//       <GithubGraphContent />
-//     </Suspense>
-//   )
-// }
+export default function GithubGraph() {
+  return (
+    <Suspense fallback={<div />}>
+      <GithubGraphContent />
+    </Suspense>
+  )
+}

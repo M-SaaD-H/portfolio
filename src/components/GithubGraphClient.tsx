@@ -12,12 +12,52 @@ export function GithubGraphClient({ data }: GithubGraphClientProps) {
   return (
     <div className='flex flex-col font-sans'>
       <motion.h3 
-        variants={childVariant} 
+        variants={{
+          initial: {
+            opacity: 0,
+            y: 10,
+            filter: 'blur(8px)',
+            transition: {
+              type: 'tween',
+              duration: 0.4
+            }
+          },
+          animate: {
+            opacity: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            transition: {
+              type: 'tween',
+              duration: 0.4,
+              delay: 0.1
+            }
+          }
+        }} 
         className='text-2xl font-bold tracking-tight mb-4 ml-2'
       >
         Github
       </motion.h3>
-      <motion.div variants={childVariant}>
+      <motion.div variants={{
+        initial: {
+          opacity: 0,
+          y: 10,
+          filter: 'blur(8px)',
+          transition: {
+            type: 'tween',
+            duration: 0.4
+          }
+        },
+        animate: {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          transition: {
+            type: 'tween',
+            duration: 0.4,
+            delay: 0.2
+          }
+        }
+      }}>
         {!data || data.length === 0 ? (
           <p className='my-8 text-muted-foreground'>
             No GitHub contribution data available.
