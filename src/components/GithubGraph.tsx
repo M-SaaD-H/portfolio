@@ -1,10 +1,6 @@
-"use client";
-
-import { IconLoader2 } from '@tabler/icons-react';
-import { motion } from "motion/react";
-import React, { useEffect, useState } from 'react';
-import ActivityCalendar from 'react-activity-calendar';
-import { childVariant } from './ui/animation-wrapper';
+import { Suspense } from 'react'
+import { IconLoader2 } from '@tabler/icons-react'
+import { GithubGraphClient } from './GithubGraphClient'
 
 type ContributionDay = {
   date: string;
@@ -12,75 +8,58 @@ type ContributionDay = {
   level: number;
 };
 
-const GithubGraph = () => {
-  const [data, setData] = useState<ContributionDay[] | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  const getLevel = (count: number): number => {
-    if (count === 0) return 0;
-    if (count < 5) return 1;
-    if (count < 10) return 2;
-    if (count < 20) return 3;
-    return 4;
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/api/contributions');
-        const json: { date: string; count: number }[] = await res.json();
-
-        const formatted: ContributionDay[] = json.map((day) => ({
-          date: day.date,
-          count: day.count,
-          level: getLevel(day.count),
-        }));
-
-        setData(formatted);
-      } catch (err) {
-        console.error('Failed to load contributions:', err);
-        setData([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return (
-    <div className='flex flex-col font-sans'>
-      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4 ml-2'>Github</motion.h3>
-      <motion.div variants={childVariant}>
-        {
-          loading ? (
-            <div className='w-full min-h-20 flex justify-center items-center'>
-              <IconLoader2 className='animate-spin' />
-            </div>
-          ) : !data || data.length === 0 ? (
-            <p className='my-8 text-muted-foreground'>No GitHub contribution data available.</p>
-          ) : (
-            <div
-              className="overflow-x-auto"
-              style={{
-                scrollbarWidth: 'none', // Firefox
-                msOverflowStyle: 'none', // IE 10+
-              }}
-            >
-              <style>
-                {`
-                div::-webkit-scrollbar {
-                  display: none;
-                }
-              `}
-              </style>
-              <ActivityCalendar data={data} blockSize={9.5} blockMargin={2} fontSize={12} />
-            </div>
-          )
-        }
-      </motion.div>
-    </div>
-  );
+const getLevel = (count: number): number => {
+  if (count === 0) return 0;
+  if (count < 5) return 1;
+  if (count < 10) return 2;
+  if (count < 20) return 3;
+  return 4;
 };
 
-export default GithubGraph;
+async function getGithubContributions() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/contributions`, {
+      next: { revalidate: 3600 }, // Cache for 1 hour
+    })
+
+    if (!res.ok) return null
+
+    const json: { date: string; count: number }[] = await res.json()
+
+    const formatted: ContributionDay[] = json.map((day) => ({
+      date: day.date,
+      count: day.count,
+      level: getLevel(day.count),
+    }))
+
+    return formatted
+  } catch (err) {
+    console.error('Failed to load contributions:', err)
+    return null
+  }
+}
+
+export default async function GithubGraphContent() {
+  const data = await getGithubContributions()
+
+  return <GithubGraphClient data={data} />
+}
+
+// function GithubGraphSkeleton() {
+//   return (
+//     <div className='flex flex-col font-sans'>
+//       <h3 className='text-2xl font-bold tracking-tight mb-4 ml-2'>Github</h3>
+//       <div className='w-full min-h-20 flex justify-center items-center'>
+//         <IconLoader2 className='animate-spin' />
+//       </div>
+//     </div>
+//   )
+// }
+
+// export default function GithubGraph() {
+//   return (
+//     <Suspense fallback={<GithubGraphSkeleton />}>
+//       <GithubGraphContent />
+//     </Suspense>
+//   )
+// }
