@@ -1,13 +1,109 @@
 'use client'
 
-import { ProjectCard, UpcomingProjectCard } from './ProjectCards'
+import { ProjectCard, ProjectPopup, UpcomingProjectCard } from './ProjectCards'
 import Link from 'next/link'
 import { IconBrandFramerMotion, IconBrandJavascript, IconBrandMongodb, IconBrandNextjs, IconBrandNodejs, IconBrandReact, IconBrandTailwind, IconBrandTypescript, IconChevronDown, IconChevronRight } from '@tabler/icons-react'
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import { Button } from './ui/button'
 import { childVariant } from './ui/animation-wrapper'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+
+const useOutsideClick = (callback: () => void) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        callback();
+      }
+    }
+
+    document.addEventListener("click", handleClick);
+
+    return () => document.removeEventListener("click", handleClick);
+  }, [callback]);
+
+  return ref;
+}
+
+function Projects() {
+  const [showAll, setShowAll] = useState(false);
+  const visibleProjects = showAll ? projects : projects.slice(0, 4);
+
+  const [current, setCurrent] = useState<Project | null>(null);
+  const ref = useOutsideClick(() => setCurrent(null));
+
+  return (
+    <div id='projects' className='mt-12'>
+      <AnimatePresence>
+        {
+          current && (
+            <motion.div
+              initial={{
+                backdropFilter: "blur(0px)",
+                opacity: 0,
+              }}
+              animate={{
+                backdropFilter: "blur(10px)",
+                opacity: 1,
+              }}
+              exit={{
+                backdropFilter: "blur(0px)",
+                opacity: 0,
+              }}
+              key={current.title}
+              className='bg-background/50 fixed inset-0 flex justify-center items-center z-10'
+            >
+              <ProjectPopup ref={ref} project={current} />
+            </motion.div>
+          )
+        }
+      </AnimatePresence>
+      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4 ml-2'>Projects</motion.h3>
+      <div className='grid gap-3 md:grid-cols-2 md:auto-rows-[20rem]'>
+        {
+          visibleProjects.map(project => (
+            <motion.div
+              variants={childVariant}
+              layoutId={`project-${project.title}`}
+              onClick={() => setCurrent(project)}
+              key={project.title}
+              className='h-full w-full flex z-0'
+            >
+              <ProjectCard project={project} />
+            </motion.div>
+          ))
+        }
+      </div>
+
+      {!showAll && (
+        <motion.div variants={childVariant}>
+          <Button
+            variant={'hidden'}
+            className='flex items-center gap-1 w-max text-sm mx-auto my-8 rounded-xl'
+            onClick={() => setShowAll(true)}
+          >
+            See More <IconChevronDown size={16} />
+          </Button>
+        </motion.div>
+      )}
+
+      <motion.h1 variants={childVariant} className='text-2xl ml-2 mt-8 mb-4 font-bold font-sans tracking-tight max-md:text-center text-balance'>Upcoming Projects</motion.h1>
+      <div className='grid md:grid-cols-2 gap-4 w-full'>
+        {
+          upcomingProjects.map(project => (
+            <motion.div variants={childVariant} key={project.title}>
+              <UpcomingProjectCard project={project} />
+            </motion.div>
+          ))
+        }
+      </div>
+    </div>
+  )
+}
+
+export default Projects
 
 export type Project = {
   title: string,
@@ -15,6 +111,7 @@ export type Project = {
   image: string,
   liveLink: string,
   sourceLink: string,
+  content: React.ReactNode,
   tags: {
     name: string,
     logo?: React.ReactNode
@@ -85,6 +182,17 @@ const projects: Project[] = [
     image: '/projects/vynk.png',
     liveLink: 'https://vynk.live',
     sourceLink: 'https://github.com/M-SaaD-H/vynk',
+    content:
+      <>
+        <p>
+          Vynk is a UI component library and CLI tool that helps developers quickly add ready-to-use components and layout blocks to their projects.
+        </p>
+        <ul className='list-disc ml-5 mt-2'>
+          <li>Custom CLI for instant injection of components and backend snippets</li>
+          <li>Production-ready UI blocks and templates</li>
+          <li>Pro marketplace with premium landing pages and animated heroes</li>
+        </ul>
+      </>,
     tags: [
       NextJS,
       Motion,
@@ -99,6 +207,17 @@ const projects: Project[] = [
     image: '/projects/anton.png',
     liveLink: 'https://github.com/M-SaaD-H/Anton',
     sourceLink: 'https://github.com/M-SaaD-H/Anton',
+    content:
+      <>
+        <p>
+          Anton is a lightweight SQL-like database in Java, built from scratch to learn database internals.
+        </p>
+        <ul className='list-disc ml-5 mt-2'>
+          <li>Create tables with columns and types</li>
+          <li>Insert, select, update, and delete data</li>
+          <li>SQL-like query parsing and execution</li>
+        </ul>
+      </>,
     tags: [
       Java
     ]
@@ -109,6 +228,10 @@ const projects: Project[] = [
     image: '/projects/autotone.png',
     liveLink: 'https://github.com/M-SaaD-H/autotone',
     sourceLink: 'https://github.com/M-SaaD-H/autotone',
+    content:
+      <p>
+        AutoTone is a smart, minimal browser extension that automatically keeps your audio volume steady and comfortable across tabs. For example, if you're listening to Spotify and start playing a YouTube video, AutoTone will lower Spotify’s volume and restore it when the video stops, no manual fiddling required.
+      </p>,
     tags: [
       JavaScript
     ]
@@ -119,6 +242,17 @@ const projects: Project[] = [
     image: '/projects/game.png',
     liveLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
     sourceLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
+    content:
+      <>
+        <p>
+          This is a simple 2D adventure game I built just for fun. It&apos;s not a fully-fledged game, more like a prototype or an early concept of what a game could be.
+        </p>
+        <ol className='list-disc ml-5'>
+          <li>Basic player movement and collision detection</li>
+          <li>Simple map tiles</li>
+          <li>Basic interaction system</li>
+        </ol>
+      </>,
     tags: [
       Java
     ]
@@ -129,6 +263,17 @@ const projects: Project[] = [
     image: '/projects/vidchat.png',
     liveLink: 'https://vid-chat-peach.vercel.app',
     sourceLink: 'https://github.com/M-SaaD-H/VidChat',
+    content:
+      <>
+        <p>VidChat lets you make quick, hassle-free video calls in your browser.</p>
+        <ul className="list-disc ml-5 mt-1">
+          <li>Real-time video and audio with WebRTC</li>
+          <li>Instant room creation and joining</li>
+          <li>In-room text chat</li>
+          <li>Low-latency signaling with Socket.io</li>
+          <li>Simple UI with React + TypeScript</li>
+        </ul>
+      </>,
     tags: [
       NextJS,
       TypeScript,
@@ -143,6 +288,15 @@ const projects: Project[] = [
     image: '/projects/fintrack.png',
     liveLink: 'https://fintrack-flax-beta.vercel.app',
     sourceLink: 'https://github.com/M-SaaD-H/fintrack',
+    content:
+      <>
+        <p>FinTrack helps students track expenses and savings by semester.</p>
+        <ul className="list-disc ml-5 mt-1">
+          <li>Semester-based finance tracking</li>
+          <li>Quick overview of spending and savings</li>
+          <li>Designed for college budgeting</li>
+        </ul>
+      </>,
     tags: [
       NextJS,
       TypeScript,
@@ -157,6 +311,17 @@ const projects: Project[] = [
     image: '/projects/sputify.png',
     liveLink: 'https://github.com/M-SaaD-H/Sputify',
     sourceLink: 'https://github.com/M-SaaD-H/Sputify',
+    content:
+      <>
+        <p>Sputify is a Spotify-inspired web music streaming platform built from scratch.</p>
+        <ul className="list-disc ml-5 mt-1">
+          <li>Browse, search, and play tracks in real time</li>
+          <li>Custom playlists and queue management</li>
+          <li>Sleek UI inspired by Spotify using ShadCN & Tailwind</li>
+          <li>Media streaming, seeking, skip and loop control</li>
+          <li>Login system and personal music libraries</li>
+        </ul>
+      </>,
     tags: [
       ReactTech,
       NodeJS,
@@ -171,6 +336,17 @@ const projects: Project[] = [
     image: '/projects/zootube.png',
     liveLink: 'https://github.com/M-SaaD-H/Zootube',
     sourceLink: 'https://github.com/M-SaaD-H/Zootube',
+    content:
+      <>
+        <p>Zootube powers a video streaming service backend, much like YouTube.</p>
+        <ul className="list-disc ml-5 mt-1">
+          <li>REST API handles video and media uploads securely</li>
+          <li>User authentication and JWT-based session management</li>
+          <li>Uploads managed efficiently with Cloudinary</li>
+          <li>Store, retrieve, and stream videos with MongoDB GridFS</li>
+          <li>Built with Node.js and Express for scalability</li>
+        </ul>
+      </>,
     tags: [
       NodeJS,
       MongoDB,
@@ -202,48 +378,3 @@ const upcomingProjects: UpcomingProject[] = [
     ]
   }
 ]
-
-function Projects() {
-  const [showAll, setShowAll] = useState(false)
-  const visibleProjects = showAll ? projects : projects.slice(0, 4)
-
-  return (
-    <div id='projects' className='mt-12'>
-      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4 ml-2'>Projects</motion.h3>
-      <div className='grid gap-3 md:grid-cols-2 md:auto-rows-[20rem]'>
-        {
-          visibleProjects.map(project => (
-            <motion.div variants={childVariant} key={project.title} className='h-full w-full flex'>
-              <ProjectCard project={project} />
-            </motion.div>
-          ))
-        }
-      </div>
-
-      {!showAll && (
-        <motion.div variants={childVariant}>
-          <Button
-            variant={'hidden'}
-            className='flex items-center gap-1 w-max text-sm mx-auto my-8 rounded-xl'
-            onClick={() => setShowAll(true)}
-          >
-            See More <IconChevronDown size={16} />
-          </Button>
-        </motion.div>
-      )}
-
-      <motion.h1 variants={childVariant} className='text-2xl ml-2 mt-8 mb-4 font-bold font-sans tracking-tight max-md:text-center text-balance'>Upcoming Projects</motion.h1>
-      <div className='grid md:grid-cols-2 gap-4 w-full'>
-        {
-          upcomingProjects.map(project => (
-            <motion.div variants={childVariant} key={project.title}>
-              <UpcomingProjectCard project={project} />
-            </motion.div>
-          ))
-        }
-      </div>
-    </div>
-  )
-}
-
-export default Projects
