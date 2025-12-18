@@ -1,43 +1,12 @@
 'use client'
 
-import Link from 'next/link'
 import React from 'react'
+import Link from 'next/link'
 import { Socials } from './ui/socials'
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa6'
-import { IconBrandX, IconMail } from '@tabler/icons-react'
-import { SiPeerlist } from 'react-icons/si'
 import { Highlight } from './ui/highlight'
 import { motion } from 'motion/react'
 import { childVariant } from './ui/animation-wrapper'
-
-const socials = [
-  {
-    name: 'GitHub',
-    link: 'https://github.com/M-SaaD-H',
-    icon: FaGithub
-  },
-  {
-    name: 'X',
-    link: 'https://x.com/_MSaaDH',
-    icon: IconBrandX
-  },
-  {
-    name: 'Peerlist',
-    link: 'https://peerlist.io/m_saad_h',
-    icon: SiPeerlist
-  },
-  {
-    name: 'Linkedin',
-    link: 'https://www.linkedin.com/in/muhammad-saad-haider-942167317',
-    icon: FaLinkedinIn
-  },
-  {
-    name: 'Email',
-    link: 'mailto:mohd.saadhaider@gmail.com',
-    icon: IconMail
-  }
-]
-
+import { socials } from '@/data/socials'
 
 const Footer = () => {
   return (

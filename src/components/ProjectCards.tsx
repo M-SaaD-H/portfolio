@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Project, UpcomingProject } from './Projects'
+import React from 'react'
+import { type Project, type UpcomingProject } from '@/data/projects'
 import Link from 'next/link'
 import { Button } from './ui/button'
 import Image from 'next/image'
@@ -26,7 +26,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
       <div className='p-3 w-full flex flex-col justify-between flex-1'>
         <div>
           <motion.h1 layoutId={project.title} className='font-sans tracking-tight font-semibold'>{project.title}</motion.h1>
-          <motion.p layoutId={`porject-desc-${project.title}`} className='font-sans text-muted-foreground text-xs line-clamp-2'>{project.description}</motion.p>
+          <motion.p layoutId={`project-desc-${project.title}`} className='font-sans text-muted-foreground text-xs line-clamp-2'>{project.description}</motion.p>
         </div>
         <motion.div layoutId={`project-cta-${project.title}`} className='grid grid-cols-2 gap-2 h-max mt-4'>
           <Button size={'small'} variant={"secondary"} asChild className='text-xs group/button rounded-lg'>
@@ -77,7 +77,7 @@ export const ProjectPopup = ({ project, ref }: { project: Project, ref: React.Re
         <div>
           <motion.h1 layoutId={project.title} className='font-sans tracking-tight font-semibold text-xl'>{project.title}</motion.h1>
           <motion.div
-            layoutId={`porject-desc-${project.title}`}
+            layoutId={`project-desc-${project.title}`}
             initial={{
               filter: "blur(10px)",
             }}

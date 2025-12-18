@@ -31,7 +31,7 @@ const HeroButton = ({ button }: { button: IHeroButton }) => {
             x: isHovered ? '-4px' : 0
           }}
         >
-          {button.text}
+          {button.name.toLowerCase()}
           <motion.span
             className="block h-px bg-muted-foreground absolute left-0 -bottom-[0.1rem] rounded"
             initial={{ width: 0 }}

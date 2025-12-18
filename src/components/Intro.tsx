@@ -8,25 +8,22 @@ import { childVariant } from './ui/animation-wrapper'
 import TextAnimation from './ui/text-animation'
 import HeroButton from './ui/hero-button'
 import { IconFileFilled } from '@tabler/icons-react'
-import { FaGithub } from 'react-icons/fa6'
+import { socials } from '@/data/socials'
+import { IconType } from 'react-icons'
 
 export interface IHeroButton {
-  text: string;
+  name: string;
   href: string;
-  icon: React.ElementType;
+  icon: IconType;
 }
 
 const heroButtons: IHeroButton[] = [
   {
-    text: 'resume',
+    name: 'resume',
     href: 'resume.pdf',
     icon: IconFileFilled
   },
-  {
-    text: 'github',
-    href: 'https://github.com/M-SaaD-H',
-    icon: FaGithub
-  }
+  socials[0] // github
 ]
 
 const Intro = () => {
@@ -56,7 +53,7 @@ const Intro = () => {
         <div className='flex flex-col gap-1 mt-1'>
           {
             heroButtons.map(h => (
-              <motion.div variants={childVariant} key={h.text}>
+              <motion.div variants={childVariant} key={h.name}>
                 <HeroButton
                   button={h}
                 />
