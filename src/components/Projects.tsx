@@ -71,7 +71,7 @@ function Projects() {
         </motion.div>
       )}
 
-      <motion.h1 variants={childVariant} className='text-2xl ml-2 mt-8 mb-4 font-bold font-sans tracking-tight max-md:text-center text-balance'>Upcoming Projects</motion.h1>
+      <motion.h1 variants={childVariant} className='text-2xl ml-2 mt-12 mb-4 font-bold font-sans tracking-tight max-md:text-center text-balance'>Upcoming Projects</motion.h1>
       <div className='grid md:grid-cols-2 gap-4 w-full'>
         {
           upcomingProjects.map(project => (

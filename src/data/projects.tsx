@@ -8,6 +8,7 @@ export type Project = {
   liveLink: string,
   sourceLink: string,
   content: React.ReactNode,
+  demoLink?: string,
   tags: {
     name: string,
     logo?: React.ReactNode
@@ -84,11 +85,12 @@ export const projects: Project[] = [
           Vynk is a UI component library and CLI tool that helps developers quickly add ready-to-use components and layout blocks to their projects.
         </p>
         <ul className='list-disc ml-5 mt-2'>
-          <li>Custom CLI for instant injection of components and backend snippets</li>
-          <li>Production-ready UI blocks and templates</li>
-          <li>Pro marketplace with premium landing pages and animated heroes</li>
+          <li>Custom CLI for instant injection of components and backend snippets.</li>
+          <li>Production-ready UI blocks and templates.</li>
+          <li>Pro marketplace with premium landing pages and animated heroes.</li>
         </ul>
       </>,
+    demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766151214/vynk-demo_xdpfa3.mp4",
     tags: [
       NextJS,
       Motion,
@@ -109,11 +111,13 @@ export const projects: Project[] = [
           Anton is a lightweight SQL-like database in Java, built from scratch to learn database internals.
         </p>
         <ul className='list-disc ml-5 mt-2'>
-          <li>Create tables with columns and types</li>
-          <li>Insert, select, update, and delete data</li>
-          <li>SQL-like query parsing and execution</li>
+          <li>Create tables with columns and types.</li>
+          <li>Insert, select, update, and delete data.</li>
+          <li>SQL-like query parsing and execution.</li>
+          <li>B+ Tree indexing for faster lookups.</li>
         </ul>
       </>,
+    demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766165438/anton-demo_wvcfek.mp4",
     tags: [
       Java
     ]
@@ -125,9 +129,19 @@ export const projects: Project[] = [
     liveLink: 'https://github.com/M-SaaD-H/autotone',
     sourceLink: 'https://github.com/M-SaaD-H/autotone',
     content:
-      <p>
-        AutoTone is a smart, minimal browser extension that automatically keeps your audio volume steady and comfortable across tabs. For example, if you're listening to Spotify and start playing a YouTube video, AutoTone will lower Spotify’s volume and restore it when the video stops, no manual fiddling required.
-      </p>,
+      <>
+        <p>
+          AutoTone is a simple browser extension that keeps tab audio levels steady and comfortable, automatically.
+        </p>
+        <ul className="list-disc ml-5 mt-2">
+          <li>Keeps audio balanced across all tabs.</li>
+          <li>Detects playing tabs and adjusts sound in real time.</li>
+          <li>Restores normal volume automatically when other audio stops.</li>
+        </ul>
+        <p className="mt-2">
+          For example, if you're listening to Spotify and start playing a YouTube video, AutoTone will lower or stop Spotify&apos;s volume and restore it when the video stops, no manual adjustments.
+        </p>
+      </>,
     tags: [
       JavaScript
     ]
@@ -144,11 +158,12 @@ export const projects: Project[] = [
           This is a simple 2D adventure game I built just for fun. It&apos;s not a fully-fledged game, more like a prototype or an early concept of what a game could be.
         </p>
         <ol className='list-disc ml-5'>
-          <li>Basic player movement and collision detection</li>
-          <li>Simple map tiles</li>
-          <li>Basic interaction system</li>
+          <li>Basic player movement and collision detection.</li>
+          <li>Simple map tiles.</li>
+          <li>Basic interaction system.</li>
         </ol>
       </>,
+    demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766151967/2d-game-demo_skkrw6.mp4",
     tags: [
       Java
     ]
@@ -163,11 +178,10 @@ export const projects: Project[] = [
       <>
         <p>VidChat lets you make quick, hassle-free video calls in your browser.</p>
         <ul className="list-disc ml-5 mt-1">
-          <li>Real-time video and audio with WebRTC</li>
-          <li>Instant room creation and joining</li>
-          <li>In-room text chat</li>
-          <li>Low-latency signaling with Socket.io</li>
-          <li>Simple UI with React + TypeScript</li>
+          <li>Real-time video and audio with WebRTC.</li>
+          <li>Instant room creation and joining.</li>
+          <li>Low-latency signaling with Socket.io.</li>
+          <li>Simple UI with React + TypeScript.</li>
         </ul>
       </>,
     tags: [
@@ -188,9 +202,9 @@ export const projects: Project[] = [
       <>
         <p>FinTrack helps students track expenses and savings by semester.</p>
         <ul className="list-disc ml-5 mt-1">
-          <li>Semester-based finance tracking</li>
-          <li>Quick overview of spending and savings</li>
-          <li>Designed for college budgeting</li>
+          <li>Semester-based finance tracking.</li>
+          <li>Quick overview of spending and savings.</li>
+          <li>Designed for college budgeting.</li>
         </ul>
       </>,
     tags: [
@@ -211,11 +225,10 @@ export const projects: Project[] = [
       <>
         <p>Sputify is a Spotify-inspired web music streaming platform built from scratch.</p>
         <ul className="list-disc ml-5 mt-1">
-          <li>Browse, search, and play tracks in real time</li>
-          <li>Custom playlists and queue management</li>
-          <li>Sleek UI inspired by Spotify using ShadCN & Tailwind</li>
-          <li>Media streaming, seeking, skip and loop control</li>
-          <li>Login system and personal music libraries</li>
+          <li>Browse, search, and play tracks in real time.</li>
+          <li>Custom playlists and queue management.</li>
+          <li>Sleek UI inspired by Spotify using ShadCN & Tailwind.</li>
+          <li>Login system and personal music libraries.</li>
         </ul>
       </>,
     tags: [
@@ -236,11 +249,10 @@ export const projects: Project[] = [
       <>
         <p>Zootube powers a video streaming service backend, much like YouTube.</p>
         <ul className="list-disc ml-5 mt-1">
-          <li>REST API handles video and media uploads securely</li>
-          <li>User authentication and JWT-based session management</li>
-          <li>Uploads managed efficiently with Cloudinary</li>
-          <li>Store, retrieve, and stream videos with MongoDB GridFS</li>
-          <li>Built with Node.js and Express for scalability</li>
+          <li>REST API handles video and media uploads securely.</li>
+          <li>User authentication and JWT-based session management.</li>
+          <li>Uploads managed efficiently with Cloudinary.</li>
+          <li>Built with Node.js and Express for scalability.</li>
         </ul>
       </>,
     tags: [
