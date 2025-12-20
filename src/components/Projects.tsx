@@ -16,6 +16,19 @@ function Projects() {
   const [current, setCurrent] = useState<Project | null>(null);
   const ref = useOutsideClick(() => setCurrent(null));
 
+  const handleProjectCardClick = (e: React.MouseEvent, project: Project) => {
+    // Don't trigger popup if the click target is a button or inside a button/link
+    const target = e.target as HTMLElement;
+    if (
+      target.closest('button') ||
+      target.closest('a')
+    ) {
+      return;
+    }
+    
+    setCurrent(project);
+  }
+
   return (
     <div id='projects' className='mt-12'>
       <AnimatePresence>
@@ -49,7 +62,7 @@ function Projects() {
             <motion.div
               variants={childVariant}
               layoutId={`project-${project.title}`}
-              onClick={() => setCurrent(project)}
+              onClick={(e) => handleProjectCardClick(e, project)}
               key={project.title}
               className='h-full w-full flex z-0'
             >

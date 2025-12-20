@@ -80,7 +80,7 @@ export const ProjectPopup = ({ project, ref }: { project: Project, ref: React.Re
               height={300}
               width={400}
               alt={`${project.title}-image`}
-              className='w-full h-auto'
+              className='w-full h-full object-cover'
             />
           )
         }
