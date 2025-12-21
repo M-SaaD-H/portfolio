@@ -8,6 +8,7 @@ import { childVariant } from './ui/animation-wrapper'
 import { projects, type Project, upcomingProjects } from '@/data/projects'
 import { IconChevronDown } from '@tabler/icons-react'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { useIsMobile } from '@/hooks/isMobile'
 
 function Projects() {
   const [showAll, setShowAll] = useState(false);
@@ -16,7 +17,13 @@ function Projects() {
   const [current, setCurrent] = useState<Project | null>(null);
   const ref = useOutsideClick(() => setCurrent(null));
 
+  const isMobile = useIsMobile();
+
   const handleProjectCardClick = (e: React.MouseEvent, project: Project) => {
+    // don't trigger animations for mobile
+    // animations are jittering on mobile, so have to optimize it for mobile before enabling it
+    if (isMobile) return;
+
     // Don't trigger popup if the click target is a button or inside a button/link
     const target = e.target as HTMLElement;
     if (
@@ -64,7 +71,7 @@ function Projects() {
               layoutId={`project-${project.title}`}
               onClick={(e) => handleProjectCardClick(e, project)}
               key={project.title}
-              className='h-full w-full flex z-0'
+              className='h-full w-full'
             >
               <ProjectCard project={project} />
             </motion.div>
