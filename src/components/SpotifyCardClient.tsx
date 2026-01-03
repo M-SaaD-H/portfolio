@@ -97,11 +97,11 @@ export default function SpotifyCardClient({ data }: SpotifyCardClientProps) {
           <Link
             href={song.externalLink}
             target="_blank"
-            className="font-sans tracking-tight font-medium line-clamp-1 truncate text-sm hover:text-green-500 hover:underline transition-colors duration-100"
+            className="font-sans tracking-tight font-medium line-clamp-1 text-wrap text-sm hover:text-green-500 hover:underline transition-colors duration-100"
           >
             {song.title}
           </Link>
-          <p className="text-xs text-muted-foreground line-clamp-1">
+          <p className="text-xs text-muted-foreground line-clamp-1 text-wrap">
             by {song.artists.join(", ")}
           </p>
         </div>
@@ -114,7 +114,7 @@ export default function SpotifyCardClient({ data }: SpotifyCardClientProps) {
         ) : (
           <Link 
             href={song.externalLink} 
-            className="bg-accent/30 hover:bg-accent/50 btn-inner-shadow transition-colors rounded-xl p-2 flex items-center justify-center mr-4"
+            className="bg-accent/30 hover:bg-accent/50 btn-inner-shadow transition-colors rounded-xl p-2 flex items-center justify-center"
           >
             <IconPlayerPlay size={18} className="text-white" stroke={2} />
           </Link>
