@@ -88,22 +88,34 @@ async function getCachedAccessToken() {
 }
 
 export const getSpotifyStatus = async () => {
-  const token = await getCachedAccessToken();
+  // const token = await getCachedAccessToken();
 
-  if (!token) {
-    throw new Error("Access token found to be null.");
-  }
+  // if (!token) {
+  //   throw new Error("Access token found to be null.");
+  // }
 
-  let song = await getNowPlaying(token);
+  // let song = await getNowPlaying(token);
 
-  if (song) {
-    return {
-      isPlaying: true,
-      song
-    };
-  }
+  // if (song) {
+  //   return {
+  //     isPlaying: true,
+  //     song
+  //   };
+  // }
 
-  song = await getRecentlyPlayed(token)
+  // song = await getRecentlyPlayed(token)
+
+  // Using default hardcoded song untill a workaround is found
+  // for Spotify's restriction on WebAPI usage.
+  const song: Song = {
+    title: "Photograph",
+    artists: ["Ed Sheeran"],
+    albumName: "",
+    imageUrl: "https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd",
+    duration: 0,
+    externalLink: "https://open.spotify.com/track/1HNkqx9Ahdgi1Ixy2xkKkL",
+    preview: null
+  };
 
   return {
     isPlaying: false,
