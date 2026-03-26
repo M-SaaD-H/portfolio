@@ -123,6 +123,29 @@ export const projects: Project[] = [
     ]
   },
   {
+    title: 'Ember',
+    description: "Redis-style, in-memory database server clone: compatible with Redis clients, featuring all core Redis commands and functionality.",
+    image: '/projects/ember.png',
+    liveLink: 'https://github.com/M-SaaD-H/Ember',
+    sourceLink: 'https://github.com/M-SaaD-H/Ember',
+    content:
+      <>
+        <p>
+          Ember is a fully compatible, open-source in-memory database server inspired by Redis. Compatible with existing Redis clients, it aims to closely mimic the API and feature set of Redis for seamless interchange.
+        </p>
+        <ul className='list-disc ml-5 mt-2'>
+          <li>Supports all basic data types: strings, hashes, lists, sets, and sorted sets.</li>
+          <li>Implements core Redis commands and server operations.</li>
+          <li>Works out-of-the-box with Redis CLI and libraries.</li>
+          <li>Fast, lightweight, and ideal for learning or prototyping with Redis-style databases.</li>
+        </ul>
+      </>,
+    tags: [
+      { name: 'NodeJS' },
+      { name: 'TypeScript' }
+    ]
+  },
+  {
     title: 'Autotone',
     description: "Browser extension to automatically balance and keep tab audio volume steady.",
     image: '/projects/autotone.png',
@@ -144,6 +167,31 @@ export const projects: Project[] = [
       </>,
     tags: [
       JavaScript
+    ]
+  },
+  {
+    title: 'Relix',
+    description: "Relix converts ERD diagram images to downloadable SQL schema code.",
+    image: '/projects/relix.png',
+    liveLink: 'https://relix-lac.vercel.app',
+    sourceLink: 'https://github.com/M-SaaD-H/relix',
+    content:
+      <>
+        <p>
+          Relix instantly converts ERD diagram images into downloadable, production-ready SQL schema code.
+        </p>
+        <ul className="list-disc ml-5 mt-2">
+          <li>Upload ERD images - supports screenshots, exports, even hand-drawn sketches.</li>
+          <li>Detects tables, columns, and relationships using AI.</li>
+          <li>Generates SQL code for your database schema.</li>
+          <li>Copy or download the SQL in one click.</li>
+        </ul>
+      </>,
+    demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1774547094/relix-1769085992687_aihre3.mp4",
+    tags: [
+      NextJS,
+      Tailwind,
+      TypeScript
     ]
   },
   {
