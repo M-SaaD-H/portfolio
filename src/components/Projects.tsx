@@ -32,7 +32,7 @@ function Projects() {
     ) {
       return;
     }
-    
+
     setCurrent(project);
   }
 
@@ -63,7 +63,7 @@ function Projects() {
         }
       </AnimatePresence>
       <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4 ml-2'>Projects</motion.h3>
-      <div className='grid gap-3 md:grid-cols-2 md:auto-rows-[20rem]'>
+      <div className='grid gap-3 auto-rows-[22rem] md:grid-cols-2 md:auto-rows-[20rem]'>
         {
           visibleProjects.map(project => (
             <motion.div

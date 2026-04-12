@@ -10,7 +10,7 @@ const quotes: Quote[] = [
   },
   {
     text: "Successful people work hard and call it luck, while others whines over it.",
-    author: "Saad Haider",
+    author: "Unknown",
   },
   {
     text: "If you win, you live. If you lose, you die. If you don't fight, you can't win!",
