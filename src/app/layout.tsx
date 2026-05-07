@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/next"
+import { AnimationWrapper } from "@/components/ui/animation-wrapper";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -78,10 +80,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
       >
-        <div className="max-w-xl mx-auto md:mt-8 p-6">
-          {children}
-        </div>
-        <Analytics />
+        <ThemeProvider>
+          <AnimationWrapper className="max-w-xl mx-auto md:mt-8 p-6">
+            {children}
+          </AnimationWrapper>
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );

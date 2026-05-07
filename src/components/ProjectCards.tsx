@@ -14,7 +14,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <div className='bg-background flex flex-col overflow-hidden rounded-xl w-full h-full border transition-colors duration-200 hover:bg-muted/30 border-border shadow-[0_1px_1px_rgba(0,0,0,0.05),0_4px_6px_rgba(34,42,53,0.04),0_24px_68px_rgba(47,48,55,0.05),0_2px_3px_rgba(0,0,0,0.04)] group'>
       <div className='w-full h-[60%] overflow-hidden shrink-0'>
-        <motion.div layoutId={`project-${project.title}-image`} className='h-full w-full'>
+        <motion.div layoutId={`project-${project.title}-image`} className='h-full w-full dark:bg-card bg-black/80'>
           <Image
             src={project.image}
             height={300}
