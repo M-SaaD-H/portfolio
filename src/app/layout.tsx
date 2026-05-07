@@ -87,8 +87,8 @@ export default function RootLayout({
             <Header />
             {children}
           </AnimationWrapper>
-          <Analytics />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
