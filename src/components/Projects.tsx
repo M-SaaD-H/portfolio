@@ -37,7 +37,7 @@ function Projects() {
   }
 
   return (
-    <div id='projects' className='mt-12'>
+    <div id='projects' className='mt-8'>
       <AnimatePresence>
         {
           current && (

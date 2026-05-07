@@ -33,7 +33,7 @@ export function GithubGraphClient({ data }: GithubGraphClientProps) {
             }
           }
         }} 
-        className='text-2xl font-bold tracking-tight mb-4 ml-2'
+        className='text-2xl font-bold tracking-tight my-2'
       >
         Github
       </motion.h3>

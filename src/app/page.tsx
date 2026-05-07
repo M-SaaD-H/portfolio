@@ -15,15 +15,13 @@ const Home = () => {
   const quote = getRandomQuote()
 
   return (
-    <AnimationWrapper>
+    <>
       <Intro />
-      <SpotifyCard />
-      <Skills />
       <GithubGraph />
       <Projects />
       <Quote quote={quote} />
       <Footer />
-    </AnimationWrapper>
+    </>
   )
 }
 
