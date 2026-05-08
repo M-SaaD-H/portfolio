@@ -1,19 +1,18 @@
 'use client'
 
 import React, { useState } from 'react'
-import { ProjectCard, ProjectPopup, UpcomingProjectCard } from './ProjectCards'
+import { ProjectCard, ProjectPopup } from './ProjectCards'
 import { AnimatePresence, motion } from 'motion/react'
 import { Button } from './ui/button'
 import { childVariant } from './ui/animation-wrapper'
-import { projects, type Project, upcomingProjects } from '@/data/projects'
+import { projects, type Project } from '@/data/projects'
 import { IconChevronDown } from '@tabler/icons-react'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { useIsMobile } from '@/hooks/isMobile'
+import Link from 'next/link'
+import { socials } from '@/data/socials'
 
 function Projects() {
-  const [showAll, setShowAll] = useState(false);
-  const visibleProjects = showAll ? projects : projects.slice(0, 4);
-
   const [current, setCurrent] = useState<Project | null>(null);
   const ref = useOutsideClick(() => setCurrent(null));
 
@@ -42,33 +41,25 @@ function Projects() {
         {
           current && (
             <motion.div
-              initial={{
-                backdropFilter: "blur(0px)",
-                opacity: 0,
-              }}
-              animate={{
-                backdropFilter: "blur(10px)",
-                opacity: 1,
-              }}
-              exit={{
-                backdropFilter: "blur(0px)",
-                opacity: 0,
-              }}
               key={current.title}
-              className='bg-background/50 fixed inset-0 flex justify-center items-center z-10'
-            >
+              className='fixed inset-0 flex justify-center items-center z-50'>
+              <motion.div
+                initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                animate={{ opacity: 1, backdropFilter: "blur(10px)" }}
+                exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                className='bg-background/50 absolute inset-0'
+              />
               <ProjectPopup ref={ref} project={current} />
             </motion.div>
           )
         }
       </AnimatePresence>
-      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-4 ml-2'>Projects</motion.h3>
-      <div className='grid gap-3 auto-rows-[22rem] md:grid-cols-2 md:auto-rows-[20rem]'>
+      <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-2'>Projects</motion.h3>
+      <div>
         {
-          visibleProjects.map(project => (
+          projects.map(project => (
             <motion.div
               variants={childVariant}
-              layoutId={`project-${project.title}`}
               onClick={(e) => handleProjectCardClick(e, project)}
               key={project.title}
               className='h-full w-full'
@@ -78,20 +69,19 @@ function Projects() {
           ))
         }
       </div>
-
-      {!showAll && (
-        <motion.div variants={childVariant}>
-          <Button
-            variant={'hidden'}
-            className='flex items-center gap-1 w-max text-sm mx-auto my-8 rounded-xl'
-            onClick={() => setShowAll(true)}
-          >
+      <motion.div variants={childVariant}>
+        <Button asChild
+          variant={'hidden'}
+          size={'small'}
+          className='flex items-center gap-1 w-max text-sm mx-auto my-8 rounded-xl'
+        >
+          <Link href={socials.github.href} target='_blank'>
             See More <IconChevronDown size={16} />
-          </Button>
-        </motion.div>
-      )}
+          </Link>
+        </Button>
+      </motion.div>
 
-      <motion.h1 variants={childVariant} className='text-2xl ml-2 mt-12 mb-4 font-bold font-sans tracking-tight max-md:text-center text-balance'>Upcoming Projects</motion.h1>
+      {/* <motion.h1 variants={childVariant} className='text-2xl ml-2 mt-12 mb-4 font-bold font-sans tracking-tight max-md:text-center text-balance'>Upcoming Projects</motion.h1>
       <div className='grid md:grid-cols-2 gap-4 w-full'>
         {
           upcomingProjects.map(project => (
@@ -100,7 +90,7 @@ function Projects() {
             </motion.div>
           ))
         }
-      </div>
+      </div> */}
     </div>
   )
 }

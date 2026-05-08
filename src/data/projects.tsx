@@ -1,4 +1,13 @@
-import { IconBrandFramerMotion, IconBrandJavascript, IconBrandMongodb, IconBrandNextjs, IconBrandNodejs, IconBrandReact, IconBrandTailwind, IconBrandTypescript } from "@tabler/icons-react"
+import {
+  IconBrandFramerMotion,
+  IconBrandJavascript,
+  IconBrandMongodb,
+  IconBrandNextjs,
+  IconBrandNodejs,
+  IconBrandReact,
+  IconBrandTailwind,
+  IconBrandTypescript
+} from "@tabler/icons-react"
 import Image from "next/image"
 
 export type Project = {
@@ -75,7 +84,7 @@ const Java = {
 export const projects: Project[] = [
   {
     title: 'Vynk',
-    description: "CLI tool for ready-to-use UI components and blocks to speed up your web development.",
+    description: "UI component library and ready-to-use template marketplace.",
     image: '/projects/vynk.png',
     liveLink: 'https://vynk.live',
     sourceLink: 'https://github.com/M-SaaD-H/vynk',
@@ -101,7 +110,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Anton',
-    description: "A SQL-like Java database, built from scratch, for learning database internals.",
+    description: "SQL database engine.",
     image: '/projects/anton.png',
     liveLink: 'https://github.com/M-SaaD-H/Anton',
     sourceLink: 'https://github.com/M-SaaD-H/Anton',
@@ -124,7 +133,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Ember',
-    description: "Redis-style, in-memory database server clone: compatible with Redis clients, featuring all core Redis commands and functionality.",
+    description: "Redis compatible in-memory datastore server.",
     image: '/projects/ember.png',
     liveLink: 'https://github.com/M-SaaD-H/Ember',
     sourceLink: 'https://github.com/M-SaaD-H/Ember',
@@ -154,92 +163,92 @@ export const projects: Project[] = [
     content:
       <>
         <p>
-          AutoTone is a simple browser extension that keeps tab audio levels steady and comfortable, automatically.
+          AutoTone is a simple browser extension that keeps tab audio levels steady and comfortable automatically.
         </p>
         <ul className="list-disc ml-5 mt-2">
           <li>Keeps audio balanced across all tabs.</li>
-          <li>Detects playing tabs and adjusts sound in real time.</li>
+          <li>Detects playing tabs and adjusts their sound in real time.</li>
           <li>Restores normal volume automatically when other audio stops.</li>
         </ul>
         <p className="mt-2">
-          For example, if you're listening to Spotify and start playing a YouTube video, AutoTone will lower or stop Spotify&apos;s volume and restore it when the video stops, no manual adjustments.
+          For example, if you're listening to Spotify and start playing a YouTube video, AutoTone will lower or stop Spotify&apos;s volume and restore it when the video stops, requiring no manual adjustments.
         </p>
       </>,
     tags: [
       JavaScript
     ]
   },
-  {
-    title: 'Relix',
-    description: "Relix converts ERD diagram images to downloadable SQL schema code.",
-    image: '/projects/relix.png',
-    liveLink: 'https://relix-lac.vercel.app',
-    sourceLink: 'https://github.com/M-SaaD-H/relix',
-    content:
-      <>
-        <p>
-          Relix instantly converts ERD diagram images into downloadable, production-ready SQL schema code.
-        </p>
-        <ul className="list-disc ml-5 mt-2">
-          <li>Upload ERD images - supports screenshots, exports, even hand-drawn sketches.</li>
-          <li>Detects tables, columns, and relationships using AI.</li>
-          <li>Generates SQL code for your database schema.</li>
-          <li>Copy or download the SQL in one click.</li>
-        </ul>
-      </>,
-    demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1774547094/relix-1769085992687_aihre3.mp4",
-    tags: [
-      NextJS,
-      Tailwind,
-      TypeScript
-    ]
-  },
-  {
-    title: '2D Game',
-    description: "Simple 2D adventure game built in Java, featuring exploration and basic obstacles and power-ups.",
-    image: '/projects/game.png',
-    liveLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
-    sourceLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
-    content:
-      <>
-        <p>
-          This is a simple 2D adventure game I built just for fun. It&apos;s not a fully-fledged game, more like a prototype or an early concept of what a game could be.
-        </p>
-        <ol className='list-disc ml-5'>
-          <li>Basic player movement and collision detection.</li>
-          <li>Simple map tiles.</li>
-          <li>Basic interaction system.</li>
-        </ol>
-      </>,
-    demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766151967/2d-game-demo_skkrw6.mp4",
-    tags: [
-      Java
-    ]
-  },
-  {
-    title: 'VidChat',
-    description: "Peer-to-peer browser video chat app using WebRTC and Socket.io for real-time calls.",
-    image: '/projects/vidchat.png',
-    liveLink: 'https://vid-chat-peach.vercel.app',
-    sourceLink: 'https://github.com/M-SaaD-H/VidChat',
-    content:
-      <>
-        <p>VidChat lets you make quick, hassle-free video calls in your browser.</p>
-        <ul className="list-disc ml-5 mt-1">
-          <li>Real-time video and audio with WebRTC.</li>
-          <li>Instant room creation and joining.</li>
-          <li>Low-latency signaling with Socket.io.</li>
-          <li>Simple UI with React + TypeScript.</li>
-        </ul>
-      </>,
-    tags: [
-      NextJS,
-      TypeScript,
-      { name: 'Socket.io' },
-      { name: 'WebRTC' },
-      Tailwind
-    ]
-  },
+  // {
+  //   title: 'Relix',
+  //   description: "Relix converts ERD diagram images to downloadable SQL schema code.",
+  //   image: '/projects/relix.png',
+  //   liveLink: 'https://relix-lac.vercel.app',
+  //   sourceLink: 'https://github.com/M-SaaD-H/relix',
+  //   content:
+  //     <>
+  //       <p>
+  //         Relix instantly converts ERD diagram images into downloadable, production-ready SQL schema code.
+  //       </p>
+  //       <ul className="list-disc ml-5 mt-2">
+  //         <li>Upload ERD images - supports screenshots, exports, even hand-drawn sketches.</li>
+  //         <li>Detects tables, columns, and relationships using AI.</li>
+  //         <li>Generates SQL code for your database schema.</li>
+  //         <li>Copy or download the SQL in one click.</li>
+  //       </ul>
+  //     </>,
+  //   demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1774547094/relix-1769085992687_aihre3.mp4",
+  //   tags: [
+  //     NextJS,
+  //     Tailwind,
+  //     TypeScript
+  //   ]
+  // },
+  // {
+  //   title: '2D Game',
+  //   description: "Simple 2D adventure game built in Java, featuring exploration and basic obstacles and power-ups.",
+  //   image: '/projects/game.png',
+  //   liveLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
+  //   sourceLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
+  //   content:
+  //     <>
+  //       <p>
+  //         This is a simple 2D adventure game I built just for fun. It&apos;s not a fully-fledged game, more like a prototype or an early concept of what a game could be.
+  //       </p>
+  //       <ol className='list-disc ml-5'>
+  //         <li>Basic player movement and collision detection.</li>
+  //         <li>Simple map tiles.</li>
+  //         <li>Basic interaction system.</li>
+  //       </ol>
+  //     </>,
+  //   demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766151967/2d-game-demo_skkrw6.mp4",
+  //   tags: [
+  //     Java
+  //   ]
+  // },
+  // {
+  //   title: 'VidChat',
+  //   description: "Peer-to-peer browser video chat app using WebRTC and Socket.io for real-time calls.",
+  //   image: '/projects/vidchat.png',
+  //   liveLink: 'https://vid-chat-peach.vercel.app',
+  //   sourceLink: 'https://github.com/M-SaaD-H/VidChat',
+  //   content:
+  //     <>
+  //       <p>VidChat lets you make quick, hassle-free video calls in your browser.</p>
+  //       <ul className="list-disc ml-5 mt-1">
+  //         <li>Real-time video and audio with WebRTC.</li>
+  //         <li>Instant room creation and joining.</li>
+  //         <li>Low-latency signaling with Socket.io.</li>
+  //         <li>Simple UI with React + TypeScript.</li>
+  //       </ul>
+  //     </>,
+  //   tags: [
+  //     NextJS,
+  //     TypeScript,
+  //     { name: 'Socket.io' },
+  //     { name: 'WebRTC' },
+  //     Tailwind
+  //   ]
+  // },
   {
     title: 'FinTrack',
     description: "A student-focused finance tracker app to manage and monitor expenses with ease.",
@@ -263,53 +272,53 @@ export const projects: Project[] = [
       Tailwind
     ]
   },
-  {
-    title: 'Sputify',
-    description: "Spotify-like web music streaming clone. Features playlists, playback, and more.",
-    image: '/projects/sputify.png',
-    liveLink: 'https://github.com/M-SaaD-H/Sputify',
-    sourceLink: 'https://github.com/M-SaaD-H/Sputify',
-    content:
-      <>
-        <p>Sputify is a Spotify-inspired web music streaming platform built from scratch.</p>
-        <ul className="list-disc ml-5 mt-1">
-          <li>Browse, search, and play tracks in real time.</li>
-          <li>Custom playlists and queue management.</li>
-          <li>Sleek UI inspired by Spotify using ShadCN & Tailwind.</li>
-          <li>Login system and personal music libraries.</li>
-        </ul>
-      </>,
-    tags: [
-      ReactTech,
-      NodeJS,
-      { name: 'ShadCN' },
-      JavaScript,
-      Tailwind
-    ]
-  },
-  {
-    title: 'Zootube',
-    description: "YouTube-style backend with secure uploads, authentication, and cloud media management.",
-    image: '/projects/zootube.png',
-    liveLink: 'https://github.com/M-SaaD-H/Zootube',
-    sourceLink: 'https://github.com/M-SaaD-H/Zootube',
-    content:
-      <>
-        <p>Zootube powers a video streaming service backend, much like YouTube.</p>
-        <ul className="list-disc ml-5 mt-1">
-          <li>REST API handles video and media uploads securely.</li>
-          <li>User authentication and JWT-based session management.</li>
-          <li>Uploads managed efficiently with Cloudinary.</li>
-          <li>Built with Node.js and Express for scalability.</li>
-        </ul>
-      </>,
-    tags: [
-      NodeJS,
-      MongoDB,
-      { name: 'Cloudinary' },
-      JavaScript
-    ]
-  }
+  // {
+  //   title: 'Sputify',
+  //   description: "Spotify-like web music streaming clone. Features playlists, playback, and more.",
+  //   image: '/projects/sputify.png',
+  //   liveLink: 'https://github.com/M-SaaD-H/Sputify',
+  //   sourceLink: 'https://github.com/M-SaaD-H/Sputify',
+  //   content:
+  //     <>
+  //       <p>Sputify is a Spotify-inspired web music streaming platform built from scratch.</p>
+  //       <ul className="list-disc ml-5 mt-1">
+  //         <li>Browse, search, and play tracks in real time.</li>
+  //         <li>Custom playlists and queue management.</li>
+  //         <li>Sleek UI inspired by Spotify using ShadCN & Tailwind.</li>
+  //         <li>Login system and personal music libraries.</li>
+  //       </ul>
+  //     </>,
+  //   tags: [
+  //     ReactTech,
+  //     NodeJS,
+  //     { name: 'ShadCN' },
+  //     JavaScript,
+  //     Tailwind
+  //   ]
+  // },
+  // {
+  //   title: 'Zootube',
+  //   description: "YouTube-style backend with secure uploads, authentication, and cloud media management.",
+  //   image: '/projects/zootube.png',
+  //   liveLink: 'https://github.com/M-SaaD-H/Zootube',
+  //   sourceLink: 'https://github.com/M-SaaD-H/Zootube',
+  //   content:
+  //     <>
+  //       <p>Zootube powers a video streaming service backend, much like YouTube.</p>
+  //       <ul className="list-disc ml-5 mt-1">
+  //         <li>REST API handles video and media uploads securely.</li>
+  //         <li>User authentication and JWT-based session management.</li>
+  //         <li>Uploads managed efficiently with Cloudinary.</li>
+  //         <li>Built with Node.js and Express for scalability.</li>
+  //       </ul>
+  //     </>,
+  //   tags: [
+  //     NodeJS,
+  //     MongoDB,
+  //     { name: 'Cloudinary' },
+  //     JavaScript
+  //   ]
+  // }
 ]
 
 export const upcomingProjects: UpcomingProject[] = [
