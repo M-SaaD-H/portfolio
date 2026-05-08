@@ -6,7 +6,6 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
 import { AnimationWrapper } from "@/components/ui/animation-wrapper";
 import { ThemeProvider } from "@/providers/theme-provider";
-import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -84,7 +83,6 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <AnimationWrapper className="max-w-xl mx-auto md:mt-8 p-6">
-            <Header />
             {children}
           </AnimationWrapper>
         </ThemeProvider>

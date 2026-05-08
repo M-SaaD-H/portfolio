@@ -50,13 +50,7 @@ async function page({
 }) {
   const { slug } = await params;
   const post = await getBlogBySlug(slug);
-  console.log("post", post);
-  return (
-    <div className="mt-2 mb-24">
-      <h1 className="font-instrument-serif text-4xl">{post.frontMatter.title}</h1>
-      <BlogPostClient mdxSource={post.mdxSource} />
-    </div>
-  )
+  return <BlogPostClient mdxSource={post.mdxSource} title={post.frontMatter.title} />
 }
 
 export default page;
