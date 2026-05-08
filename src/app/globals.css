@@ -91,3 +91,76 @@ body {
   background-color: var(--color-primary);
   color: var(--color-primary-foreground);
 }
+
+.blog-article-header {
+  margin-bottom: 2rem;
+}
+
+.blog-article-header h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+}
+
+.blog-article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.blog-article p {
+  line-height: 1.5;
+  margin: 1.2rem 0;
+}
+
+.blog-inline-code,
+.blog-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  border-radius: 0.35rem;
+  font-size: 0.95em;
+}
+
+.blog-inline-code {
+  background: rgba(148, 163, 184, 0.18);
+  padding: 0.15rem 0.3rem;
+}
+
+.blog-code-block {
+  background: #1C1F23;
+  color: #e2e8f0;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  overflow-x: auto;
+  margin: 1.75rem 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+.blog-code-block code {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-code-block::-webkit-scrollbar {
+  height: 0.5rem;
+}
+
+.blog-code-block::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+
+.blog-quote {
+  border-left: 4px solid rgba(148, 163, 184, 0.65);
+  padding: 1rem 1.25rem;
+  margin: 1.75rem 0;
+  color: rgba(226, 232, 240, 0.9);
+  background: rgba(148, 163, 184, 0.08);
+}
+
