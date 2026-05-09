@@ -29,9 +29,10 @@ export default function BlogPostClient({
       <motion.h1 variants={childVariant} className="font-instrument-serif md:text-4xl text-3xl">
         {title}
       </motion.h1>
-      <motion.div variants={childVariant} className="mb-24">
+      <motion.div variants={childVariant} className="mb-[12rem]">
         <BlogPostRenderer mdxSource={mdxSource} />
       </motion.div>
+      <div className="fixed inset-0 bg-background/80 pointer-events-none [mask-image:linear-gradient(180deg,transparent_80%,black)]" />
     </div>
   )
 }
