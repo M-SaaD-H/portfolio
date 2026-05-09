@@ -1,6 +1,7 @@
 import Intro from '@/components/Intro'
 import Projects from '@/components/Projects'
 import GithubGraph from '@/components/GithubGraph'
+import HomePageBlogs from '@/components/blog/home-page-blogs'
 import Footer from '@/components/Footer'
 import Quote from '@/components/ui/quote'
 
@@ -12,8 +13,9 @@ const Home = () => {
   return (
     <>
       <Intro />
-      <GithubGraph />
       <Projects />
+      <GithubGraph />
+      <HomePageBlogs />
       <Quote quote={quote} />
       <Footer />
     </>

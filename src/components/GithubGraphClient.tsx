@@ -29,7 +29,7 @@ export function GithubGraphClient({ data }: GithubGraphClientProps) {
             transition: {
               type: 'tween',
               duration: 0.4,
-              delay: 0.1
+              delay: 0.05 * 9
             }
           }
         }} 
@@ -54,7 +54,7 @@ export function GithubGraphClient({ data }: GithubGraphClientProps) {
           transition: {
             type: 'tween',
             duration: 0.4,
-            delay: 0.2
+            delay: 0.05 * 10
           }
         }
       }}>

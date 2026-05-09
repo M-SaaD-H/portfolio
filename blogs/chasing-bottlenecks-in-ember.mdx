@@ -1,0 +1,88 @@
+---
+title: "Chasing Bottlenecks in Ember"
+publishedAt: "2026-03-10"
+---
+
+A few months ago, I came across a video of someone building a database from scratch. What started as casual curiosity quickly turned into a deep rabbit hole of database internals, networking, concurrency, and backend systems design.
+
+That curiosity eventually led me to build Anton, a small SQL database engine, and later Ember, a Redis-inspired concurrent in-memory KV store written in Rust.
+
+Repository: [https://github.com/M-SaaD-H/ember](https://github.com/M-SaaD-H/ember)
+
+Once Ember reached a reasonably stable state with RESP support, persistence, expiration, and concurrent request handling, I was initially ready to move on to the next project.
+
+But then I stopped for a moment and realized: if Ember was inspired by Redis, I should probably benchmark it like one too. That’s when I started testing it under concurrent workloads to better understand where the actual bottlenecks were and how far the implementation could be pushed. For that, I used `redis-benchmark` to analyze the throughput reports.
+
+Under concurrent workloads, Ember was plateauing around 120K requests/sec.
+
+So instead of adding more features, I decided to spend some time profiling and optimizing the request path to understand where performance was really being lost.
+
+While looking for ways to improve performance, I came across the datastore implementation.
+
+```rust
+#[derive(Clone)]
+pub struct DB {
+    state: Arc<Mutex<State>>,
+}
+
+pub struct State {
+    data: HashMap<String, RedisObject>,
+    expirations: HashMap<String, Instant>,
+}
+```
+
+Since Ember is a concurrent server, each TCP request is handled by a separate thread. That meant multiple threads had to access the same datastore simultaneously for reads and writes. To enable shared ownership, I wrapped the HashMap in an `Arc` and used a `Mutex` for thread-safe mutations.
+
+But this also introduced lock **contention**. Threads often had to wait for others to finish accessing the store, which slowly erased the advantages of a multithreaded server under heavier workloads.
+
+The first step was to address this by switching from `HashMap` to `DashMap`. DashMap is a concurrent hashmap that internally shards the map into multiple segments, each protected by its own lock. This reduced contention significantly and improved parallel throughput.
+
+```rust
+#[derive(Clone)]
+pub struct DB {
+    data: Arc<DashMap<String, RedisObject>>,
+    expirations: Arc<DashMap<String, Instant>>,
+}
+```
+
+Once contention improved, another issue became more visible: unnecessary allocations and cloning.
+
+I was redundantly cloning values and converting raw bytes into strings and then back into bytes again. Individually these operations seemed small, but under hundreds of thousands of requests they started showing up in hot paths.
+
+So I replaced unnecessary cloning with references wherever ownership transfer wasn’t actually required. I also stopped converting raw bytes into strings unless it was necessary for parsing or storage.
+
+This may not sound like a huge optimization, but small inefficiencies compound surprisingly fast in systems sitting directly on the request path.
+
+Then I moved closer to the networking layer, where I noticed I was making a lot of small write syscalls. To reduce this overhead, I introduced `BufWriter`. Instead of triggering multiple small `write_all()` calls, `BufWriter` batches writes together and reduces the number of `send()` syscalls reaching the kernel.
+
+After reducing allocations and improving the request path, the networking layer itself started becoming more visible during benchmarking.
+
+While digging into this, I came across an old Cloudflare article about optimizing **TCP while preserving low latency**. That led me into another rabbit hole around socket-level optimizations.
+
+One of the most useful changes was enabling `TCP_NODELAY`, which disables **Nagle’s algorithm**. Without it, small RESP responses could be buffered briefly by the kernel while waiting for more packets to coalesce. Since Ember deals with lots of small request-response cycles, disabling that delay helped reduce latency noticeably.
+
+I also enabled TCP keep-alive to detect dead peers more reliably and reclaim resources faster when clients disappeared unexpectedly.
+
+Another important change was enabling `SO_REUSEPORT`, which allowed multiple sockets to bind to the same port and distribute incoming connections more efficiently across threads. This became much more noticeable under heavier concurrent workloads.
+
+```rust
+// Allow multiple sockets to bind to the same port.
+socket
+    .set_reuse_port(true)
+    .context("SO_REUSEPORT not supported on this platform")?;
+
+// Put the socket in non-blocking mode before handing it to Tokio's reactor.
+socket
+    .set_nonblocking(true)
+    .context("O_NONBLOCK failed")?;
+```
+
+While making all these changes, I never expected some magical optimization that would suddenly fix everything. Most of the improvements were fairly small individually, but performance gains in systems work often come from cumulative fixes.
+
+None of the optimizations individually felt groundbreaking, switching data structures, reducing allocations, buffering writes, avoiding unnecessary copies, but together they pushed Ember from roughly 120K to 195K RPS under the same benchmark setup, where the actual Redis server handled around 250K requests/sec.
+
+The more valuable part wasn’t really the final number, but understanding where time and resources were actually being spent.
+
+More importantly, the process changed how I think about backend systems. A lot of the bottlenecks weren’t where I initially expected them to be.
+
+There’s still a lot left to improve in Ember, especially around contention, memory allocation patterns, and persistence performance under heavier workloads, but chasing those bottlenecks has honestly been one of the most interesting parts of building it so far.
