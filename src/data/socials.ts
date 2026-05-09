@@ -13,15 +13,15 @@ export const socials = {
     href: "https://x.com/_MSaaDH",
     icon: IconBrandX
   },
-  peerlist: {
-    name: "Peerlist",
-    href: "https://peerlist.io/m_saad_h",
-    icon: SiPeerlist
-  },
   linkedin: {
     name: "Linkedin",
     href: "https://www.linkedin.com/in/muhammad-saad-haider-942167317",
     icon: FaLinkedinIn
+  },
+  peerlist: {
+    name: "Peerlist",
+    href: "https://peerlist.io/m_saad_h",
+    icon: SiPeerlist
   },
   email: {
     name: "Email",

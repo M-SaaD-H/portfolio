@@ -1,9 +1,10 @@
 'use client'
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation';
-import { DarkModeToggle } from './ui/theme-toggle';
+import { usePathname } from 'next/navigation'
+import { DarkModeToggle } from './ui/theme-toggle'
+import { SocialsTooltip } from './ui/socials-tooltip'
 
 const items = [
   {
@@ -13,44 +14,42 @@ const items = [
   {
     name: 'Writing',
     link: '/writing',
-  },
-  {
-    name: 'Socials',
-    link: '/socials',
   }
 ]
 
 function isActivePath(pathname: string, href: string) {
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
-
+  if (href === '/') return pathname === '/'
+  return pathname === href || pathname.startsWith(`${href}/`)
 }
+
 export const Navigation = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   return (
     <div className='flex items-center justify-between'>
-      <div className='flex gap-2'>
-        {
-          items.map((item, idx) => {
-            const active = isActivePath(pathname, item.link);
+      <div className='flex'>
+        <div className='flex gap-2 items-center'>
+          {items.map((item) => {
+            const active = isActivePath(pathname, item.link)
             return (
-              <div key={idx}>
-                <Link
-                  href={item.link}
-                  className={cn(
-                    'text-sm text-muted-foreground hover:text-primary transition-colors',
-                    active && 'text-primary font-medium'
-                  )}
-                >
-                  {item.name}
-                </Link>
-              </div>
+              <Link
+                key={item.link}
+                href={item.link}
+                className={cn(
+                  'text-sm text-muted-foreground hover:text-primary transition-colors',
+                  active && 'text-primary font-medium'
+                )}
+              >
+                {item.name}
+              </Link>
             )
-          })
-        }
+          })}
+
+        </div>
+        <SocialsTooltip />
       </div>
       <DarkModeToggle />
     </div>
-  );
-};
+  )
+}
+
