@@ -28,14 +28,13 @@ export const SocialsTooltip = ({ label = 'Socials' }: SocialsTooltipProps) => {
       onFocus={() => setIsOpen(true)}
       onBlur={handleBlur}
     >
-      <Link
-        href="/socials"
-        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+      <div
+        className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer"
         aria-haspopup="menu"
         aria-expanded={isOpen}
       >
         {label}
-      </Link>
+      </div>
 
       <AnimatePresence>
         {isOpen ? (
@@ -74,7 +73,7 @@ export const SocialsTooltip = ({ label = 'Socials' }: SocialsTooltipProps) => {
                   key={key}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted/40"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors dark:hover:bg-secondary/40 hover:bg-secondary"
                   aria-label={social.name}
                 >
                   <Icon className="size-5" />

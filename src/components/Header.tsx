@@ -21,7 +21,7 @@ const Header = () => {
             alt='Avatar'
           />
         </motion.div>
-        <motion.h1 variants={childVariant} className='text-3xl font-instrument-serif'>
+        <motion.h1 variants={childVariant} className='text-4xl font-instrument-serif'>
           Saad Haider
         </motion.h1>
       </div>
