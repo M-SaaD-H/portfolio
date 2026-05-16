@@ -23,7 +23,7 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://saad.works"),
+  metadataBase: new URL("https://heysaad.me"),
   title: "Saad",
   description: "Engineer delivering fast, scalable, and meticulously crafted digital experiences.",
   keywords: [
@@ -38,17 +38,17 @@ export const metadata: Metadata = {
     "Autotone",
     "Open Source Contributor"
   ],
-  authors: [{ name: "Saad", url: "https://saad.works" }],
+  authors: [{ name: "Saad", url: "https://heysaad.me" }],
   creator: "Saad",
   publisher: "Saad",
   openGraph: {
     title: "Saad",
     description: "Engineer delivering fast, scalable, and meticulously crafted digital experiences.",
-    url: "https://saad.works",
+    url: "https://heysaad.me",
     siteName: "Saad",
     images: [
       {
-        url: "https://saad.works/og-image.png",
+        url: "https://heysaad.me/og-image.png",
         width: 1200,
         height: 630,
         alt: "Saad - Engineer",

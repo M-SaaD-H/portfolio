@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getBlogs, getBlogBySlug } from "@/lib/mdx";
 import BlogPostClient from "./BlogPostClient";
 
-const siteUrl = "https://saad.works";
+const siteUrl = "https://heysaad.me";
 
 type PostFrontMatter = {
   title: string;
