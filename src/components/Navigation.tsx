@@ -47,6 +47,14 @@ export const Navigation = () => {
 
         </div>
         <SocialsTooltip />
+        <Link
+          href="/resume.pdf"
+          className={cn(
+            'text-sm text-muted-foreground hover:text-primary transition-colors'
+          )}
+        >
+          Resume
+        </Link>
       </div>
       <DarkModeToggle />
     </div>
