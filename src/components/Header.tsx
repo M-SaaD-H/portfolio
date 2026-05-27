@@ -8,7 +8,7 @@ import { DarkModeToggle } from "./ui/theme-toggle";
 
 const Header = () => {
   return (
-    <div>
+    <div className="relative z-50">
       <div className='flex gap-2 items-center'>
         <motion.div
           variants={childVariant}

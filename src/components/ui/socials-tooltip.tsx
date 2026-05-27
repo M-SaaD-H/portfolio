@@ -22,7 +22,7 @@ export const SocialsTooltip = ({ label = 'Socials' }: SocialsTooltipProps) => {
   return (
     <div
       ref={wrapperRef}
-      className="relative z-[9999] inline-flex px-2"
+      className="relative inline-flex px-2"
       onPointerEnter={() => setIsOpen(true)}
       onPointerLeave={() => setIsOpen(false)}
       onFocus={() => setIsOpen(true)}
@@ -63,7 +63,7 @@ export const SocialsTooltip = ({ label = 'Socials' }: SocialsTooltipProps) => {
               damping: 24,
               duration: 0.5,
             }}
-            className="absolute left-1/2 -translate-x-1/2 top-full z-[9999] mt-1 flex min-w-[12rem] items-center justify-center rounded-full border border-border bg-card p-1 shadow-lg shadow-black/10 backdrop-blur-md"
+            className="absolute left-1/2 -translate-x-1/2 top-full mt-1 flex min-w-48 items-center justify-center rounded-full border border-border bg-card p-1 shadow-lg shadow-black/10 backdrop-blur-md"
           >
             {Object.entries(socials).map(([key, social]) => {
               const Icon = social.icon
