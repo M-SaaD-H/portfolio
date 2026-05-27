@@ -75,9 +75,9 @@ export const ProjectPopup = ({ project, ref }: { project: Project, ref: React.Re
           <motion.div
             layoutId={`project-desc-${project.title}`}
             className='text-sm text-muted-foreground'
-          >
-            {project.content}
-          </motion.div>
+            // have the project content in the server itself, so it should be fine
+            dangerouslySetInnerHTML={{ __html: project.content() }}
+          />
         </div>
         <motion.div
           layoutId={`project-cta-${project.title}`}

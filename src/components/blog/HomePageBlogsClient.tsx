@@ -2,7 +2,6 @@
 
 import { BlogPost } from '../BlogPost'
 import { childVariant } from '../ui/animation-wrapper'
-import { getAllBlogsFrontMatter } from '@/lib/mdx';
 import { BlogIndex } from '@/app/(main)/writing/WritingPageClient';
 import { motion } from 'motion/react';
 

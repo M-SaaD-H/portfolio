@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import { IconLoader2 } from '@tabler/icons-react'
 import SpotifyCardClient from './SpotifyCardClient'
 import { Song } from '@/lib/spotify'
 

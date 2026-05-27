@@ -1,21 +1,7 @@
 'use client'
 
-import React from 'react'
-import Image from 'next/image'
 import { motion } from 'motion/react'
-import { Highlight } from './ui/highlight'
 import { childVariant } from './ui/animation-wrapper'
-import TextAnimation from './ui/text-animation'
-import HeroButton from './ui/hero-button'
-import { IconFileFilled } from '@tabler/icons-react'
-import { socials } from '@/data/socials'
-import { IconType } from 'react-icons'
-
-export interface IHeroButton {
-  name: string;
-  href: string;
-  icon: IconType;
-}
 
 const Intro = () => (
   <div className='text-sm my-4 flex flex-col gap-2 text-justify font-sans'>

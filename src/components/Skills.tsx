@@ -1,7 +1,6 @@
 "use client"
 
 import Image from 'next/image';
-import React from 'react'
 import { AnimationWrapper, childVariant } from './ui/animation-wrapper';
 import { motion } from 'motion/react';
 import { skills, type Skill } from '@/data/skills';

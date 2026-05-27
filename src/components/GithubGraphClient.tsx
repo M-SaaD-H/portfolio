@@ -2,7 +2,6 @@
 
 import { motion } from "motion/react"
 import ActivityCalendar, { type Activity } from 'react-activity-calendar'
-import { childVariant } from './ui/animation-wrapper'
 
 interface GithubGraphClientProps {
   data: Activity[] | null

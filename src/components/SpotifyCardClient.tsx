@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Song } from '@/lib/spotify'
 import Image from 'next/image'
 import Link from 'next/link'

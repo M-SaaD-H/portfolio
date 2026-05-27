@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { IconLoader2 } from '@tabler/icons-react'
 
 export const Video = ({ src }: { src: string }) => {

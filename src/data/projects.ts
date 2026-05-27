@@ -1,7 +1,7 @@
 import {
+  Icon,
   IconBrandFramerMotion,
   IconBrandJavascript,
-  IconBrandMongodb,
   IconBrandNextjs,
   IconBrandNodejs,
   IconBrandReact,
@@ -16,69 +16,64 @@ export type Project = {
   image: string,
   liveLink: string,
   sourceLink: string,
-  content: React.ReactNode,
+  content: () => string,
   demoLink?: string,
   tags: {
     name: string,
-    logo?: React.ReactNode
+    logo?: Icon
   }[]
 }
 
-export type UpcomingProject = {
-  title: string,
-  description: string,
-  image?: string,
-  liveLink?: string,
-  sourceLink?: string,
-  tags: {
-    name: string,
-    logo?: React.ReactNode
-  }[]
-}
+// export type UpcomingProject = {
+//   title: string,
+//   description: string,
+//   image?: string,
+//   liveLink?: string,
+//   sourceLink?: string,
+//   tags: {
+//     name: string,
+//     logo?: Icon
+//   }[]
+// }
 
 const NextJS = {
   name: 'Next.js',
-  logo: <IconBrandNextjs size={18} />
+  logo: IconBrandNextjs
 }
 
 const ReactTech = {
   name: 'React',
-  logo: <IconBrandReact size={18} />
+  logo: IconBrandReact
 }
 
 const Tailwind = {
   name: 'Tailwind CSS',
-  logo: <IconBrandTailwind size={18} />
+  logo: IconBrandTailwind
 }
 
 const Motion = {
   name: 'Motion',
-  logo: <IconBrandFramerMotion size={18} />
+  logo: IconBrandFramerMotion
 }
 
 const TypeScript = {
   name: 'TypeScript',
-  logo: <IconBrandTypescript size={18} />
+  logo: IconBrandTypescript
 }
 
 const NodeJS = {
   name: 'NodeJS',
-  logo: <IconBrandNodejs size={18} />
+  logo: IconBrandNodejs
 }
 
 const JavaScript = {
   name: 'JavaScript',
-  logo: <IconBrandJavascript size={18} />
-}
-
-const MongoDB = {
-  name: 'MongoDB',
-  logo: <IconBrandMongodb size={18} />
+  logo: IconBrandJavascript
 }
 
 const Java = {
   name: 'Java',
-  logo: <Image src={"/skills/java.svg"} height={20} width={20} alt='Java Icon' style={{ filter: 'brightness(1000%) saturate(0)', WebkitFilter: 'brightness(1000%) saturate(0)' }} />
+  logo: () => `<Image src={"/skills/java.svg"} height={20} width={20} alt='Java Icon' style={{ filter: 'brightness(1000%) saturate(0)', WebkitFilter: 'brightness(1000%) saturate(0)' }} />`
 }
 
 export const projects: Project[] = [
@@ -88,17 +83,18 @@ export const projects: Project[] = [
     image: '/projects/vynk.png',
     liveLink: 'https://vynk.live',
     sourceLink: 'https://github.com/M-SaaD-H/vynk',
-    content:
-      <>
+    content: () => (
+      `
         <p>
           Vynk is a UI component library and CLI tool that helps developers quickly add ready-to-use components and layout blocks to their projects.
         </p>
-        <ul className='list-disc ml-5 mt-2'>
+        <ul class='list-disc ml-5 mt-2'>
           <li>Custom CLI for instant injection of components and backend snippets.</li>
           <li>Production-ready UI blocks and templates.</li>
           <li>Pro marketplace with premium landing pages and animated heroes.</li>
         </ul>
-      </>,
+      `
+    ),
     demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766151214/vynk-demo_xdpfa3.mp4",
     tags: [
       NextJS,
@@ -114,18 +110,19 @@ export const projects: Project[] = [
     image: '/projects/anton.png',
     liveLink: 'https://github.com/M-SaaD-H/Anton',
     sourceLink: 'https://github.com/M-SaaD-H/Anton',
-    content:
-      <>
+    content: () => (
+      `
         <p>
           Anton is a lightweight SQL-like database in Java, built from scratch to learn database internals.
         </p>
-        <ul className='list-disc ml-5 mt-2'>
+        <ul class='list-disc ml-5 mt-2'>
           <li>Create tables with columns and types.</li>
           <li>Insert, select, update, and delete data.</li>
           <li>SQL-like query parsing and execution.</li>
           <li>B+ Tree indexing for faster lookups.</li>
         </ul>
-      </>,
+      `
+    ),
     demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766165438/anton-demo_wvcfek.mp4",
     tags: [
       Java
@@ -137,18 +134,19 @@ export const projects: Project[] = [
     image: '/projects/ember.png',
     liveLink: 'https://github.com/M-SaaD-H/Ember',
     sourceLink: 'https://github.com/M-SaaD-H/Ember',
-    content:
-      <>
+    content: () => (
+      `
         <p>
           Ember is a fully compatible, open-source in-memory database server inspired by Redis. Compatible with existing Redis clients, it aims to closely mimic the API and feature set of Redis for seamless interchange.
         </p>
-        <ul className='list-disc ml-5 mt-2'>
+        <ul class='list-disc ml-5 mt-2'>
           <li>Supports all basic data types: strings, hashes, lists, sets, and sorted sets.</li>
           <li>Implements core Redis commands and server operations.</li>
           <li>Works out-of-the-box with Redis CLI and libraries.</li>
           <li>Fast, lightweight, and ideal for learning or prototyping with Redis-style databases.</li>
         </ul>
-      </>,
+      `
+    ),
     tags: [
       { name: 'NodeJS' },
       { name: 'TypeScript' }
@@ -160,20 +158,21 @@ export const projects: Project[] = [
     image: '/projects/autotone.png',
     liveLink: 'https://github.com/M-SaaD-H/autotone',
     sourceLink: 'https://github.com/M-SaaD-H/autotone',
-    content:
-      <>
+    content: () => (
+      `
         <p>
           AutoTone is a simple browser extension that keeps tab audio levels steady and comfortable automatically.
         </p>
-        <ul className="list-disc ml-5 mt-2">
+        <ul class="list-disc ml-5 mt-2">
           <li>Keeps audio balanced across all tabs.</li>
           <li>Detects playing tabs and adjusts their sound in real time.</li>
           <li>Restores normal volume automatically when other audio stops.</li>
         </ul>
-        <p className="mt-2">
+        <p class="mt-2">
           For example, if you're listening to Spotify and start playing a YouTube video, AutoTone will lower or stop Spotify&apos;s volume and restore it when the video stops, requiring no manual adjustments.
         </p>
-      </>,
+      `
+    ),
     tags: [
       JavaScript
     ]
@@ -184,18 +183,19 @@ export const projects: Project[] = [
   //   image: '/projects/relix.png',
   //   liveLink: 'https://relix-lac.vercel.app',
   //   sourceLink: 'https://github.com/M-SaaD-H/relix',
-  //   content:
-  //     <>
+  //   content: () => (
+  //     `
   //       <p>
   //         Relix instantly converts ERD diagram images into downloadable, production-ready SQL schema code.
   //       </p>
-  //       <ul className="list-disc ml-5 mt-2">
+  //       <ul class="list-disc ml-5 mt-2">
   //         <li>Upload ERD images - supports screenshots, exports, even hand-drawn sketches.</li>
   //         <li>Detects tables, columns, and relationships using AI.</li>
   //         <li>Generates SQL code for your database schema.</li>
   //         <li>Copy or download the SQL in one click.</li>
   //       </ul>
-  //     </>,
+  //     `
+  //   ),
   //   demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1774547094/relix-1769085992687_aihre3.mp4",
   //   tags: [
   //     NextJS,
@@ -209,17 +209,18 @@ export const projects: Project[] = [
   //   image: '/projects/game.png',
   //   liveLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
   //   sourceLink: 'https://github.com/M-SaaD-H/2D-Adventure-Game',
-  //   content:
-  //     <>
+  //   content: () => (
+  //     `
   //       <p>
   //         This is a simple 2D adventure game I built just for fun. It&apos;s not a fully-fledged game, more like a prototype or an early concept of what a game could be.
   //       </p>
-  //       <ol className='list-disc ml-5'>
+  //       <ol class='list-disc ml-5'>
   //         <li>Basic player movement and collision detection.</li>
   //         <li>Simple map tiles.</li>
   //         <li>Basic interaction system.</li>
   //       </ol>
-  //     </>,
+  //     `
+  //   ),
   //   demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766151967/2d-game-demo_skkrw6.mp4",
   //   tags: [
   //     Java
@@ -231,16 +232,17 @@ export const projects: Project[] = [
   //   image: '/projects/vidchat.png',
   //   liveLink: 'https://vid-chat-peach.vercel.app',
   //   sourceLink: 'https://github.com/M-SaaD-H/VidChat',
-  //   content:
-  //     <>
+  //   content: () => (
+  //     `
   //       <p>VidChat lets you make quick, hassle-free video calls in your browser.</p>
-  //       <ul className="list-disc ml-5 mt-1">
+  //       <ul class="list-disc ml-5 mt-1">
   //         <li>Real-time video and audio with WebRTC.</li>
   //         <li>Instant room creation and joining.</li>
   //         <li>Low-latency signaling with Socket.io.</li>
   //         <li>Simple UI with React + TypeScript.</li>
   //       </ul>
-  //     </>,
+  //     `
+  //   ),
   //   tags: [
   //     NextJS,
   //     TypeScript,
@@ -255,15 +257,16 @@ export const projects: Project[] = [
     image: '/projects/fintrack.png',
     liveLink: 'https://fintrack-flax-beta.vercel.app',
     sourceLink: 'https://github.com/M-SaaD-H/fintrack',
-    content:
-      <>
+    content: () => (
+      `
         <p>FinTrack helps students track expenses and savings by semester.</p>
-        <ul className="list-disc ml-5 mt-1">
+        <ul class="list-disc ml-5 mt-1">
           <li>Semester-based finance tracking.</li>
           <li>Quick overview of spending and savings.</li>
           <li>Designed for college budgeting.</li>
         </ul>
-      </>,
+      `
+    ),
     tags: [
       NextJS,
       TypeScript,
@@ -278,16 +281,17 @@ export const projects: Project[] = [
   //   image: '/projects/sputify.png',
   //   liveLink: 'https://github.com/M-SaaD-H/Sputify',
   //   sourceLink: 'https://github.com/M-SaaD-H/Sputify',
-  //   content:
-  //     <>
+  //   content: () => (
+  //     `
   //       <p>Sputify is a Spotify-inspired web music streaming platform built from scratch.</p>
-  //       <ul className="list-disc ml-5 mt-1">
+  //       <ul class="list-disc ml-5 mt-1">
   //         <li>Browse, search, and play tracks in real time.</li>
   //         <li>Custom playlists and queue management.</li>
   //         <li>Sleek UI inspired by Spotify using ShadCN & Tailwind.</li>
   //         <li>Login system and personal music libraries.</li>
   //       </ul>
-  //     </>,
+  //     `
+  //   ),
   //   tags: [
   //     ReactTech,
   //     NodeJS,
@@ -302,16 +306,17 @@ export const projects: Project[] = [
   //   image: '/projects/zootube.png',
   //   liveLink: 'https://github.com/M-SaaD-H/Zootube',
   //   sourceLink: 'https://github.com/M-SaaD-H/Zootube',
-  //   content:
-  //     <>
+  //   content: () => (
+  //     `
   //       <p>Zootube powers a video streaming service backend, much like YouTube.</p>
-  //       <ul className="list-disc ml-5 mt-1">
+  //       <ul class="list-disc ml-5 mt-1">
   //         <li>REST API handles video and media uploads securely.</li>
   //         <li>User authentication and JWT-based session management.</li>
   //         <li>Uploads managed efficiently with Cloudinary.</li>
   //         <li>Built with Node.js and Express for scalability.</li>
   //       </ul>
-  //     </>,
+  //     `
+  //   ),
   //   tags: [
   //     NodeJS,
   //     MongoDB,
@@ -321,25 +326,25 @@ export const projects: Project[] = [
   // }
 ]
 
-export const upcomingProjects: UpcomingProject[] = [
-  {
-    title: 'AlgoBud',
-    description: "An AI-powered DSA platform with a personal tutor that spots your mistakes, explains patterns, and helps you level up smarter than brute force.",
-    tags: [
-      NextJS,
-      NodeJS,
-      TypeScript,
-      Tailwind
-    ]
-  },
-  {
-    title: 'Zuno',
-    description: "An AI agent that keeps track of your personal life, so you can focus on getting work done without missing anything important.",
-    tags: [
-      NextJS,
-      NodeJS,
-      TypeScript,
-      Tailwind
-    ]
-  }
-]
+// export const upcomingProjects: UpcomingProject[] = [
+//   {
+//     title: 'AlgoBud',
+//     description: "An AI-powered DSA platform with a personal tutor that spots your mistakes, explains patterns, and helps you level up smarter than brute force.",
+//     tags: [
+//       NextJS,
+//       NodeJS,
+//       TypeScript,
+//       Tailwind
+//     ]
+//   },
+//   {
+//     title: 'Zuno',
+//     description: "An AI agent that keeps track of your personal life, so you can focus on getting work done without missing anything important.",
+//     tags: [
+//       NextJS,
+//       NodeJS,
+//       TypeScript,
+//       Tailwind
+//     ]
+//   }
+// ]

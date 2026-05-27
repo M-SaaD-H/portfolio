@@ -4,7 +4,6 @@ import { Navigation } from "./Navigation";
 import { motion } from "motion/react";
 import { childVariant } from "./ui/animation-wrapper";
 import Image from "next/image";
-import { DarkModeToggle } from "./ui/theme-toggle";
 
 const Header = () => {
   return (
@@ -19,6 +18,7 @@ const Header = () => {
             height={36}
             width={36}
             alt='Avatar'
+            loading='eager'
           />
         </motion.div>
         <motion.h1 variants={childVariant} className='text-4xl font-instrument-serif'>
