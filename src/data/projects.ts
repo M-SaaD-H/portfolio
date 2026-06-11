@@ -8,7 +8,6 @@ import {
   IconBrandTailwind,
   IconBrandTypescript
 } from "@tabler/icons-react"
-import Image from "next/image"
 
 export type Project = {
   title: string,
@@ -95,7 +94,7 @@ export const projects: Project[] = [
         </ul>
       `
     ),
-    demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766151214/vynk-demo_xdpfa3.mp4",
+    demoLink: "https://res.cloudinary.com/presently/video/upload/v1766151214/vynk-demo_xdpfa3.mp4",
     tags: [
       NextJS,
       Motion,
@@ -123,7 +122,7 @@ export const projects: Project[] = [
         </ul>
       `
     ),
-    demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766165438/anton-demo_wvcfek.mp4",
+    demoLink: "https://res.cloudinary.com/presently/video/upload/v1766165438/anton-demo_wvcfek.mp4",
     tags: [
       Java
     ]
@@ -196,7 +195,7 @@ export const projects: Project[] = [
   //       </ul>
   //     `
   //   ),
-  //   demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1774547094/relix-1769085992687_aihre3.mp4",
+  //   demoLink: "https://res.cloudinary.com/presently/video/upload/v1774547094/relix-1769085992687_aihre3.mp4",
   //   tags: [
   //     NextJS,
   //     Tailwind,
@@ -221,7 +220,7 @@ export const projects: Project[] = [
   //       </ol>
   //     `
   //   ),
-  //   demoLink: "https://res.cloudinary.com/sputifyy/video/upload/v1766151967/2d-game-demo_skkrw6.mp4",
+  //   demoLink: "https://res.cloudinary.com/presently/video/upload/v1766151967/2d-game-demo_skkrw6.mp4",
   //   tags: [
   //     Java
   //   ]
