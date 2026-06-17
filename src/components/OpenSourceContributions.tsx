@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import { type Contribution } from '@/lib/github-prs'
 import { OpenSourceContributionsClient } from './OpenSourceContributionsClient'
 
@@ -23,15 +22,7 @@ async function fetchContributions(): Promise<Contribution[]> {
   }
 }
 
-async function OpenSourceContributionsContent() {
+export default async function OpenSourceContributions() {
   const contributions = await fetchContributions();
   return <OpenSourceContributionsClient contributions={contributions} />
-}
-
-export default function OpenSourceContributions() {
-  return (
-    <Suspense fallback={<div />}>
-      <OpenSourceContributionsContent />
-    </Suspense>
-  )
 }

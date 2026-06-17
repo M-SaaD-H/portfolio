@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { AnimationWrapper, childVariant } from '@/components/ui/animation-wrapper'
+import { childVariant } from '@/components/ui/animation-wrapper'
 import { type Contribution } from '@/lib/github-prs'
 
 type Tab = 'all' | 'open' | 'merged'
@@ -96,7 +96,7 @@ export function OpenSourceContributionsClient({
   }
 
   return (
-    <AnimationWrapper id="open-source" className="mt-8">
+    <div id="open-source" className="mt-8">
       {/* Header & Tabs Inline */}
       <div className="flex justify-between items-center mb-2">
         <motion.h3
@@ -178,7 +178,7 @@ export function OpenSourceContributionsClient({
               ))}
 
               {visibleContributions.length > INITIAL_COUNT && (
-                <motion.div 
+                <motion.div
                   variants={childVariant}
                   className="pt-4 pb-2 flex justify-center"
                 >
@@ -194,6 +194,6 @@ export function OpenSourceContributionsClient({
           )}
         </AnimatePresence>
       </motion.div>
-    </AnimationWrapper>
+    </div>
   )
 }

@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import { GithubGraphClient } from './GithubGraphClient'
 
 type ContributionDay = {
@@ -38,29 +37,7 @@ async function getGithubContributions() {
   }
 }
 
-async function GithubGraphContent() {
+export default async function GithubGraph() {
   const data = await getGithubContributions()
-
   return <GithubGraphClient data={data} />
-}
-
-// Not using fallback, because it is staggering the animation
-// will to solve it later
-
-// function GithubGraphSkeleton() {
-//   return (
-//     <div className='flex flex-col font-sans'>
-//       <div className='w-full min-h-20 flex justify-center items-center'>
-//         <IconLoader2 className='animate-spin' />
-//       </div>
-//     </div>
-//   )
-// }
-
-export default function GithubGraph() {
-  return (
-    <Suspense fallback={<div />}>
-      <GithubGraphContent />
-    </Suspense>
-  )
 }
