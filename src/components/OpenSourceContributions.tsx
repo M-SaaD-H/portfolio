@@ -1,0 +1,37 @@
+import { Suspense } from 'react'
+import { type Contribution } from '@/lib/github-prs'
+import { OpenSourceContributionsClient } from './OpenSourceContributionsClient'
+
+async function fetchContributions(): Promise<Contribution[]> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    if (!baseUrl) {
+      console.warn('[OpenSourceContributions] NEXT_PUBLIC_BASE_URL is not set');
+      return [];
+    }
+
+    const res = await fetch(`${baseUrl}/api/pull-requests`, {
+      next: { revalidate: 86400 },
+    });
+
+    if (!res.ok) return [];
+
+    return await res.json();
+  } catch (err) {
+    console.error('[OpenSourceContributions] Failed to load contributions:', err);
+    return [];
+  }
+}
+
+async function OpenSourceContributionsContent() {
+  const contributions = await fetchContributions();
+  return <OpenSourceContributionsClient contributions={contributions} />
+}
+
+export default function OpenSourceContributions() {
+  return (
+    <Suspense fallback={<div />}>
+      <OpenSourceContributionsContent />
+    </Suspense>
+  )
+}
