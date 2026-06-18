@@ -10,7 +10,7 @@ async function fetchContributions(): Promise<Contribution[]> {
     }
 
     const res = await fetch(`${baseUrl}/api/pull-requests`, {
-      next: { revalidate: 86400 },
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) return [];

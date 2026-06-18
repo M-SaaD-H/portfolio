@@ -73,7 +73,7 @@ async function fetchAllPRs(): Promise<GitHubPR[]> {
         query: PR_SEARCH_QUERY,
         variables: { cursor },
       }),
-      next: { revalidate: 86400 },
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {

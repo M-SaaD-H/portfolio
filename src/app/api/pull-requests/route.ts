@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getContributions } from '@/lib/github-prs'
 
-export const revalidate = 86400 // Revalidate once per day
+export const revalidate = 3600 // Revalidate once per hour
 
 export async function GET() {
   try {
