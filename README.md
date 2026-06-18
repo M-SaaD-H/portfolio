@@ -1,24 +1,23 @@
 # Portfolio
 
-A modern, animated portfolio website built with Next.js 15, featuring real-time Spotify integration, GitHub contributions visualization, and smooth scroll animations.
+A modern, animated portfolio website built with Next.js 16. It features real-time Spotify integration, GitHub contributions visualization, and smooth scroll animations.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS v4
-- **Animations**: [Motion](https://motion.dev/) (Framer Motion)
-- **Smooth Scrolling**: [Locomotive Scroll](https://github.com/locomotivemtl/locomotive-scroll)
-- **UI Components**: Radix UI, Tabler Icons, React Icons
-- **Analytics**: Vercel Analytics
-- **Deployment**: Optimized for Vercel
+* **Framework**: [Next.js 16](https://nextjs.org/) with App Router
+* **Language**: TypeScript
+* **Styling**: Tailwind CSS v4
+* **Animations**: [Motion](https://motion.dev/) (Framer Motion)
+* **UI Components**: Radix UI, Tabler Icons, React Icons
+* **Analytics**: Vercel Analytics
+* **Deployment**: Optimized for Vercel
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm, yarn, pnpm, or bun
+* Node.js 18 or later
+* npm, yarn, pnpm, or bun
 
 ### Installation
 
@@ -41,12 +40,12 @@ pnpm install
 Create a `.env.local` file in the root directory:
 
 ```env
-# Spotify API (optional - for Spotify integration)
+# Spotify API (optional for Spotify integration)
 SPOTIFY_CLIENT_ID=your_spotify_client_id
 SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
 SPOTIFY_REFRESH_TOKEN=your_spotify_refresh_token
 
-# GitHub API (optional - for contributions graph)
+# GitHub API (optional for contributions graph)
 GITHUB_USERNAME=your_github_username
 GITHUB_TOKEN=your_github_personal_access_token
 ```
@@ -62,9 +61,9 @@ pnpm dev
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 📁 Project Structure
+## Project Structure
 
-```
+```text
 portfolio/
 ├── public/
 │   ├── assets/          # SVG assets
@@ -96,66 +95,60 @@ portfolio/
 └── package.json
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Spotify Integration
 
 To enable Spotify integration:
 
-1. Create a Spotify app at [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
-2. Get your Client ID and Client Secret
-3. Generate a refresh token using the [Spotify OAuth flow](https://developer.spotify.com/documentation/web-api/tutorials/code-flow)
-4. Add the credentials to your `.env.local` file
+1. Create a Spotify application at the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
+2. Obtain your Client ID and Client Secret.
+3. Generate a refresh token using the [Spotify OAuth flow](https://developer.spotify.com/documentation/web-api/tutorials/code-flow).
+4. Add the credentials to your `.env.local` file.
 
 ### GitHub Contributions
 
-To enable GitHub contributions graph:
+To enable the GitHub contributions graph:
 
-1. Generate a GitHub Personal Access Token with `read:user` scope
-2. Add your GitHub username and token to `.env.local`
+1. Generate a GitHub Personal Access Token with the `read:user` scope.
+2. Add your GitHub username and token to `.env.local`.
 
-## 📝 Available Scripts
+## Available Scripts
 
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
+* `npm run dev` : Start development server with Turbopack.
+* `npm run build` : Build for production.
+* `npm run start` : Start production server.
+* `npm run lint` : Run ESLint.
 
-## 🎨 Customization
+## Customization
 
 ### Update Personal Information
 
-- Edit `src/components/Intro.tsx` to update your bio and social links
-- Replace `/public/avatar.png` with your profile picture
-- Update project images in `/public/projects/`
+* Edit `src/components/Intro.tsx` to update your bio and social links.
+* Replace `/public/avatar.png` with your profile picture.
+* Update project images in `/public/projects/`.
 
 ### Modify Skills
 
-- Edit `src/components/Skills.tsx` to add/remove skills
-- Add skill icons to `/public/skills/`
+* Edit `src/components/Skills.tsx` to add or remove skills.
+* Add skill icons to `/public/skills/`.
 
 ### Add Projects
 
-- Edit `src/components/Projects.tsx` to add your projects
-- Add project images to `/public/projects/`
+* Edit `src/components/Projects.tsx` to add your projects.
+* Add project images to `/public/projects/`.
 
-## 🚢 Deployment
+## Deployment
 
-The easiest way to deploy is using [Vercel](https://vercel.com):
+The standard method for deployment is using [Vercel](https://vercel.com):
 
-1. Push your code to GitHub
-2. Import your repository on Vercel
-3. Add your environment variables in Vercel dashboard
-4. Deploy!
+1. Push your code to GitHub.
+2. Import your repository on Vercel.
+3. Add your environment variables in the Vercel dashboard.
+4. Deploy the application.
 
-The site will be live at `https://your-project.vercel.app`
+The site will be live at `https://your-project.vercel.app`.
 
-## 📄 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
-
-## 🙏 Acknowledgments
-
-- Built with [Next.js](https://nextjs.org/)
-- Icons from [Tabler Icons](https://tabler.io/icons) and [React Icons](https://react-icons.github.io/react-icons/)
-- Fonts from [Geist](https://vercel.com/font)
