@@ -77,30 +77,33 @@ const Java = {
 
 export const projects: Project[] = [
   {
-    title: 'Vynk',
-    description: "UI component library and ready-to-use template marketplace.",
-    image: '/projects/vynk.png',
-    liveLink: 'https://vynk.live',
-    sourceLink: 'https://github.com/M-SaaD-H/vynk',
+    title: 'Presently',
+    description: "Generate interactive product demo video from any URL.",
+    image: '',
+    sourceLink: 'https://github.com/M-SaaD-H/presently',
+    liveLink: 'https://github.com/M-SaaD-H/presently',
     content: () => (
       `
         <p>
-          Vynk is a UI component library and CLI tool that helps developers quickly add ready-to-use components and layout blocks to their projects.
+          Presently is an automated service that converts any website link into a smooth, human-like UI presentation video. It spins up a headless browser and records the interaction to output an MP4 video of the session.
         </p>
         <ul class='list-disc ml-5 mt-2'>
-          <li>Custom CLI for instant injection of components and backend snippets.</li>
-          <li>Production-ready UI blocks and templates.</li>
-          <li>Pro marketplace with premium landing pages and animated heroes.</li>
+          <li>Robust background processing worker using BullMQ and Redis.</li>
+          <li>Virtual X11 display with Xvfb and Playwright for seamless headless recording.</li>
+          <li>Custom Scroll Engine that emulates realistic scrolling physics and variable reading pauses.</li>
+          <li>Video encoding using FFmpeg and cloud storage with Supabase.</li>
         </ul>
       `
     ),
-    demoLink: "https://res.cloudinary.com/presently/video/upload/v1766151214/vynk-demo_xdpfa3.mp4",
+    demoLink: "https://res.cloudinary.com/presently/video/upload/v1782997920/presently_qppzny.mp4",
     tags: [
       NextJS,
-      Motion,
-      { name: 'ShadCN' },
       TypeScript,
-      Tailwind
+      Tailwind,
+      { name: 'ShadCN' },
+      { name: 'Redis' },
+      { name: 'Playwright' },
+      { name: 'FFmpeg' }
     ]
   },
   {
@@ -149,6 +152,33 @@ export const projects: Project[] = [
     tags: [
       { name: 'NodeJS' },
       { name: 'TypeScript' }
+    ]
+  },
+  {
+    title: 'Vynk',
+    description: "UI component library and ready-to-use template marketplace.",
+    image: '/projects/vynk.png',
+    liveLink: 'https://vynk.live',
+    sourceLink: 'https://github.com/M-SaaD-H/vynk',
+    content: () => (
+      `
+        <p>
+          Vynk is a UI component library and CLI tool that helps developers quickly add ready-to-use components and layout blocks to their projects.
+        </p>
+        <ul class='list-disc ml-5 mt-2'>
+          <li>Custom CLI for instant injection of components and backend snippets.</li>
+          <li>Production-ready UI blocks and templates.</li>
+          <li>Pro marketplace with premium landing pages and animated heroes.</li>
+        </ul>
+      `
+    ),
+    demoLink: "https://res.cloudinary.com/presently/video/upload/v1766151214/vynk-demo_xdpfa3.mp4",
+    tags: [
+      NextJS,
+      Motion,
+      { name: 'ShadCN' },
+      TypeScript,
+      Tailwind
     ]
   },
   {
@@ -250,30 +280,30 @@ export const projects: Project[] = [
   //     Tailwind
   //   ]
   // },
-  {
-    title: 'FinTrack',
-    description: "A student-focused finance tracker app to manage and monitor expenses with ease.",
-    image: '/projects/fintrack.png',
-    liveLink: 'https://fintrack-flax-beta.vercel.app',
-    sourceLink: 'https://github.com/M-SaaD-H/fintrack',
-    content: () => (
-      `
-        <p>FinTrack helps students track expenses and savings by semester.</p>
-        <ul class="list-disc ml-5 mt-1">
-          <li>Semester-based finance tracking.</li>
-          <li>Quick overview of spending and savings.</li>
-          <li>Designed for college budgeting.</li>
-        </ul>
-      `
-    ),
-    tags: [
-      NextJS,
-      TypeScript,
-      { name: 'ShadCN' },
-      { name: 'Aceternity UI' },
-      Tailwind
-    ]
-  },
+  // {
+  //   title: 'FinTrack',
+  //   description: "A student-focused finance tracker app to manage and monitor expenses with ease.",
+  //   image: '/projects/fintrack.png',
+  //   liveLink: 'https://fintrack-flax-beta.vercel.app',
+  //   sourceLink: 'https://github.com/M-SaaD-H/fintrack',
+  //   content: () => (
+  //     `
+  //       <p>FinTrack helps students track expenses and savings by semester.</p>
+  //       <ul class="list-disc ml-5 mt-1">
+  //         <li>Semester-based finance tracking.</li>
+  //         <li>Quick overview of spending and savings.</li>
+  //         <li>Designed for college budgeting.</li>
+  //       </ul>
+  //     `
+  //   ),
+  //   tags: [
+  //     NextJS,
+  //     TypeScript,
+  //     { name: 'ShadCN' },
+  //     { name: 'Aceternity UI' },
+  //     Tailwind
+  //   ]
+  // },
   // {
   //   title: 'Sputify',
   //   description: "Spotify-like web music streaming clone. Features playlists, playback, and more.",

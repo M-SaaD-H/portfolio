@@ -56,8 +56,8 @@ function Projects() {
       <div className='flex justify-between items-center'>
         <motion.h3 variants={childVariant} className='text-2xl font-bold tracking-tight mb-2'>Projects</motion.h3>
         <motion.div variants={childVariant}>
-          <Link href={socials.github.href} target='_blank' className='text-sm text-muted-foreground flex gap-1 items-center mb-1 hover:text-primary transition-colors'>
-            View all <IconChevronRight size={16} />
+          <Link href={socials.github.href} target='_blank' className='group text-sm text-muted-foreground flex gap-1 items-center mb-1 hover:text-primary transition-colors'>
+            View all <IconChevronRight size={16} className='transition-transform group-hover:translate-x-1' />
           </Link>
         </motion.div>
       </div>
