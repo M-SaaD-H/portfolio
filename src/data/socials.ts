@@ -15,7 +15,7 @@ export const socials = {
   },
   linkedin: {
     name: "Linkedin",
-    href: "https://www.linkedin.com/in/muhammad-saad-haider-942167317",
+    href: "https://www.linkedin.com/in/m-saad-h",
     icon: FaLinkedinIn
   },
   peerlist: {
