@@ -150,31 +150,32 @@ export function OpenSourceContributionsClient({
             <motion.div
               key={activeTab}
               variants={childVariant}
-              className="flex flex-col"
+              className="flex flex-col divide-y divide-border/50"
             >
               {displayedContributions.map((c) => (
-                <Link
-                  key={`${c.repository.nameWithOwner}-${c.number}`}
-                  href={c.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 py-2 border-b border-border/50 last:border-0 hover:bg-muted/50 transition-colors px-2 -mx-2 rounded-lg"
-                >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <span className="text-xs font-mono text-muted-foreground shrink-0 sm:w-12">
-                      #{c.number}
-                    </span>
-                    <span className="text-sm truncate font-medium">
-                      {c.title}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between gap-3 shrink-0">
-                    <span className="text-xs text-muted-foreground truncate max-w-[120px] sm:max-w-none">
-                      {c.repository.nameWithOwner}
-                    </span>
-                    <StatusBadge status={c.status} />
-                  </div>
-                </Link>
+                <div key={`${c.repository.nameWithOwner}-${c.number}`}>
+                  <Link
+                    href={c.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 py-2 hover:bg-muted/50 transition-colors px-2 -mx-2 rounded-lg"
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span className="text-xs font-mono text-muted-foreground shrink-0 sm:w-12">
+                        #{c.number}
+                      </span>
+                      <span className="text-sm truncate font-medium">
+                        {c.title}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between gap-3 shrink-0">
+                      <span className="text-xs text-muted-foreground truncate max-w-[120px] sm:max-w-none">
+                        {c.repository.nameWithOwner}
+                      </span>
+                      <StatusBadge status={c.status} />
+                    </div>
+                  </Link>
+                </div>
               ))}
 
               {visibleContributions.length > INITIAL_COUNT && (
