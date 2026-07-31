@@ -1,0 +1,1192 @@
+---
+title: "The Making of an Interpreter"
+publishedAt: "2026-07-31"
+---
+
+We've written code for years, but how often do we think about why the text we type into an editor eventually produces an output?
+
+How do words like `if`, `while`, or `return` make sense to a machine that ultimately deals with binary?
+
+In this article, I’ll take you through that journey and the thinking behind how an interpreter works.
+
+## How Did We Get Here?
+
+Before we get into how an interpreter works, I think it's worth asking why we needed one in the first place.
+
+In the early days of computing, before assemblers and higher-level languages existed, programmers had to work much closer to the machine. Instructions were written in machine code, and on some early computers, even entered using physical switches.
+
+Then came Assembly.
+
+Instead of dealing with raw machine instructions, programmers could write things like `MOV`, `ADD`, and `JMP`, and an **assembler** would translate them into machine code.
+
+But that raises an interesting question:
+
+**How do you build an assembler when you don't have an assembler yet?**
+
+The first ones had to be created using lower-level mechanisms, including machine code. Once an assembler existed, though, it could be used to build better tools, which could then help build even better ones.
+
+Eventually, this same idea leads to a question that confused me when I first thought about it:
+
+**If the Java compiler is itself written in Java, how was the first Java compiler compiled?**
+
+It wasn't compiled by Java.
+
+An initial compiler can be implemented using an already existing language. Once the new language becomes capable enough, a compiler for it can be written in the language itself and compiled using the existing compiler. From then on, each working compiler can help build the next one.
+
+This is called **bootstrapping**.
+
+And I think it captures something important about how we got here. We didn't jump straight from machine code to the languages we use today. We kept building abstractions on top of what already worked, moving further away from the machine.
+
+All because of a simple problem:
+
+**Humans don't want to speak the computer's language. So we built programs that translate ours.**
+
+## What Is an Interpreter?
+
+Enough of the story. Let's get back to our topic.
+
+Before going deeper, I want to differentiate between two terms: **compiler** and **interpreter**.
+
+Both take source code and somehow make it executable, but they approach the problem differently.
+
+In a simplified mental model, a compiler translates source code into another representation before execution. That representation could be machine code, bytecode, assembly, or even another language.
+
+An interpreter, on the other hand, executes the program through the language implementation itself.
+
+The distinction isn't always clean. Modern language implementations often combine compilation and interpretation. But for what we're building, this mental model is enough.
+
+Our interpreter will roughly do this:
+
+<img src="../assets/the-making-of-an-interpreter/1.png" alt="image.png" />
+
+Now let's figure out why we need each of these stages.
+
+## How Does a Computer Understand Our Source Code?
+
+Let's return to our original question; how does a sequence of English characters actually make sense to a computer?
+
+One thing is clear, the computer can't directly understand the source code we write. We need to transform it into a structure our program can reason about.
+
+There are thousands of programming languages, and they can express the same idea using completely different syntax.
+
+That means the exact characters aren't what ultimately matter. We need some internal representation of what those characters **mean**.
+
+One common representation is the **Abstract Syntax Tree (AST)**.
+
+But before we can build an AST, we need to turn our raw source code into something easier to work with.
+
+We need **tokens**.
+
+## Tokens
+
+Right now, our source code is just a sequence of characters.
+
+Take this simple line:
+
+```java
+var age = 20 + 1;
+```
+
+Is `var` three unrelated characters or one keyword?
+
+Are `2` and `0` two numbers, or are they together the number `20`?
+
+Before trying to understand the structure of the program, let's categorize what was written.
+
+```text
+var     ->     VAR
+age     ->     IDENTIFIER
+=       ->     EQUAL
+20      ->     NUMBER
++       ->     PLUS
+1       ->     NUMBER
+;       ->     SEMICOLON
+```
+
+These categorized pieces are called **tokens**.
+
+Humans are also going to make mistakes. We can't assume that the code users write will always be valid.
+
+So when we encounter an error, saying:
+
+> "Oh! you have an error in the code. Good luck finding where it is"
+
+isn't particularly useful.
+
+We need to tell the user where the error occurred. That's why tokens usually carry information such as their line number, lexeme, and literal value.
+
+Let's define the types of tokens our interpreter supports:
+
+```java
+public enum TokenType {
+    // Single-character tokens.
+    LEFT_PAREN, RIGHT_PAREN,
+    LEFT_BRACE, RIGHT_BRACE,
+    LEFT_BRACKET, RIGHT_BRACKET,
+    DOT, MINUS, PLUS, COMMA,
+    COLON, SEMICOLON, SLASH, STAR,
+
+    // One or two-character tokens.
+    BANG, BANG_EQUAL,
+    EQUAL, EQUAL_EQUAL,
+    GREATER, GREATER_EQUAL,
+    LESS, LESS_EQUAL,
+    AND, OR,
+
+    // Literals.
+    IDENTIFIER, STRING, NUMBER,
+
+    // Keywords.
+    FOR, WHILE, IF, ELSE, NIL,
+    PRINT, VAR, TRUE, FALSE,
+
+    EOF
+}
+```
+
+To keep track of additional information, we'll wrap the token type inside a `Token` class:
+
+```java
+public class Token {
+    private final TokenType type;
+    private final String lexeme;
+    private final Object literal;
+    private final int line;
+}
+```
+
+There are two terms here that might look similar: **lexeme** and **literal**.
+
+We'll see the distinction more clearly when we build the scanner.
+
+## Scanner
+
+The scanner's job is to convert our source code, which is just a string of characters, into meaningful tokens.
+
+For the most part, this involves walking through the source code, recognizing patterns, and categorizing them.
+
+This is where **lexemes** and **literals** become useful.
+
+A **lexeme** is the exact sequence of characters encountered in the source code.
+
+A **literal** is the value represented by those characters.
+
+For example, suppose the scanner encounters:
+
+```text
+true
+```
+
+The lexeme is:
+
+```text
+"true"
+```
+
+But the literal value is:
+
+```text
+true
+```
+
+The first is a sequence of characters. The second is a boolean value.
+
+Similarly, for:
+
+```text
+20
+```
+
+the lexeme may be `"20"`, while the literal is the numeric value `20`.
+
+After scanning the entire source file, we have a list of tokens.
+
+But tokens alone don't tell us what the program means.
+
+We need structure.
+
+## Statements and Expressions
+
+A program is a sequence of instructions, and a single instruction usually requires multiple tokens to become meaningful.
+
+Take:
+
+```java
+print "Saad";
+```
+
+Knowing that `print` is a `PRINT` token tells us that the user wants to print something.
+
+But what do they want to print?
+
+We need the `STRING` token too.
+
+So instead of reasoning about isolated tokens, we'll combine them into larger structures: **statements** and **expressions**.
+
+An expression produces a value:
+
+```java
+20 + 1
+```
+
+A statement performs some action:
+
+```java
+print 20 + 1;
+```
+
+These statements and expressions will eventually become the nodes of our AST.
+
+But how does the parser know which tokens belong together?
+
+That's where grammar comes in.
+
+## Parser
+
+Every programming language has a grammar.
+
+The grammar defines which sequences of tokens form valid programs and how those tokens relate to each other.
+
+Consider:
+
+```java
+1 + 2 * 3
+```
+
+The parser needs to understand that multiplication has higher precedence than addition.
+
+It should interpret this as:
+
+```text
+1 + (2 * 3)
+```
+
+not:
+
+```text
+(1 + 2) * 3
+```
+
+Simply grouping tokens until we encounter a semicolon isn't enough.
+
+We need rules.
+
+A small grammar might look like this:
+
+```text
+program     -> statement* EOF ;
+
+statement   -> exprStmt
+						| varDeclStmt
+            | printStmt ;
+
+exprStmt    -> expression ";" ;
+varDeclStmt -> "var" IDENTIFIER ( "=" expression )? ";" ;
+printStmt   -> "print" expression ";" ;
+
+expression  -> equality ;
+equality    -> comparison ( ("==" | "!=") comparison )* ;
+comparison  -> term ( (">" | ">=" | "<" | "<=") term )* ;
+term        -> factor ( ("+" | "-") factor )* ;
+factor      -> unary ( ("*" | "/") unary )* ;
+unary       -> ("!" | "-") unary
+            | primary ;
+
+primary     -> NUMBER | STRING
+            | "true" | "false" | "nil"
+            | "(" expression ")" ;
+```
+
+This grammar tells us how valid expressions and statements are constructed.
+
+Now we need to translate these rules into code.
+
+## Recursive Descent Parsing
+
+One of the simplest ways to build a parser is **recursive descent parsing**.
+
+It's a **top-down parser** because it starts from the outermost grammar rule and works its way down into nested expressions.
+
+The nice thing about recursive descent is that the implementation is almost a direct translation of the grammar.
+
+For example:
+
+```java
+Expr expression() {
+    return equality();
+}
+
+Expr equality() {
+    Expr expr = comparison();
+
+    while (match(EQUAL_EQUAL, BANG_EQUAL)) {
+        Token operator = previous();
+        Expr right = comparison();
+        expr = new Binary(expr, operator, right);
+    }
+
+    return expr;
+}
+
+Expr comparison() {
+    Expr expr = term();
+
+    while (match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
+        Token operator = previous();
+        Expr right = term();
+        expr = new Binary(expr, operator, right);
+    }
+
+    return expr;
+}
+
+Expr term() {
+    Expr expr = factor();
+
+    while (match(PLUS, MINUS)) {
+        Token operator = previous();
+        Expr right = factor();
+        expr = new Binary(expr, operator, right);
+    }
+
+    return expr;
+}
+
+Expr factor() {
+    Expr expr = unary();
+
+    while (match(STAR, SLASH)) {
+        Token operator = previous();
+        Expr right = unary();
+        expr = new Binary(expr, operator, right);
+    }
+
+    return expr;
+}
+```
+
+Each grammar rule becomes a method.
+
+`expression()` begins with `equality()`, which works its way down through the precedence levels.
+
+For example, `term()` handles addition and subtraction, while `factor()` handles multiplication and division.
+
+Because `term()` calls `factor()` before handling its own operators, multiplication and division naturally get higher precedence than addition and subtraction.
+
+That's recursive descent parsing.
+
+### Error Handling
+
+The parser is also a good place to detect **syntax errors**.
+
+Suppose the user writes:
+
+```java
+var age = ;
+```
+
+The scanner can tokenize this perfectly well.
+
+But according to our grammar, something should appear after `=`.
+
+That's a syntax error.
+
+Our first instinct might be to report the error immediately and stop parsing.
+
+But what if the source code contains five syntax errors?
+
+Reporting one error at a time would force the user into an annoying cycle:
+
+```text
+run -> fix -> run -> fix -> run -> fix
+```
+
+It would be much better to report as many useful errors as possible in a single run.
+
+But that introduces another problem.
+
+After encountering an error, where should the parser continue?
+
+Starting from the next token could leave us in the middle of an expression, producing a cascade of meaningless errors.
+
+Instead, we **synchronize**.
+
+We advance until we reach a likely statement boundary, such as a semicolon or the beginning of another statement. Then the parser can continue from a location where it has a reasonable chance of understanding the program again.
+
+Now that we can parse our tokens, we can finally build the structure we've been talking about.
+
+## Abstract Syntax Tree
+
+An **Abstract Syntax Tree**, or AST, represents the structure of our program.
+
+Take:
+
+```java
+1 + 2 * 3
+```
+
+The AST might conceptually look like:
+
+```text
+  +
+ / \
+1   *
+   / \
+  2   3
+```
+
+The multiplication sits deeper in the tree, representing the fact that it should be evaluated before addition.
+
+The nodes of our AST represent meaningful constructs such as:
+
+```text
+BinaryExpression
+UnaryExpression
+VariableExpression
+PrintStatement
+VariableDeclaration
+WhileStatement
+```
+
+Now our source code has gone from:
+
+```text
+  Characters
+      ↓
+   Tokens
+      ↓
+Structured AST
+```
+
+The parser has done its job.
+
+But now we have another problem.
+
+How do we actually do things with this tree?
+
+## The Problem With Traversing the AST
+
+We could manually traverse the tree.
+
+For each node, we check its type and perform the appropriate operation.
+
+But an interpreter eventually needs many operations over the same AST.
+
+For example:
+
+<img src="../assets/the-making-of-an-interpreter/2.png" alt="image.png" />
+
+Think of AST node types as rows and operations as columns.
+
+One approach would be to put methods such as:
+
+```java
+interpret()
+resolve()
+analyze()
+```
+
+inside every AST node.
+
+Adding a new node type would be easy, create the class and implement those methods.
+
+But adding a new operation would be painful because we'd need to modify every existing AST class.
+
+We could flip the design and centralize operations instead.
+
+That makes adding operations easier, but now every operation needs to know how to handle every AST node type.
+
+This is the problem the **Visitor Pattern** helps us organize.
+
+## The Visitor Pattern
+
+The Visitor Pattern lets us define operations over a family of types without putting those operations directly inside each type.
+
+Think of the AST as a hospital.
+
+The nodes are patients.
+
+The visitors are specialists.
+
+A patient only needs to identify what kind of patient they are. The specialist decides what to do with that kind of patient.
+
+A node is essentially saying:
+
+> "You're visiting me? I'm a `BinaryExpr`. Use your `visitBinaryExpr()` procedure."
+
+
+Let's use a simpler example.
+
+```java
+interface Animal {
+    void accept(AnimalVisitor visitor);
+}
+
+interface AnimalVisitor {
+    void visitMonkey(Monkey monkey);
+    void visitLion(Lion lion);
+    void visitDolphin(Dolphin dolphin);
+}
+
+class Monkey implements Animal {
+    @Override
+    public void accept(AnimalVisitor visitor) {
+        visitor.visitMonkey(this);
+    }
+}
+
+class Lion implements Animal {
+    @Override
+    public void accept(AnimalVisitor visitor) {
+        visitor.visitLion(this);
+    }
+}
+
+class Dolphin implements Animal {
+    @Override
+    public void accept(AnimalVisitor visitor) {
+        visitor.visitDolphin(this);
+    }
+}
+```
+
+Every animal knows how to accept a visitor.
+
+Now we can define an operation:
+
+```java
+class Speak implements AnimalVisitor {
+    @Override
+    public void visitMonkey(Monkey monkey) {
+        System.out.println("Monkey shout: Ooh oo aa aa!");
+    }
+
+    @Override
+    public void visitLion(Lion lion) {
+        System.out.println("Lion roar: Roaaar!");
+    }
+
+    @Override
+    public void visitDolphin(Dolphin dolphin) {
+        System.out.println("Dolphin speak: Tuut tutt tuutt!");
+    }
+}
+```
+
+`Speak` contains the implementation of that operation for every animal.
+
+Using it looks like this:
+
+```java
+void main() {
+    Monkey monkey = new Monkey();
+    Lion lion = new Lion();
+    Dolphin dolphin = new Dolphin();
+
+    AnimalVisitor speak = new Speak();
+
+    monkey.accept(speak);
+    lion.accept(speak);
+    dolphin.accept(speak);
+}
+```
+
+What's interesting here is **double dispatch**.
+
+When we call:
+
+```java
+monkey.accept(speak);
+```
+
+the first dispatch selects `Monkey.accept()`.
+
+Inside that method:
+
+```java
+visitor.visitMonkey(this);
+```
+
+the second dispatch selects the visitor's implementation for `Monkey`.
+
+The same idea works with our AST.
+
+Instead of putting interpreter logic inside every AST node, the interpreter can be a visitor.
+
+The resolver can be another visitor.
+
+Later, if we want another operation over the AST, we can create another visitor.
+
+Now we finally have a structured program that we can execute.
+
+But execution introduces another problem.
+
+Memory.
+
+## Memory
+
+While executing a program, we create variables:
+
+```java
+var name = "Saad";
+```
+
+and use them later:
+
+```java
+print name;
+```
+
+So we need somewhere to store them.
+
+We need two things:
+
+```text
+name -> value
+```
+
+A natural choice is:
+
+```java
+Map<String, Object>
+```
+
+A hash map gives us average O(1) insertion and lookup, which makes it a good fit for variable storage.
+
+Great.
+
+But now we encounter **scoping**.
+
+Consider:
+
+```java
+var name = "global";
+var num = 1;
+
+{
+    var name = "local";
+    print name;
+    print num;
+}
+
+print name;
+```
+
+Inside the block, `name` should refer to `"local"`.
+
+But `num` should still be accessible from the outer scope.
+
+After leaving the block, `name` should once again refer to `"global"`.
+
+We could create a new map for every scope.
+
+Conceptually:
+
+<img src="../assets/the-making-of-an-interpreter/3.png" alt="image.png" />
+
+But how does the local map access variables from the global map?
+
+We could copy every global variable into every local scope.
+
+That would work, but it would waste memory and create synchronization problems. With deeply nested scopes, the same variable could be duplicated many times.
+
+Instead, why not link scopes together?
+
+Each scope stores its own variables and a reference to its parent.
+
+```java
+class Environment {
+    Map<String, Object> memory;
+    Environment parent;
+}
+```
+
+<img src="../assets/the-making-of-an-interpreter/4.png" alt="image.png" />
+
+Now variable lookup works like this:
+
+```text
+Current scope
+    ↓
+Parent scope
+    ↓
+Parent's parent
+    ↓
+...
+```
+
+If a variable isn't found in the current environment, we walk up the chain until we find it.
+
+Now we have a basic environment model with lexical scopes.
+
+Things get more interesting when we introduce functions.
+
+## Functions
+
+We now have a place to store variables, and scopes are represented by environments linked to their parents.
+
+That's enough for executing blocks of code.
+
+But consider a function:
+
+```java
+var name = "Saad";
+
+func greet() {
+    print name;
+}
+
+greet();
+```
+
+When we call `greet()`, where should it look for `name`?
+
+The simplest answer might be:
+
+> Look in whatever environment is active when the function is called.
+
+But that creates strange behavior:
+
+```java
+var name = "Saad";
+
+func greet() {
+    print name;
+}
+
+{
+    var name = "John";
+    greet();
+}
+```
+
+Should `greet()` suddenly print `"John"` just because we called it from inside this block?
+
+That would mean the meaning of the function depends on where we call it from.
+
+That's not how **lexical scoping** works.
+
+We should be able to look at the source code and determine what a variable refers to.
+
+`greet()` was declared where `name` referred to the global variable. Calling it from another scope shouldn't change that.
+
+So a function needs to remember the environment in which it was declared.
+
+```java
+class Function {
+    FunctionDeclaration declaration;
+    Environment closure;
+}
+```
+
+When we encounter a function declaration, we store the current environment with it.
+
+Later, when the function is called, we create a new child environment for that particular call.
+
+This new environment stores parameters and local variables, while its parent gives the function access to variables that were visible where it was declared.
+
+That captured environment is what makes closures possible.
+
+## Closures
+
+Consider:
+
+```java
+func makeCounter() {
+    var count = 0;
+
+    func increment() {
+        count = count + 1;
+        print count;
+    }
+
+    return increment;
+}
+
+var counter = makeCounter();
+
+counter(); // 1
+counter(); // 2
+counter(); // 3
+```
+
+Normally, we might expect everything created while executing `makeCounter()` to disappear once the function returns.
+
+But `increment()` still needs `count`.
+
+When `increment` was created, it captured the current environment: the environment belonging to `makeCounter()`.
+
+<img src="../assets/the-making-of-an-interpreter/5.png" alt="image.png" />
+
+Even after `makeCounter()` returns, `increment` still holds a reference to that environment.
+
+So the environment can't disappear yet.
+
+Every time we call `increment()`, it reaches back into that captured environment and updates the same `count`.
+
+That's a **closure**.
+
+A closure is essentially a function bundled with the environment in which it was created.
+
+This is why a function can keep using variables from an outer function even after that outer function has finished executing.
+
+At this point, our environment model looks pretty solid.
+
+Unfortunately, there's a hole in it.
+
+## When Runtime Scoping Breaks
+
+Consider this:
+
+```java
+var a = "global";
+
+{
+    func showA() {
+        print a;
+    }
+
+    showA();
+
+    var a = "block";
+
+    showA();
+}
+```
+
+What should this print?
+
+```text
+global
+global
+```
+
+Why?
+
+Look at where `showA()` is written.
+
+The `a` inside it refers to the global `a`. At the point where that expression appears in the source code, the block's local `a` hasn't been declared yet, so it isn't in scope.
+
+But let's run this using the environment model we just built.
+
+When `showA` is declared, it captures the current block environment:
+
+<img src="../assets/the-making-of-an-interpreter/6.png" alt="image.png" />
+
+During the first call, we look for `a` in the block environment.
+
+It isn't there, so we move to its parent and find:
+
+```text
+a = "global"
+```
+
+Perfect.
+
+Then this executes:
+
+```java
+var a = "block";
+```
+
+But remember: `showA` holds a reference to the **same block environment**.
+
+That environment now looks like:
+
+<img src="../assets/the-making-of-an-interpreter/7.png" alt="image.png" />
+
+Call `showA()` again and our interpreter searches the environment chain.
+
+This time, it immediately finds:
+
+```text
+a = "block"
+```
+
+So our interpreter prints:
+
+```text
+global
+block
+```
+
+We have a problem.
+
+The exact same expression:
+
+```java
+print a;
+```
+
+referred to one variable during the first call and another variable during the second.
+
+Its meaning changed at runtime.
+
+But lexical scope is determined by the structure of the source code, not by the state of our environment when a line happens to execute.
+
+Our environments are good at answering:
+
+> Where is the value of this variable stored?
+
+But we're missing another question:
+
+> Which variable does this `a` actually refer to?
+
+And that's something we can figure out **before executing the program**.
+
+## Semantic Analysis
+
+So we introduce another pass between parsing and execution: a **resolver**.
+
+The parser gave structure to our program, but that structure alone doesn't tell us which declaration a variable refers to.
+
+The **resolver** walks the AST before execution and resolves these references. For each variable expression, it determines which declaration that variable refers to.
+
+Suppose we have:
+
+```java
+var a = "global";
+
+{
+    var b = 10;
+
+    {
+        var c = a + b;
+    }
+}
+```
+
+When the resolver encounters `b`, it can determine that `b` belongs to the environment one scope outside the current one.
+
+Conceptually, we can record:
+
+```text
+b -> 1 scope away
+```
+
+For `a`, no local declaration exists, so it resolves to the global variable.
+
+Now when the interpreter later evaluates `b`, it doesn't need to ask:
+
+> Starting from my current environment, where can I find something called `b`?
+
+We've already answered that question.
+
+It knows exactly which scope to access.
+
+This separation turns out to be useful beyond fixing closures.
+
+There are errors that are perfectly valid syntax but don't make sense semantically.
+
+For example:
+
+```java
+{
+    var a = a;
+}
+```
+
+The parser has no problem with this.
+
+```java
+var IDENTIFIER = expression;
+```
+
+is valid syntax.
+
+But while resolving it, we know that we're currently declaring `a`, and its initializer is trying to read that same variable before its initialization has completed.
+
+Similarly:
+
+```java
+return 10;
+```
+
+is syntactically a perfectly valid return statement.
+
+But if we're not inside a function, what are we returning from?
+
+Again, the parser shouldn't care.
+
+Its job is to determine whether the tokens form valid syntax. But the resolver understands enough context to reject it.
+
+This gave me a useful way to separate their responsibilities:
+
+```text
+Parser:
+"What structure does this code have?"
+
+Resolver:
+"What do the names and constructs in that structure refer to?"
+
+Interpreter:
+"What happens when I execute it?"
+```
+
+The resolver isn't there because every interpreter is supposed to have something called "semantic analysis."
+
+It exists because eventually there are questions that can't be answered correctly by syntax or runtime environment lookup alone.
+
+## Control Flow
+
+Now that variables, scopes, and functions work, we can start making the language actually useful.
+
+An `if` statement is straightforward. Evaluate the condition and decide which branch to execute.
+
+A `while` loop isn't much different:
+
+```java
+while (condition) {
+    body;
+}
+```
+
+The interpreter evaluates `condition`. If it's true, it executes `body` and repeats.
+
+So far, control flow is still local. We either execute a statement, skip a branch, or repeat a block.
+
+But some statements need to jump out of the normal execution flow entirely.
+
+### Return
+
+Consider a `return` statement:
+
+```java
+func find() {
+    while (true) {
+        if (found) {
+            return 10;
+        }
+    }
+}
+```
+
+When the interpreter reaches `return`, it can't simply stop executing the current block. It has to escape the `if`, then the `while`, then the function body, and finally return `10` to whoever called `find()`.
+
+We could make every layer check whether a return occurred and manually propagate it upward, but that would spread return-handling logic throughout the interpreter.
+
+There's a simpler option: use the host language's own stack unwinding.
+
+When the interpreter encounters a `return`, we throw a special exception carrying the returned value:
+
+```java
+class Return extends RuntimeException {
+    final Object value;
+
+    Return(Object value) {
+        this.value = value;
+    }
+}
+```
+
+Then, at the function boundary, we catch it:
+
+```java
+try {
+    interpreter.executeBlock(body, environment);
+} catch (Return returnValue) {
+    return returnValue.value;
+}
+```
+
+Now it doesn't matter how deeply nested the `return` is. The exception unwinds through all those intermediate blocks until it reaches the function call that knows how to handle it.
+
+Nothing actually went wrong here. We're simply using the exception mechanism because it already provides exactly what we need: **jumping through multiple levels of execution to a known boundary**.
+
+Here's another interesting control-flow construct: the `for` loop.
+
+```java
+for (var i = 0; i < 10; i = i + 1) {
+    print i;
+}
+```
+
+Our first instinct might be to create a new `ForStmt` AST node, teach the parser how to construct it, add a visitor method for it, and teach the interpreter how to execute it.
+
+We could.
+
+But look at what a `for` loop actually does.
+
+First:
+
+```java
+var i = 0;
+```
+
+Then repeatedly:
+
+```java
+while (i < 10) {
+    print i;
+    i = i + 1;
+}
+```
+
+We already know how to execute every one of those things.
+
+So why teach the rest of the interpreter about another construct?
+
+## Desugaring
+
+Instead of implementing `for` all the way through the interpreter, the parser can translate it into simpler constructs that already exist.
+
+This:
+
+```java
+for (var i = 0; i < 10; i = i + 1) {
+    print i;
+}
+```
+
+can become something conceptually equivalent to:
+
+```java
+{
+    var i = 0;
+
+    while (i < 10) {
+        print i;
+        i = i + 1;
+    }
+}
+```
+
+Now the interpreter doesn't even need to know that `for` loops exist.
+
+As far as it's concerned, it received a block containing a variable declaration and a `while` loop.
+
+This is called **desugaring**.
+
+Some syntax exists because it makes the programmer's life easier, not because the interpreter needs a fundamentally new operation to support it.
+
+We can provide convenient syntax at the surface and translate it into a smaller set of constructs internally.
+
+## What I Took Away From Building an Interpreter
+
+When I started building this interpreter, I thought the hard part would be executing code.
+
+It wasn't.
+
+Most of the interesting problems appeared before execution: turning characters into structure, deciding what names refer to, representing scopes, handling closures, and designing the AST so that adding new operations didn't turn the codebase into a mess.
+
+What started as: "How does a computer understand my code?"
+
+eventually became a fully working interpreter.
+
+And each stage exists because the previous one leaves a problem that still needs to be solved.
+
+The scanner turns characters into meaningful pieces.
+
+The parser turns those pieces into structure.
+
+The resolver determines what names and constructs mean in context.
+
+The interpreter finally executes that meaning.
+
+The [interpreter I built](https://github.com/M-SaaD-H/orin) is nowhere near a production programming language, and that was never the goal.
+
+The goal was to stop treating compilers and interpreters as black boxes.
+
+Now when I declare a variable, define a function, create a closure, or write a `for` loop, I have a much better picture of what has to happen underneath before that code can run.
+
+And for me, that was the whole point of building one.

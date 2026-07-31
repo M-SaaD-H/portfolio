@@ -164,3 +164,11 @@ body {
   background: rgba(148, 163, 184, 0.08);
 }
 
+.blog-quote > :first-child {
+  margin-top: 0;
+}
+
+.blog-quote > :last-child {
+  margin-bottom: 0;
+}
+
