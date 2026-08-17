@@ -13,8 +13,8 @@ export type Project = {
   title: string,
   description: string,
   image: string,
-  liveLink: string,
-  sourceLink: string,
+  liveLink?: string,
+  sourceLink?: string,
   content: () => string,
   demoLink?: string,
   tags: {
@@ -77,15 +77,14 @@ const Java = {
 
 export const projects: Project[] = [
   {
-    title: 'Presently',
-    description: "Generate interactive product demo video from any URL.",
+    title: 'Sitecast',
+    description: "Generate interactive product demo video from any website URL.",
     image: '',
-    sourceLink: 'https://github.com/M-SaaD-H/presently',
-    liveLink: 'https://github.com/M-SaaD-H/presently',
+    sourceLink: 'https://github.com/M-SaaD-H/sitecast',
     content: () => (
       `
         <p>
-          Presently is an automated service that converts any website link into a smooth, human-like UI presentation video. It spins up a headless browser and records the interaction to output an MP4 video of the session.
+          Sitecast is an automated service that converts any website link into a smooth, human-like UI presentation video. It spins up a headless browser and records the interaction to output an MP4 video of the session.
         </p>
         <ul class='list-disc ml-5 mt-2'>
           <li>Robust background processing worker using BullMQ and Redis.</li>
@@ -110,8 +109,7 @@ export const projects: Project[] = [
     title: 'Anton',
     description: "SQL database engine.",
     image: '/projects/anton.png',
-    liveLink: 'https://github.com/M-SaaD-H/Anton',
-    sourceLink: 'https://github.com/M-SaaD-H/Anton',
+    sourceLink: 'https://github.com/M-SaaD-H/anton',
     content: () => (
       `
         <p>
@@ -134,7 +132,6 @@ export const projects: Project[] = [
     title: 'Ember',
     description: "Redis compatible in-memory datastore server.",
     image: '/projects/ember.png',
-    liveLink: 'https://github.com/M-SaaD-H/Ember',
     sourceLink: 'https://github.com/M-SaaD-H/Ember',
     content: () => (
       `
@@ -155,10 +152,31 @@ export const projects: Project[] = [
     ]
   },
   {
+    title: 'Orin',
+    description: "A lightweight, custom AST based tree-walk interpreter.",
+    image: '/projects/orin.png',
+    sourceLink: 'https://github.com/M-SaaD-H/orin',
+    content: () => (
+      `
+        <p>
+          Orin is a dynamically-typed, object-oriented programming language interpreter implemented in Java.
+        </p>
+        <ul class='list-disc ml-5 mt-2'>
+          <li>Orin execution pipeline processes source code through lexical analysis, parsing, semantic analysis and evaluation.</li>
+          <li>Orin implements a custom AST and the visitor pattern .</li>
+          <li>Supports lexical scoping and closures.</li>
+          <li>Supports OOPs concepts.</li>
+        </ul>
+      `
+    ),
+    tags: [
+      Java
+    ]
+  },
+  {
     title: 'Vynk',
-    description: "UI component library and ready-to-use template marketplace.",
+    description: "A marketplace for pre-built UI components and snippets, accessible through a CLI.",
     image: '/projects/vynk.png',
-    liveLink: 'https://vynk.live',
     sourceLink: 'https://github.com/M-SaaD-H/vynk',
     content: () => (
       `
@@ -181,31 +199,31 @@ export const projects: Project[] = [
       Tailwind
     ]
   },
-  {
-    title: 'Autotone',
-    description: "Browser extension to automatically balance and keep tab audio volume steady.",
-    image: '/projects/autotone.png',
-    liveLink: 'https://github.com/M-SaaD-H/autotone',
-    sourceLink: 'https://github.com/M-SaaD-H/autotone',
-    content: () => (
-      `
-        <p>
-          AutoTone is a simple browser extension that keeps tab audio levels steady and comfortable automatically.
-        </p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>Keeps audio balanced across all tabs.</li>
-          <li>Detects playing tabs and adjusts their sound in real time.</li>
-          <li>Restores normal volume automatically when other audio stops.</li>
-        </ul>
-        <p class="mt-2">
-          For example, if you're listening to Spotify and start playing a YouTube video, AutoTone will lower or stop Spotify&apos;s volume and restore it when the video stops, requiring no manual adjustments.
-        </p>
-      `
-    ),
-    tags: [
-      JavaScript
-    ]
-  },
+  // {
+  //   title: 'Autotone',
+  //   description: "Browser extension to automatically balance and keep tab audio volume steady.",
+  //   image: '/projects/autotone.png',
+  //   liveLink: 'https://github.com/M-SaaD-H/autotone',
+  //   sourceLink: 'https://github.com/M-SaaD-H/autotone',
+  //   content: () => (
+  //     `
+  //       <p>
+  //         AutoTone is a simple browser extension that keeps tab audio levels steady and comfortable automatically.
+  //       </p>
+  //       <ul class="list-disc ml-5 mt-2">
+  //         <li>Keeps audio balanced across all tabs.</li>
+  //         <li>Detects playing tabs and adjusts their sound in real time.</li>
+  //         <li>Restores normal volume automatically when other audio stops.</li>
+  //       </ul>
+  //       <p class="mt-2">
+  //         For example, if you're listening to Spotify and start playing a YouTube video, AutoTone will lower or stop Spotify&apos;s volume and restore it when the video stops, requiring no manual adjustments.
+  //       </p>
+  //     `
+  //   ),
+  //   tags: [
+  //     JavaScript
+  //   ]
+  // },
   // {
   //   title: 'Relix',
   //   description: "Relix converts ERD diagram images to downloadable SQL schema code.",

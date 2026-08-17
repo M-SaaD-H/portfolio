@@ -15,8 +15,8 @@ const Header = () => {
         >
           <Image
             src={'/avatar.png'}
-            height={36}
-            width={36}
+            height={40}
+            width={40}
             alt='Avatar'
             loading='eager'
           />

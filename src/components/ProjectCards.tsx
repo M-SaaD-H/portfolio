@@ -18,12 +18,20 @@ export const ProjectCard = ({ project }: { project: Project }) => {
         <motion.p layoutId={`project-desc-${project.title}`} className='text-sm text-muted-foreground/80 group-hover/project:text-muted-foreground italic truncate'>{project.description}</motion.p>
       </div>
       <motion.div layoutId={`project-cta-${project.title}`} className='flex gap-2'>
-        <Link href={project.sourceLink} target='_blank'>
-          <FaGithub size={16} className='text-foreground/80 group-hover/project:text-foreground' />
-        </Link>
-        <Link href={project.liveLink} target='_blank'>
-          <IconExternalLink size={16} className='text-foreground/80 group-hover/project:text-foreground' />
-        </Link>
+        {
+          !!project.sourceLink && (
+            <Link href={project.sourceLink} target='_blank'>
+              <FaGithub size={16} className='text-foreground/80 group-hover/project:text-foreground' />
+            </Link>
+          )
+        }
+        {
+          !!project.liveLink && (
+            <Link href={project.liveLink} target='_blank'>
+              <IconExternalLink size={16} className='text-foreground/80 group-hover/project:text-foreground' />
+            </Link>
+          )
+        }
       </motion.div>
     </motion.div>
   )
@@ -83,18 +91,26 @@ export const ProjectPopup = ({ project, ref }: { project: Project, ref: React.Re
           layoutId={`project-cta-${project.title}`}
           className='grid grid-cols-2 gap-2 h-max mt-4'
         >
-          <Button variant={"secondary"} asChild className='group/button rounded-lg'>
-            <Link href={project.sourceLink} target='_blank'>
-              <FaGithub size={16} className='group-hover/button:-rotate-12 rotate-0 group-hover/button:-translate-[2px] transition-transform duration-300' />
-              Source
-            </Link>
-          </Button>
-          <Button asChild className='group/button rounded-lg'>
-            <Link href={project.liveLink} target='_blank'>
-              <IconExternalLink size={16} className='group-hover/button:-rotate-12 rotate-0 group-hover/button:-translate-[2px] transition-transform duration-300' />
-              Live
-            </Link>
-          </Button>
+          {
+            !!project.sourceLink && (
+              <Button variant={"secondary"} asChild className='group/button rounded-lg'>
+                <Link href={project.sourceLink} target='_blank'>
+                  <FaGithub size={16} className='group-hover/button:-rotate-12 rotate-0 group-hover/button:-translate-[2px] transition-transform duration-300' />
+                  Source
+                </Link>
+              </Button>
+            )
+          }
+          {
+            !!project.liveLink && (
+              <Button asChild className='group/button rounded-lg'>
+                <Link href={project.liveLink} target='_blank'>
+                  <IconExternalLink size={16} className='group-hover/button:-rotate-12 rotate-0 group-hover/button:-translate-[2px] transition-transform duration-300' />
+                  Live
+                </Link>
+              </Button>
+            )
+          }
         </motion.div>
       </div>
     </motion.div>
