@@ -9,6 +9,7 @@ import { IconExternalLink } from '@tabler/icons-react'
 import { FaGithub } from 'react-icons/fa6'
 import { motion } from 'motion/react'
 import { Video } from './ui/video'
+import { cn } from '@/lib/utils'
 
 export const ProjectCard = ({ project }: { project: Project }) => {
   return (
@@ -20,16 +21,20 @@ export const ProjectCard = ({ project }: { project: Project }) => {
       <motion.div layoutId={`project-cta-${project.title}`} className='flex gap-2'>
         {
           !!project.sourceLink && (
-            <Link href={project.sourceLink} target='_blank'>
-              <FaGithub size={16} className='text-foreground/80 group-hover/project:text-foreground' />
-            </Link>
+            <motion.div layout="position">
+              <Link href={project.sourceLink} target='_blank'>
+                <FaGithub size={16} className='text-foreground/80 group-hover/project:text-foreground shrink-0' />
+              </Link>
+            </motion.div>
           )
         }
         {
           !!project.liveLink && (
-            <Link href={project.liveLink} target='_blank'>
-              <IconExternalLink size={16} className='text-foreground/80 group-hover/project:text-foreground' />
-            </Link>
+            <motion.div layout="position">
+              <Link href={project.liveLink} target='_blank'>
+                <IconExternalLink size={16} className='text-foreground/80 group-hover/project:text-foreground shrink-0' />
+              </Link>
+            </motion.div>
           )
         }
       </motion.div>
@@ -89,7 +94,10 @@ export const ProjectPopup = ({ project, ref }: { project: Project, ref: React.Re
         </div>
         <motion.div
           layoutId={`project-cta-${project.title}`}
-          className='grid grid-cols-2 gap-2 h-max mt-4'
+          className={cn(
+            'h-max mt-4',
+            !!project.sourceLink && !!project.liveLink && 'grid grid-cols-2 gap-2'
+          )}
         >
           {
             !!project.sourceLink && (
