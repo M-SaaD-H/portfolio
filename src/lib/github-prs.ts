@@ -50,6 +50,13 @@ const PR_SEARCH_QUERY = `
   }
 `;
 
+// Don't include PRs from these repos in the list.
+const DONT_INCLUDE_REPOS: string[] = [
+  'Aryan-81/anhad',
+  'checkstyle/contribution',
+  'sevntu-checkstyle/sevntu.checkstyle'
+]
+
 // Fetcher
 async function fetchAllPRs(): Promise<GitHubPR[]> {
   const token = process.env.GITHUB_TOKEN;
@@ -97,7 +104,7 @@ async function fetchAllPRs(): Promise<GitHubPR[]> {
         typeof node === 'object' && 
         'number' in node && 
         node.state !== 'CLOSED' &&
-        node.repository?.nameWithOwner !== 'Aryan-81/anhad' // remove clg repo
+        !DONT_INCLUDE_REPOS.includes(node.repository?.nameWithOwner)
     ) as GitHubPR[];
 
     allPRs.push(...prs);
